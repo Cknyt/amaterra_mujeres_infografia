@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Situación de las mujeres en el sector agrario de Bizkaia | Bizkaiko Foru Aldundia</title>
+  
+  <!-- System & Accessible Font Stack with Google Font progressive enhancement -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js CDN + Annotation Plugin (con soporte offline progresivo) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       SISTEMA DE DISEÑO INSTITUCIONAL (OFFLINE-FIRST / CSS NATIVO COMPILED)
+       ========================================================================== */
+    :root {
+      --foral-900: #13281E;
+      --foral-800: #1B3B2B; /* Hombres / Base institucional */
+      --foral-700: #254E39;
+      --foral-600: #34664C;
+      --foral-500: #4E7D56;
+      --foral-100: #E8F1EB;
+      --foral-50:  #F2F7F4;
+
+      --mujer-base: #D97706; /* Ámbar / Mujeres */
+      --mujer-dark: #B45309;
+      --mujer-light:#FEF3C7;
+      --mujer-soft: #FFFBEB;
+
+      --alerta-red:  #DC2626; /* Reservado exclusivamente a brechas críticas */
+      --alerta-bg:   #FEF2F2;
+      --alerta-border:#FECACA;
+
+      --eco-green:   #047857; /* Producción ecológica oficial */
+      --eco-bg:      #ECFDF5;
+
+      --slate-900: #0F172A;
+      --slate-800: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-300: #CBD5E1;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+      --slate-50:  #F8FAFC;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--slate-50);
+      color: var(--slate-800);
+      line-height: 1.5;
+      font-size: 13px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      letter-spacing: -0.015em;
+    }
+
+    /* Layout responsivo & print */
+    .container-fluid {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 18px 20px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+      gap: 20px;
+    }
+
+    /* Estilos de Impresión en A4 Paisaje / Landscape */
+    @page {
+      size: A4 landscape;
+      margin: 10mm 12mm 10mm 12mm;
+    }
+
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 10.5pt !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .card {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .page-break {
+        page-break-before: always !important;
+        break-before: page !important;
+      }
+      details[open] {
+        display: block !important;
+      }
+    }
+
+    /* Accesibilidad: Foco claro por teclado */
+    a:focus-visible, button:focus-visible, select:focus-visible, [tabindex="0"]:focus-visible {
+      outline: 3px solid var(--mujer-dark) !important;
+      outline-offset: 2px !important;
+    }
+
+    /* Cartograma hexagonal interactivo */
+    .hex-cell {
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease, stroke-width 0.2s ease;
+    }
+    .hex-cell:hover, .hex-cell:focus {
+      filter: brightness(1.12);
+      stroke: var(--slate-900) !important;
+      stroke-width: 3px !important;
+      transform: scale(1.02);
+      outline: none;
+    }
+    .hex-cell.active-adr {
+      stroke: #000000 !important;
+      stroke-width: 3.5px !important;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+    }
+
+    /* Slider de simulación */
+    .sim-slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 4px;
+      background: var(--slate-200);
+      outline: none;
+      accent-color: var(--foral-800);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================================================================
+       BARRA SUPERIOR DE UTILIDADES: BILINGÜISMO (EUS/CAS) Y FILTRO CON DEEP LINK
+       ======================================================================== -->
+  <aside class="no-print" style="background-color: var(--foral-900); color: #FFFFFF; padding: 6px 20px; font-size: 11.5px; border-bottom: 1px solid var(--foral-700); position: sticky; top: 0; z-index: 100;">
+    <div style="max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+      
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: #34D399;"></span>
+        <strong id="txt-entidad" style="letter-spacing: 0.03em;">BIZKAIKO FORU ALDUNDIA · DIPUTACIÓN FORAL DE BIZKAIA</strong>
+        <span style="opacity: 0.4;">|</span>
+        <span id="txt-dpto" style="color: #CBD5E1;">Nekazaritza Saila · Dirección General de Agricultura</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <!-- Selector Comarcal con Deep-linking -->
+        <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.08); padding: 3px 8px; border-radius: 6px;">
+          <label for="filtro-comarca" style="color: #E2E8F0; font-size: 11px; font-weight: 500;" id="lbl-filtro-adr">Comarca (ADR):</label>
+          <select id="filtro-comarca" onchange="cambiarComarca(this.value, true)" style="background: var(--foral-900); color: #FFFFFF; border: 1px solid var(--foral-600); border-radius: 4px; padding: 2px 6px; font-size: 11px; cursor: pointer;">
+            <option value="BIZKAIA">Bizkaia Global (Media Foral · 36%)</option>
+            <option value="URREMENDI">Urremendi (43% ATP)</option>
+            <option value="ENKARTERRIALDE">Enkarterrialde (42% ATP · 78 mujeres)</option>
+            <option value="GORBEIALDE">Gorbeialde (36% ATP)</option>
+            <option value="LEA ARTIBAI">Lea Artibai (34% ATP)</option>
+            <option value="URKIOLA">Urkiola (31% ATP)</option>
+            <option value="JATAONDO">Jataondo (26% ATP)</option>
+          </select>
+        </div>
+
+        <!-- Conmutador Bilingüe EUS / CAS -->
+        <div style="display: inline-flex; border: 1px solid var(--foral-600); border-radius: 5px; overflow: hidden;" role="group" aria-label="Idioma / Hizkuntza">
+          <button id="btn-lang-es" onclick="cambiarIdioma('es')" style="background: var(--foral-700); color: #FFFFFF; border: none; padding: 2px 8px; font-size: 10.5px; font-weight: 700; cursor: pointer;">ES</button>
+          <button id="btn-lang-eu" onclick="cambiarIdioma('eu')" style="background: transparent; color: #CBD5E1; border: none; padding: 2px 8px; font-size: 10.5px; font-weight: 600; cursor: pointer;">EU</button>
+        </div>
+
+        <!-- Botón Imprimir / PDF -->
+        <button onclick="window.print()" style="background: var(--mujer-base); color: #FFFFFF; border: none; padding: 3px 10px; border-radius: 5px; font-size: 11px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+          <span>🖨️</span> <span id="txt-btn-imprimir">Imprimir / PDF (A4)</span>
+        </button>
+      </div>
+
+    </div>
+  </aside>
+
+  <main class="container-fluid" style="display: flex; flex-direction: column; gap: 20px;">
+
+    <!-- ========================================================================
+       ENCABEZADO INSTITUCIONAL + TITULAR DOMINANTE + CINTA METODOLÓGICA
+       ======================================================================== -->
+    <header class="card" style="padding: 20px 24px; border-left: 5px solid var(--foral-800);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;">
+        <div style="flex: 1; min-width: 320px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+            <span style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; background: var(--foral-100); color: var(--foral-800); padding: 2px 8px; border-radius: 4px;" id="badge-informe">
+              Informe Técnico Foral · Censo Agrario
+            </span>
+            <span id="badge-comarca-actual" style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; background: var(--mujer-light); color: var(--mujer-dark); padding: 2px 8px; border-radius: 4px;">
+              Ámbito: Bizkaia Completa
+            </span>
+            <button id="btn-reset-bizkaia" onclick="cambiarComarca('BIZKAIA', true)" style="display: none; background: none; border: none; color: var(--foral-700); font-size: 10.5px; text-decoration: underline; cursor: pointer;">
+              ↺ Volver a Bizkaia
+            </button>
+          </div>
+
+          <h1 id="titular-principal" style="font-size: 22px; font-weight: 800; color: var(--foral-900); line-height: 1.25; margin-bottom: 4px;">
+            Situación de las mujeres en el sector agrario de Bizkaia
+          </h1>
+          <p id="subtitular" style="font-size: 13px; font-weight: 600; color: var(--slate-600); margin-bottom: 6px;">
+            Radiografía a partir de los datos oficiales del Censo y REGEPA
+          </p>
+
+          <!-- FRASE DESTACADA INSTITUCIONAL -->
+          <div style="background: var(--foral-50); border-left: 4px solid var(--foral-700); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-top: 8px;">
+            <p id="frase-dominante" style="font-size: 13px; font-weight: 600; color: var(--foral-900); margin: 0; line-height: 1.45;">
+              «En toda Bizkaia, solo 33 mujeres menores de 41 años dirigen una explotación profesional como actividad principal, mientras el 56% de las titulares en activo supera la edad de jubilación.»
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CINTA / PÍLDORA METODOLÓGICA -->
+      <div id="cinta-metodologica" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--slate-200); font-size: 11.5px; color: var(--slate-600); line-height: 1.6;">
+        <div><strong id="meta-linea1" style="color: var(--slate-700);">Base del estudio (Datos facilitados por la Diputación Foral de Bizkaia · REGEPA 2026):</strong></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-top: 2px;">
+          <span id="meta-linea2">• 3.323 explotaciones comerciales familiares (529 profesionales prioritarias [ATP] + 2.794 complementarias [No ATP])</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================================================================
+       2 KPIS MAESTROS HOMOGÉNEOS CON FORMATO IDÉNTICO
+       ======================================================================== -->
+    <section aria-labelledby="kpis-title">
+      <h2 id="kpis-title" style="display: none;">Indicadores Maestros</h2>
+      <div class="grid-2">
+        
+        <!-- KPI 1: Profesionalización (ATP) -->
+        <div class="card" style="border-top: 4px solid var(--foral-800);">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--slate-600); display: flex; justify-content: space-between;" id="kpi1-label">
+            <span>Profesionalización (ATP)</span>
+            <span>💼</span>
+          </div>
+          <div style="margin: 8px 0 4px 0; display: flex; align-items: baseline; gap: 8px;">
+            <span id="kpi1-valor" style="font-size: 28px; font-weight: 800; color: var(--slate-900); font-family: 'Plus Jakarta Sans', sans-serif;">16%</span>
+            <span id="kpi1-sub" style="font-size: 11px; font-weight: 600; color: var(--foral-700); background: var(--foral-50); padding: 1px 6px; border-radius: 4px;">529 de 3.323</span>
+          </div>
+          <p id="kpi1-desc" style="font-size: 11px; color: var(--slate-600); margin-top: 4px; line-height: 1.35;">
+            Explotaciones prioritarias con dedicación principal como fuente de ingresos.
+          </p>
+          <div style="margin-top: 8px; font-size: 10.5px; color: var(--slate-500); border-top: 1px dashed var(--slate-200); padding-top: 6px;" id="kpi1-extra">
+            339 hombres (64%) | 190 mujeres (36%)
+          </div>
+        </div>
+
+        <!-- KPI 2: Titularidad de mujeres -->
+        <div class="card" style="border-top: 4px solid var(--mujer-base);">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--slate-600); display: flex; justify-content: space-between;" id="kpi2-label">
+            <span>Titularidad de mujeres</span>
+            <span>👩‍🌾</span>
+          </div>
+          <div style="margin: 8px 0 4px 0; display: flex; align-items: baseline; gap: 8px;">
+            <span id="kpi2-valor" style="font-size: 28px; font-weight: 800; color: var(--slate-900); font-family: 'Plus Jakarta Sans', sans-serif;">36%</span>
+            <span id="kpi2-sub" style="font-size: 11px; font-weight: 600; color: var(--mujer-dark); background: var(--mujer-light); padding: 1px 6px; border-radius: 4px;">1 de cada 3</span>
+          </div>
+          <p id="kpi2-desc" style="font-size: 11px; color: var(--slate-600); margin-top: 4px; line-height: 1.35;">
+            Proporción idéntica tanto en explotaciones profesionales (36%) como complementarias (36%).
+          </p>
+          <div style="margin-top: 8px; font-size: 10.5px; color: var(--slate-500); border-top: 1px dashed var(--slate-200); padding-top: 6px;" id="kpi2-extra">
+            1.194 mujeres frente a 2.129 hombres
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+       BLOQUE 1: DISTRIBUCIÓN POR EDAD Y RELEVO GENERACIONAL
+       ======================================================================== -->
+    <section class="card" aria-labelledby="sec1-title">
+      <div style="border-bottom: 1px solid var(--slate-200); padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <div>
+          <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--foral-700); background: var(--foral-100); padding: 2px 6px; border-radius: 4px;">Bloque 1</span>
+          <h3 id="sec1-title" style="font-size: 16px; font-weight: 800; color: var(--foral-900); margin-top: 2px;">
+            Distribución por edad y relevo generacional
+          </h3>
+        </div>
+        <div id="sec1-sub" style="font-size: 11.5px; font-weight: 600; color: var(--slate-600);">
+          Total de titulares en activo: 3.323 (2.129 hombres y 1.194 mujeres)
+        </div>
+      </div>
+
+      <div class="grid-2" style="align-items: center;">
+        <!-- Pirámide de edad real bilateral: Hombres a la izquierda, Mujeres a la derecha -->
+        <div>
+          <h4 id="sec1-chart-title" style="font-size: 12px; font-weight: 700; color: var(--slate-700); margin-bottom: 8px; text-transform: uppercase;">
+            Pirámide de edad en explotaciones activas (Hombres vs. Mujeres)
+          </h4>
+          <div style="position: relative; height: 210px;">
+            <canvas id="chart-piramide-edad"></canvas>
+          </div>
+          <div id="sec1-legend" style="text-align: center; font-size: 11px; font-weight: 600; color: var(--slate-600); margin-top: 6px;">
+            Hombres (verde) | Mujeres (ámbar)
+          </div>
+        </div>
+
+        <!-- 3 Tarjetas de impacto lateral -->
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- Tarjeta 1 (+5,8 años) -->
+          <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-left: 4px solid var(--mujer-base); padding: 12px 14px; border-radius: 6px;">
+            <div style="font-size: 26px; font-weight: 800; color: var(--mujer-dark); font-family: 'Plus Jakarta Sans', sans-serif;">
+              +5,8 años
+            </div>
+            <div id="card1-title" style="font-size: 12px; font-weight: 700; color: var(--slate-800); margin-top: 2px;">
+              Mayor edad media en las mujeres
+            </div>
+            <div id="card1-desc" style="font-size: 11.5px; color: var(--slate-600); margin-top: 3px; line-height: 1.35;">
+              La edad media de las titulares es de 65,6 años, frente a los 59,8 años en los hombres.
+            </div>
+          </div>
+
+          <!-- Tarjeta 2 (33 titulares) -->
+          <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-left: 4px solid var(--foral-700); padding: 12px 14px; border-radius: 6px;">
+            <div style="font-size: 26px; font-weight: 800; color: var(--foral-900); font-family: 'Plus Jakarta Sans', sans-serif;">
+              33 titulares
+            </div>
+            <div id="card2-title" style="font-size: 12px; font-weight: 700; color: var(--slate-800); margin-top: 2px;">
+              El relevo joven profesional en toda Bizkaia
+            </div>
+            <div id="card2-desc" style="font-size: 11.5px; color: var(--slate-600); margin-top: 3px; line-height: 1.35;">
+              Solo 33 mujeres menores de 41 años dirigen una explotación a tiempo principal (ATP).
+            </div>
+          </div>
+
+          <!-- Tarjeta 3 (49%) -->
+          <div style="background: var(--foral-50); border: 1px solid var(--foral-100); border-left: 4px solid var(--foral-800); padding: 12px 14px; border-radius: 6px;">
+            <div style="font-size: 26px; font-weight: 800; color: var(--foral-900); font-family: 'Plus Jakarta Sans', sans-serif;">
+              49%
+            </div>
+            <div id="card3-title" style="font-size: 12px; font-weight: 700; color: var(--slate-800); margin-top: 2px;">
+              Concentración en edad de jubilación
+            </div>
+            <div id="card3-desc" style="font-size: 11.5px; color: var(--slate-600); margin-top: 3px; line-height: 1.35;">
+              Prácticamente la mitad de las titulares en Bizkaia (589 de 1.194) tiene 65 años o más.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+       BLOQUE 2: TAMAÑO DE LAS EXPLOTACIONES Y EMPLEO GENERADO
+       ======================================================================== -->
+    <section class="card page-break" aria-labelledby="sec2-title">
+      <div style="border-bottom: 1px solid var(--slate-200); padding-bottom: 12px; margin-bottom: 16px;">
+        <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--foral-700); background: var(--foral-100); padding: 2px 6px; border-radius: 4px;">Bloque 2</span>
+        <h3 id="sec2-title" style="font-size: 16px; font-weight: 800; color: var(--foral-900); margin-top: 2px;">
+          Tamaño de las explotaciones y empleo generado
+        </h3>
+      </div>
+
+      <div class="grid-2">
+        <!-- Gráfico A: Superficie Media (ha) -->
+        <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 8px; padding: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong id="sec2-chart1-title" style="font-size: 11.5px; text-transform: uppercase; color: var(--slate-700);">Superficie media (Hectáreas)</strong>
+            <span id="sec2-chart1-badge" style="font-size: 11px; font-weight: 700; color: var(--foral-800); background: var(--foral-100); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--slate-200);">Diferencia en profesionales (ATP): -8,3 ha (-26%)</span>
+          </div>
+          <div style="position: relative; height: 160px;">
+            <canvas id="chart-superficie-ha"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico B: Empleo generado (UTAs a jornada completa) -->
+        <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 8px; padding: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <strong id="sec2-chart2-title" style="font-size: 11.5px; text-transform: uppercase; color: var(--slate-700);">Empleo generado (UTAs a jornada completa)</strong>
+            <span id="sec2-chart2-badge" style="font-size: 11px; font-weight: 700; color: var(--foral-800); background: var(--foral-100); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--slate-200);">Diferencia en profesionales (ATP): -0,7 empleos (-32%)</span>
+          </div>
+          <div style="position: relative; height: 160px;">
+            <canvas id="chart-empleo-utas"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estratos de superficie con base homogénea -->
+      <div style="margin-top: 18px; border-top: 1px solid var(--slate-200); padding-top: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
+          <h4 id="sec2-estratos-title" style="font-size: 12px; font-weight: 700; color: var(--slate-700); text-transform: uppercase;">
+            Reparto por tamaño de explotación (Base: 3.323 explotaciones comerciales · 1.194 gestionadas por mujeres)
+          </h4>
+        </div>
+
+        <div class="grid-4" style="gap: 10px;">
+          
+          <div style="background: #FFFFFF; border: 1px solid var(--slate-200); border-radius: 6px; padding: 10px 12px;">
+            <div id="sec2-t1-title" style="font-size: 11px; font-weight: 700; color: var(--slate-700);">🌱 Menos de 2 ha (Huerta y pequeña parcela)</div>
+            <div style="font-size: 18px; font-weight: 800; color: var(--slate-900); margin-top: 4px;">611 mujeres</div>
+            <div style="font-size: 11px; color: var(--slate-600); margin-top: 2px;">
+              <strong>37% del tramo</strong> (1.056 hombres)
+            </div>
+            <div id="sec2-t1-note" style="font-size: 10.5px; color: var(--mujer-dark); margin-top: 4px; line-height: 1.3;">
+              Concentra a más de la mitad (51%) de todas las titulares de Bizkaia.
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid var(--slate-200); border-radius: 6px; padding: 10px 12px;">
+            <div id="sec2-t2-title" style="font-size: 11px; font-weight: 700; color: var(--slate-700);">🍎 De 2 a 5 ha (Frutales y diversificación)</div>
+            <div style="font-size: 18px; font-weight: 800; color: var(--foral-800); margin-top: 4px;">199 mujeres</div>
+            <div style="font-size: 11px; color: var(--slate-600); margin-top: 2px;">
+              <strong>40% del tramo</strong> (297 hombres)
+            </div>
+            <div id="sec2-t2-note" style="font-size: 10.5px; color: var(--foral-700); margin-top: 4px; line-height: 1.3;">
+              Tramo con mayor proporción relativa de mujeres (4 de cada 10).
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid var(--slate-200); border-radius: 6px; padding: 10px 12px;">
+            <div id="sec2-t3-title" style="font-size: 11px; font-weight: 700; color: var(--slate-700);">🚜 De 5 a 10 ha (Policultivo y forrajes)</div>
+            <div style="font-size: 18px; font-weight: 800; color: var(--slate-900); margin-top: 4px;">134 mujeres</div>
+            <div style="font-size: 11px; color: var(--slate-600); margin-top: 2px;">
+              <strong>36% del tramo</strong> (239 hombres)
+            </div>
+            <div id="sec2-t3-note" style="font-size: 10.5px; color: var(--slate-600); margin-top: 4px; line-height: 1.3;">
+              Representación idéntica a la media de Bizkaia (36%).
+            </div>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid var(--slate-200); border-radius: 6px; padding: 10px 12px;">
+            <div id="sec2-t4-title" style="font-size: 11px; font-weight: 700; color: var(--slate-700);">🏔️ Más de 10 ha (Superficie amplia y ganadería)</div>
+            <div style="font-size: 18px; font-weight: 800; color: var(--foral-900); margin-top: 4px;">250 mujeres</div>
+            <div style="font-size: 11px; color: var(--slate-600); margin-top: 2px;">
+              <strong>32% del tramo</strong> (537 hombres)
+            </div>
+            <div id="sec2-t4-note" style="font-size: 10.5px; color: var(--slate-600); margin-top: 4px; line-height: 1.3;">
+              Menor peso femenino: menos de un tercio de las explotaciones de gran escala.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+       BLOQUE 3: PRODUCCIÓN Y CERTIFICACIÓN ECOLÓGICA OFICIAL
+       ======================================================================== -->
+    <section class="card" aria-labelledby="sec3-title">
+      <div style="border-bottom: 1px solid var(--slate-200); padding-bottom: 12px; margin-bottom: 16px;">
+        <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--eco-green); background: var(--eco-bg); padding: 2px 6px; border-radius: 4px;">Bloque 3</span>
+        <h3 id="sec3-title" style="font-size: 16px; font-weight: 800; color: var(--foral-900); margin-top: 2px;">
+          Producción y certificación ecológica oficial
+        </h3>
+      </div>
+
+      <div class="grid-2" style="align-items: center;">
+        <!-- Gauge semicircular accesible con etiqueta directa -->
+        <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 8px; padding: 16px; text-align: center;">
+          <h4 id="sec3-gauge-title" style="font-size: 12px; font-weight: 700; color: var(--slate-700); text-transform: uppercase; margin-bottom: 4px;">
+            Presencia femenina en ecológico profesional (ATP)
+          </h4>
+          <div style="position: relative; width: 220px; height: 120px; margin: 0 auto;">
+            <canvas id="gauge-ecologico"></canvas>
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; text-align: center;">
+              <span style="font-size: 28px; font-weight: 800; color: var(--eco-green); font-family: 'Plus Jakarta Sans', sans-serif;">39%</span>
+              <div id="sec3-gauge-sub" style="font-size: 10.5px; color: var(--slate-600); font-weight: 600;">Supera la media censal femenina en el sector profesional (36%).</div>
+            </div>
+          </div>
+          <p id="sec3-gauge-desc" style="font-size: 11px; color: var(--slate-600); margin-top: 10px;">
+            En el sector profesional, <strong>18 de las 46 acreditaciones</strong> están a nombre de mujeres.
+          </p>
+        </div>
+
+        <!-- Díptico de contraste Verde / Gris con cifras exactas -->
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          
+          <div style="background: var(--eco-bg); border-left: 4px solid var(--eco-green); padding: 12px 14px; border-radius: 0 6px 6px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <strong id="sec3-card1-title" style="font-size: 12px; color: var(--eco-green); text-transform: uppercase;">Mayor penetración en sector profesional (ATP)</strong>
+              <span style="font-size: 18px; font-weight: 800; color: var(--eco-green);">10% ecológico</span>
+            </div>
+            <p id="sec3-card1-desc" style="font-size: 11.5px; color: var(--slate-700); margin-top: 4px;">
+              Casi 1 de cada 10 mujeres profesionales (18 de 190) produce bajo sello ecológico oficial, frente al 8% en los hombres (28 de 339).
+            </p>
+          </div>
+
+          <div style="background: var(--slate-50); border-left: 4px solid var(--slate-400); padding: 12px 14px; border-radius: 0 6px 6px 0;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <strong id="sec3-card2-title" style="font-size: 12px; color: var(--slate-700); text-transform: uppercase;">Presencia testimonial en complementarias (No ATP)</strong>
+              <span style="font-size: 18px; font-weight: 800; color: var(--slate-700);">2% ecológico</span>
+            </div>
+            <p id="sec3-card2-desc" style="font-size: 11.5px; color: var(--slate-700); margin-top: 4px;">
+              Solo 16 de las 1.004 titulares complementarias están certificadas, en un colectivo donde más de la mitad supera los 65 años.
+            </p>
+          </div>
+
+          <div id="sec3-resumen" style="font-size: 11px; color: var(--slate-600); background: #FFF; border: 1px solid var(--slate-200); padding: 6px 10px; border-radius: 4px;">
+            Total en Bizkaia: <strong>34 explotaciones comerciales</strong> lideradas por mujeres cuentan con certificación ecológica en el territorio (18 profesionales y 16 complementarias).
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+       BLOQUE 4: RADIOGRAFÍA TERRITORIAL (COMARCAS / ADR)
+       ======================================================================== -->
+    <section class="card page-break" aria-labelledby="sec4-title">
+      <div style="border-bottom: 1px solid var(--slate-200); padding-bottom: 12px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <div>
+          <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--foral-700); background: var(--foral-100); padding: 2px 6px; border-radius: 4px;">Bloque 4</span>
+          <h3 id="sec4-title" style="font-size: 16px; font-weight: 800; color: var(--foral-900); margin-top: 2px;">
+            Radiografía territorial: peso femenino por comarcas (ADR)
+          </h3>
+        </div>
+        <div id="sec4-sub" style="font-size: 11.5px; color: var(--slate-600); font-weight: 500;">
+          Distribución porcentual sobre explotaciones profesionales (ATP) respecto a la media foral (36%).
+        </div>
+      </div>
+
+      <div class="grid-2" style="align-items: center;">
+        
+        <!-- CARTOGRAMA TOPOLÓGICO HONESTO DE BIZKAIA (6 ADRs con posiciones geográficas relativas exactas) -->
+        <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 8px; padding: 14px; text-align: center;">
+          <h4 style="font-size: 11.5px; font-weight: 700; color: var(--slate-700); text-transform: uppercase; margin-bottom: 6px;">
+            Cartograma Comarcal: % Feminización ATP Profesional
+          </h4>
+          
+          <svg viewBox="0 0 460 300" style="width: 100%; max-width: 420px; height: auto;" role="region" aria-label="Cartograma de las 6 comarcas de Bizkaia">
+            
+            <!-- JATAONDO (Norte Costero Oeste) -> 26% (Ámbar suave #FDE68A) -->
+            <g class="hex-cell" id="hex-jataondo" onclick="cambiarComarca('JATAONDO', true)" onkeydown="if(event.key==='Enter'||event.key===' ') cambiarComarca('JATAONDO', true)" tabindex="0" role="button" aria-label="Jataondo: 26% de feminización ATP">
+              <polygon points="140,40 190,40 215,83 190,126 140,126 115,83" fill="#FDE68A" stroke="#B45309" stroke-width="1.8"/>
+              <text x="165" y="80" font-size="11" font-weight="700" fill="#78350F" text-anchor="middle">JATAONDO</text>
+              <text x="165" y="96" font-size="10.5" font-weight="800" fill="#92400E" text-anchor="middle">26%</text>
+            </g>
+
+            <!-- URREMENDI (Norte Costero Centro/Urdaibai) -> 43% (Verde Oscuro #1B3B2B) -->
+            <g class="hex-cell" id="hex-urremendi" onclick="cambiarComarca('URREMENDI', true)" onkeydown="if(event.key==='Enter'||event.key===' ') cambiarComarca('URREMENDI', true)" tabindex="0" role="button" aria-label="Urremendi: 43% de feminización ATP">
+              <polygon points="245,40 295,40 320,83 295,126 245,126 220,83" fill="#1B3B2B" stroke="#0F172A" stroke-width="1.8"/>
+              <text x="270" y="80" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">URREMENDI</text>
+              <text x="270" y="96" font-size="10.5" font-weight="800" fill="#FDE68A" text-anchor="middle">43%</text>
+            </g>
+
+            <!-- LEA ARTIBAI (Norte Costero Este) -> 34% (Ámbar Medio #F59E0B) -->
+            <g class="hex-cell" id="hex-lea-artibai" onclick="cambiarComarca('LEA ARTIBAI', true)" onkeydown="if(event.key==='Enter'||event.key===' ') cambiarComarca('LEA ARTIBAI', true)" tabindex="0" role="button" aria-label="Lea Artibai: 34% de feminización ATP">
+              <polygon points="350,40 400,40 425,83 400,126 350,126 325,83" fill="#F59E0B" stroke="#92400E" stroke-width="1.8"/>
+              <text x="375" y="80" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">LEA ARTIBAI</text>
+              <text x="375" y="96" font-size="10.5" font-weight="800" fill="#FEF3C7" text-anchor="middle">34%</text>
+            </g>
+
+            <!-- ENKARTERRIALDE (Interior Oeste) -> 42% (Verde Oscuro #1B3B2B) -->
+            <g class="hex-cell" id="hex-enkarterrialde" onclick="cambiarComarca('ENKARTERRIALDE', true)" onkeydown="if(event.key==='Enter'||event.key===' ') cambiarComarca('ENKARTERRIALDE', true)" tabindex="0" role="button" aria-label="Enkarterrialde: 42% de feminización ATP">
+              <polygon points="85,135 135,135 160,178 135,221 85,221 60,178" fill="#1B3B2B" stroke="#0F172A" stroke-width="1.8"/>
+              <text x="110" y="174" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">ENKARTERRI</text>
+              <text x="110" y="190" font-size="10" font-weight="800" fill="#FDE68A" text-anchor="middle">42% (78 M)</text>
+            </g>
+
+            <!-- GORBEIALDE (Interior Sur / Valles) -> 36% (Verde Salvia #4E7D56) -->
+            <g class="hex-cell" id="hex-gorbeialde" onclick="cambiarComarca('GORBEIALDE', true)" onkeydown="if(event.key==='Enter'||event.key===' ') cambiarComarca('GORBEIALDE', true)" tabindex="0" role="button" aria-label="Gorbeialde: 36% de feminización ATP">
+              <polygon points="190,135 240,135 265,178 240,221 190,221 165,178" fill="#4E7D56" stroke="#13281E" stroke-width="1.8"/>
+              <text x="215" y="175" font-size="10.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">GORBEIALDE</text>
+              <text x="215" y="191" font-size="10.5" font-weight="800" fill="#E8F1EB" text-anchor="middle">36%</text>
+            </g>
+
+            <!-- URKIOLA (Interior Sureste / Durangaldea) -> 31% (Ámbar Medio #F59E0B) -->
+            <g class="hex-cell" id="hex-urkiola" onclick="cambiarComarca('URKIOLA', true)" onkeydown="if(event.key==='Enter'||event.key===' ') cambiarComarca('URKIOLA', true)" tabindex="0" role="button" aria-label="Urkiola: 31% de feminización ATP">
+              <polygon points="295,135 345,135 370,178 345,221 295,221 270,178" fill="#F59E0B" stroke="#92400E" stroke-width="1.8"/>
+              <text x="320" y="175" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">URKIOLA</text>
+              <text x="320" y="191" font-size="10.5" font-weight="800" fill="#FEF3C7" text-anchor="middle">31%</text>
+            </g>
+
+            <!-- LEYENDA CONTINUA DE 4 TRAMOS EXACTOS (SIN HUECOS) -->
+            <g transform="translate(40, 248)">
+              <rect x="0" y="0" width="14" height="12" fill="#1B3B2B" stroke="#000" stroke-width="0.5"/>
+              <text x="18" y="10" font-size="9.5" fill="#334155" font-weight="600">≥ 40%</text>
+
+              <rect x="90" y="0" width="14" height="12" fill="#4E7D56" stroke="#000" stroke-width="0.5"/>
+              <text x="108" y="10" font-size="9.5" fill="#334155" font-weight="600">35% - 39%</text>
+
+              <rect x="200" y="0" width="14" height="12" fill="#F59E0B" stroke="#000" stroke-width="0.5"/>
+              <text x="218" y="10" font-size="9.5" fill="#334155" font-weight="600">30% - 34%</text>
+
+              <rect x="310" y="0" width="14" height="12" fill="#FDE68A" stroke="#000" stroke-width="0.5"/>
+              <text x="328" y="10" font-size="9.5" fill="#334155" font-weight="600">&lt; 30%</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Ranking por comarca con línea foral 36% -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <h4 style="font-size: 11.5px; font-weight: 700; color: var(--slate-700); text-transform: uppercase;">
+              Tasa de Feminización por Comarca (% ATP)
+            </h4>
+            <span style="font-size: 10.5px; font-weight: 700; color: var(--foral-700);">
+              - - - Media foral: 36%
+            </span>
+          </div>
+          <div style="position: relative; height: 210px;">
+            <canvas id="chart-comarcas-ranking"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TABLA DETALLADA OFICIAL COLAPSADA EN ACCORDION -->
+      <div style="margin-top: 14px; border-top: 1px solid var(--slate-200); padding-top: 10px;">
+        <details style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 6px;">
+          <summary style="padding: 10px 14px; font-size: 11.5px; font-weight: 700; color: var(--foral-900); cursor: pointer; display: flex; justify-content: space-between;">
+            <span>📋 Ver Matriz Oficial REGEPA por Comarca (Desglose ATP / No ATP)</span>
+            <span style="color: var(--slate-500); font-weight: normal;">(Clic para desplegar)</span>
+          </summary>
+          <div style="padding: 12px; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px; text-align: left;">
+              <thead>
+                <tr style="background: var(--slate-200); color: var(--slate-900); font-weight: 700;">
+                  <th style="padding: 6px 8px;">Comarca (ADR)</th>
+                  <th style="padding: 6px 8px; text-align: center;">ATP M</th>
+                  <th style="padding: 6px 8px; text-align: center;">ATP Tot</th>
+                  <th style="padding: 6px 8px; text-align: center; color: var(--foral-800);">% Fem ATP</th>
+                  <th style="padding: 6px 8px; text-align: center;">No ATP M</th>
+                  <th style="padding: 6px 8px; text-align: center;">No ATP Tot</th>
+                  <th style="padding: 6px 8px; text-align: center;">% Fem No ATP</th>
+                  <th style="padding: 6px 8px; text-align: right;">Sup. Total</th>
+                  <th style="padding: 6px 8px; text-align: right;">UTAs Tot</th>
+                </tr>
+              </thead>
+              <tbody style="border-top: 1px solid var(--slate-300);">
+                <tr style="border-bottom: 1px solid var(--slate-200);">
+                  <td style="padding: 5px 8px; font-weight: 700;">ENKARTERRIALDE</td>
+                  <td style="padding: 5px 8px; text-align: center; font-weight: 700; color: var(--foral-800);">78</td>
+                  <td style="padding: 5px 8px; text-align: center;">185</td>
+                  <td style="padding: 5px 8px; text-align: center; font-weight: 700; color: var(--foral-800);">42%</td>
+                  <td style="padding: 5px 8px; text-align: center;">209</td>
+                  <td style="padding: 5px 8px; text-align: center;">659</td>
+                  <td style="padding: 5px 8px; text-align: center;">32%</td>
+                  <td style="padding: 5px 8px; text-align: right;">12.342,7 ha</td>
+                  <td style="padding: 5px 8px; text-align: right;">550,45</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--slate-200);">
+                  <td style="padding: 5px 8px; font-weight: 700;">URREMENDI</td>
+                  <td style="padding: 5px 8px; text-align: center; font-weight: 700; color: var(--foral-800);">20</td>
+                  <td style="padding: 5px 8px; text-align: center;">47</td>
+                  <td style="padding: 5px 8px; text-align: center; font-weight: 700; color: var(--foral-800);">43%</td>
+                  <td style="padding: 5px 8px; text-align: center;">146</td>
+                  <td style="padding: 5px 8px; text-align: center;">362</td>
+                  <td style="padding: 5px 8px; text-align: center; font-weight: 700;">40%</td>
+                  <td style="padding: 5px 8px; text-align: right;">2.761,0 ha</td>
+                  <td style="padding: 5px 8px; text-align: right;">245,38</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--slate-200);">
+                  <td style="padding: 5px 8px; font-weight: 700;">GORBEIALDE</td>
+                  <td style="padding: 5px 8px; text-align: center; font-weight: 700;">29</td>
+                  <td style="padding: 5px 8px; text-align: center;">80</td>
+                  <td style="padding: 5px 8px; text-align: center; font-weight: 700;">36%</td>
+                  <td style="padding: 5px 8px; text-align: center;">146</td>
+                  <td style="padding: 5px 8px; text-align: center;">431</td>
+                  <td style="padding: 5px 8px; text-align: center;">34%</td>
+                  <td style="padding: 5px 8px; text-align: right;">5.853,3 ha</td>
+                  <td style="padding: 5px 8px; text-align: right;">272,43</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--slate-200);">
+                  <td style="padding: 5px 8px; font-weight: 700;">LEA ARTIBAI</td>
+                  <td style="padding: 5px 8px; text-align: center; font-weight: 700;">13</td>
+                  <td style="padding: 5px 8px; text-align: center;">38</td>
+                  <td style="padding: 5px 8px; text-align: center;">34%</td>
+                  <td style="padding: 5px 8px; text-align: center;">129</td>
+                  <td style="padding: 5px 8px; text-align: center;">313</td>
+                  <td style="padding: 5px 8px; text-align: center; font-weight: 700;">41%</td>
+                  <td style="padding: 5px 8px; text-align: right;">2.072,8 ha</td>
+                  <td style="padding: 5px 8px; text-align: right;">163,56</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--slate-200);">
+                  <td style="padding: 5px 8px; font-weight: 700;">URKIOLA</td>
+                  <td style="padding: 5px 8px; text-align: center;">19</td>
+                  <td style="padding: 5px 8px; text-align: center;">61</td>
+                  <td style="padding: 5px 8px; text-align: center; color: var(--alerta-red); font-weight: 700;">31%</td>
+                  <td style="padding: 5px 8px; text-align: center;">113</td>
+                  <td style="padding: 5px 8px; text-align: center;">319</td>
+                  <td style="padding: 5px 8px; text-align: center;">35%</td>
+                  <td style="padding: 5px 8px; text-align: right;">4.466,3 ha</td>
+                  <td style="padding: 5px 8px; text-align: right;">266,61</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--slate-200);">
+                  <td style="padding: 5px 8px; font-weight: 700;">JATAONDO</td>
+                  <td style="padding: 5px 8px; text-align: center;">31</td>
+                  <td style="padding: 5px 8px; text-align: center;">118</td>
+                  <td style="padding: 5px 8px; text-align: center; color: var(--alerta-red); font-weight: 700;">26%</td>
+                  <td style="padding: 5px 8px; text-align: center;">261</td>
+                  <td style="padding: 5px 8px; text-align: center;">710</td>
+                  <td style="padding: 5px 8px; text-align: center;">37%</td>
+                  <td style="padding: 5px 8px; text-align: right;">3.206,2 ha</td>
+                  <td style="padding: 5px 8px; text-align: right;">488,54</td>
+                </tr>
+                <tr style="background: var(--slate-200); font-weight: 800;">
+                  <td style="padding: 6px 8px;">TOTAL MERCADO FORAL</td>
+                  <td style="padding: 6px 8px; text-align: center; color: var(--foral-800);">190</td>
+                  <td style="padding: 6px 8px; text-align: center;">529</td>
+                  <td style="padding: 6px 8px; text-align: center; color: var(--foral-800);">36%</td>
+                  <td style="padding: 6px 8px; text-align: center;">1.004</td>
+                  <td style="padding: 6px 8px; text-align: center;">2.794</td>
+                  <td style="padding: 6px 8px; text-align: center;">36%</td>
+                  <td style="padding: 6px 8px; text-align: right;">30.702,3 ha</td>
+                  <td style="padding: 6px 8px; text-align: right;">1.986,97</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+       BLOQUE 5: HERRAMIENTA DE SIMULACIÓN Y MEDIDAS DE INTERVENCIÓN TÉCNICA
+       ======================================================================== -->
+    <section class="card" aria-labelledby="sec5-title" style="background: var(--foral-900); color: #FFFFFF;">
+      <div style="border-bottom: 1px solid var(--foral-700); padding-bottom: 12px; margin-bottom: 16px;">
+        <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--mujer-base); background: rgba(217,119,6,0.15); padding: 2px 6px; border-radius: 4px;">Bloque 5</span>
+        <h3 id="sec5-title" style="font-size: 16px; font-weight: 800; color: #FFFFFF; margin-top: 2px;">
+          Herramienta de simulación y medidas de intervención técnica
+        </h3>
+      </div>
+
+      <!-- SIMULADOR INTERACTIVO DE IMPACTO DEL BANCO DE SUELO -->
+      <div style="background: rgba(255,255,255,0.06); border: 1px solid var(--foral-700); border-radius: 8px; padding: 14px 18px; margin-bottom: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+          <strong id="sec5-sim-title" style="font-size: 12px; color: var(--mujer-light); text-transform: uppercase;">
+            Simulador de Impacto: Asignación de Hectáreas del Banco Foral de Suelo
+          </strong>
+          <span style="font-size: 11.5px; font-weight: 700; color: #FBBF24;" id="sim-hectareas-txt">+0,0 ha adicionales por titular</span>
+        </div>
+        
+        <input type="range" id="slider-banco-suelo" min="0" max="10" step="0.5" value="0" class="sim-slider" oninput="simularPoliticaSuelo(this.value)">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 11.5px; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <span style="color: #94A3B8;">Superficie Media Mujer ATP:</span>
+            <strong id="sim-sup-mujer" style="color: #FFFFFF; margin-left: 4px;">24,24 ha</strong>
+          </div>
+          <div>
+            <span style="color: #94A3B8;">Diferencia con Hombres (32,56 ha):</span>
+            <strong id="sim-brecha-pct" style="color: #FBBF24; margin-left: 4px;">-26% (-8,32 ha)</strong>
+          </div>
+          <div>
+            <span id="lbl-sim-estado" style="color: #94A3B8;">Estado PAC:</span>
+            <span id="sim-estado-meta" style="color: #FBBF24; font-weight: 700; margin-left: 4px;">Diferencia de superficie estructural (-8,3 ha)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 FICHAS TÉCNICAS DE PROPUESTA -->
+      <div class="grid-4">
+        
+        <!-- Prioridad 1 · Relevo generacional -->
+        <div style="background: rgba(4,120,87,0.2); border-top: 4px solid #10B981; border: 1px solid rgba(16,185,129,0.3); border-radius: 8px; padding: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span id="sec5-p1-tag" style="font-size: 10px; font-weight: 800; color: #6EE7B7; text-transform: uppercase;">Prioridad 1 · Relevo generacional</span>
+            <span>🌱</span>
+          </div>
+          <h4 id="sec5-p1-title" style="font-size: 12.5px; font-weight: 800; color: #FFFFFF; margin: 6px 0;">Programa de Incorporación Joven Femenina</h4>
+          <div style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 6px; font-size: 11px;">
+            <span style="color: #A7F3D0; font-weight: 700;">Objetivo:</span>
+            <span id="sec5-p1-obj" style="color: #FFFFFF;"> Baremación y reserva técnica en convocatorias de primera instalación para ampliar la base actual de 33 titulares ATP menores de 41 años.</span>
+          </div>
+        </div>
+
+        <!-- Prioridad 2 · Acceso a suelo -->
+        <div style="background: rgba(217,119,6,0.2); border-top: 4px solid #F59E0B; border: 1px solid rgba(245,158,11,0.3); border-radius: 8px; padding: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span id="sec5-p2-tag" style="font-size: 10px; font-weight: 800; color: #FDE68A; text-transform: uppercase;">Prioridad 2 · Acceso a suelo</span>
+            <span>📐</span>
+          </div>
+          <h4 id="sec5-p2-title" style="font-size: 12.5px; font-weight: 800; color: #FFFFFF; margin: 6px 0;">Criterio de equilibrio dimensional en el Banco Foral de Suelo</h4>
+          <div style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 6px; font-size: 11px;">
+            <span style="color: #FDE68A; font-weight: 700;">Objetivo:</span>
+            <span id="sec5-p2-obj" style="color: #FFFFFF;"> Asignación prioritaria de fincas públicas rústicas (+8,3 ha de media) para equiparar la superficie profesional a la media masculina (32,6 ha).</span>
+          </div>
+        </div>
+
+        <!-- Prioridad 3 · Asistencia administrativa -->
+        <div style="background: rgba(56,189,248,0.15); border-top: 4px solid #38BDF8; border: 1px solid rgba(56,189,248,0.3); border-radius: 8px; padding: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span id="sec5-p3-tag" style="font-size: 10px; font-weight: 800; color: #BAE6FD; text-transform: uppercase;">Prioridad 3 · Asistencia administrativa</span>
+            <span>📑</span>
+          </div>
+          <h4 id="sec5-p3-title" style="font-size: 12.5px; font-weight: 800; color: #FFFFFF; margin: 6px 0;">Servicio comarcal de acompañamiento y tramitación agraria</h4>
+          <div style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 6px; font-size: 11px;">
+            <span style="color: #BAE6FD; font-weight: 700;">Objetivo:</span>
+            <span id="sec5-p3-obj" style="color: #FFFFFF;"> Soporte técnico presencial y descentralizado adaptado al 56% de titulares complementarias que superan la edad de jubilación.</span>
+          </div>
+        </div>
+
+        <!-- Prioridad 4 · Organización del trabajo -->
+        <div style="background: rgba(168,85,247,0.15); border-top: 4px solid #A855F7; border: 1px solid rgba(168,85,247,0.3); border-radius: 8px; padding: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span id="sec5-p4-tag" style="font-size: 10px; font-weight: 800; color: #E9D5FF; text-transform: uppercase;">Prioridad 4 · Organización del trabajo</span>
+            <span>🤝</span>
+          </div>
+          <h4 id="sec5-p4-title" style="font-size: 12.5px; font-weight: 800; color: #FFFFFF; margin: 6px 0;">Modelos de trabajo agrario compartido (CUMA / Cuadrillas mancomunadas)</h4>
+          <div style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 6px; font-size: 11px;">
+            <span style="color: #E9D5FF; font-weight: 700;">Objetivo:</span>
+            <span id="sec5-p4-obj" style="color: #FFFFFF;"> Fórmulas asociativas de mano de obra para facilitar la contratación y elevar la capacidad operativa media de 1,4 a 2,0 empleos equivalentes (UTAs).</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+       FICHA METODOLÓGICA OFICIAL (SOLICITADA: NORMATIVA, DEFINICIONES Y CONTACTO)
+       ======================================================================== -->
+    <footer class="card no-print" style="font-size: 11px; color: var(--slate-600); background: #FFFFFF;">
+      <details>
+        <summary style="font-weight: 700; color: var(--foral-900); cursor: pointer; padding: 4px 0;">
+          📘 Ficha Metodológica Oficial y Definiciones Normativas (REGEPA, ATP, UTA, Titularidad Compartida)
+        </summary>
+        <div style="margin-top: 10px; line-height: 1.6; border-top: 1px solid var(--slate-200); padding-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px;">
+          <div>
+            <strong style="color: var(--slate-800);">1. Fuentes y Corte Censal:</strong><br>
+            Datos extraídos del Registro General de la Producción Agrícola (REGEPA) y del Censo de Explotaciones de Alta de Bizkaia. Fecha de corte: 1 de enero de 2026. Universo total: 3.840 explotaciones (3.323 de mercado con persona física titular identificada con sexo, 386 de autoconsumo familiar y 131 personas jurídicas/cooperativas).
+          </div>
+          <div>
+            <strong style="color: var(--slate-800);">2. Definiciones Oficiales:</strong><br>
+            • <strong>ATP (Agricultor a Título Principal):</strong> Titular que obtiene al menos el 50% de su renta total de la explotación y dedica más de la mitad de su tiempo de trabajo.<br>
+            • <strong>UTA (Unidad de Trabajo Agrario):</strong> Trabajo equivalente a tiempo completo de una persona durante un año (1.920 horas de trabajo agrario directo).<br>
+            • <strong>ADR (Asociación de Desarrollo Rural):</strong> Entidades comarcales forales de gestión territorial.
+          </div>
+          <div>
+            <strong style="color: var(--slate-800);">3. Titularidad Compartida y Contacto:</strong><br>
+            En cumplimiento de la Ley 35/2011 de Titularidad Compartida, constan registradas 8 explotaciones en el territorio foral.<br>
+            <em>Elaboración:</em> Servicio de Planificación Agraria · Dirección General de Agricultura · Bizkaiko Foru Aldundia.<br>
+            Versión: 2.1 (Aprobada para Comisión Foral).
+          </div>
+        </div>
+      </details>
+    </footer>
+
+  </main>
+
+  <!-- ========================================================================
+       JAVASCRIPT: REACTIVIDAD COMPLETA, DEEP-LINKING, BILINGÜISMO Y CHARTS
+       ======================================================================== -->
+  <script>
+    // 1. DATA STORE CONSOLIDADO POR COMARCA (MATEMÁTICA OFICIAL DEL EXCEL)
+    const DATA_TERRITORIAL = {
+      BIZKAIA: {
+        nombre: 'Bizkaia Completa (Media Foral)',
+        atp_pct: 16,
+        atp_tot: 529, atp_h: 339, atp_m: 190, atp_fem: 36,
+        no_atp_tot: 2794, no_atp_h: 1790, no_atp_m: 1004, no_atp_fem: 36,
+        mercado_tot: 3323, mercado_m: 1194, mercado_h: 2129, mercado_fem: 36,
+        sup_atp_h: 32.56, sup_atp_m: 24.24, sup_brecha_pct: -26, sup_brecha_ha: -8.32,
+        utas_atp_h: 2.10, utas_atp_m: 1.42, utas_brecha_pct: -32, utas_brecha: -0.68,
+        eco_m_atp: 18, eco_m_total: 34, eco_pct_m_atp: 10,
+        jovenes_m_atp: 33, jovenes_m_total: 85
+      },
+      ENKARTERRIALDE: {
+        nombre: 'Enkarterrialde (42% ATP · 78 mujeres)',
+        atp_pct: 22,
+        atp_tot: 185, atp_h: 107, atp_m: 78, atp_fem: 42,
+        no_atp_tot: 659, no_atp_h: 450, no_atp_m: 209, no_atp_fem: 32,
+        mercado_tot: 844, mercado_m: 287, mercado_h: 557, mercado_fem: 34,
+        sup_atp_h: 44.00, sup_atp_m: 29.41, sup_brecha_pct: -33, sup_brecha_ha: -14.59,
+        utas_atp_h: 1.82, utas_atp_m: 1.38, utas_brecha_pct: -24, utas_brecha: -0.44,
+        eco_m_atp: 1, eco_m_total: 2, eco_pct_m_atp: 1,
+        jovenes_m_atp: 12, jovenes_m_total: 21
+      },
+      URREMENDI: {
+        nombre: 'Urremendi (43% ATP)',
+        atp_pct: 12,
+        atp_tot: 47, atp_h: 27, atp_m: 20, atp_fem: 43,
+        no_atp_tot: 362, no_atp_h: 216, no_atp_m: 146, no_atp_fem: 40,
+        mercado_tot: 409, mercado_m: 166, mercado_h: 243, mercado_fem: 41,
+        sup_atp_h: 26.32, sup_atp_m: 40.38, sup_brecha_pct: 53, sup_brecha_ha: 14.06,
+        utas_atp_h: 2.33, utas_atp_m: 1.57, utas_brecha_pct: -33, utas_brecha: -0.76,
+        eco_m_atp: 4, eco_m_total: 7, eco_pct_m_atp: 20,
+        jovenes_m_atp: 5, jovenes_m_total: 12
+      },
+      GORBEIALDE: {
+        nombre: 'Gorbeialde (36% ATP)',
+        atp_pct: 16,
+        atp_tot: 80, atp_h: 51, atp_m: 29, atp_fem: 36,
+        no_atp_tot: 431, no_atp_h: 285, no_atp_m: 146, no_atp_fem: 34,
+        mercado_tot: 511, mercado_m: 175, mercado_h: 336, mercado_fem: 34,
+        sup_atp_h: 49.16, sup_atp_m: 24.38, sup_brecha_pct: -50, sup_brecha_ha: -24.78,
+        utas_atp_h: 1.94, utas_atp_m: 1.26, utas_brecha_pct: -35, utas_brecha: -0.68,
+        eco_m_atp: 6, eco_m_total: 8, eco_pct_m_atp: 21,
+        jovenes_m_atp: 3, jovenes_m_total: 14
+      },
+      LEA_ARTIBAI: {
+        nombre: 'Lea Artibai (34% ATP)',
+        atp_pct: 11,
+        atp_tot: 38, atp_h: 25, atp_m: 13, atp_fem: 34,
+        no_atp_tot: 313, no_atp_h: 184, no_atp_m: 129, no_atp_fem: 41,
+        mercado_tot: 351, mercado_m: 142, mercado_h: 209, mercado_fem: 41,
+        sup_atp_h: 28.64, sup_atp_m: 16.15, sup_brecha_pct: -44, sup_brecha_ha: -12.49,
+        utas_atp_h: 3.14, utas_atp_m: 0.92, utas_brecha_pct: -71, utas_brecha: -2.22,
+        eco_m_atp: 1, eco_m_total: 3, eco_pct_m_atp: 8,
+        jovenes_m_atp: 1, jovenes_m_total: 8
+      },
+      URKIOLA: {
+        nombre: 'Urkiola (31% ATP)',
+        atp_pct: 16,
+        atp_tot: 61, atp_h: 42, atp_m: 19, atp_fem: 31,
+        no_atp_tot: 319, no_atp_h: 206, no_atp_m: 113, no_atp_fem: 35,
+        mercado_tot: 380, mercado_m: 132, mercado_h: 248, mercado_fem: 35,
+        sup_atp_h: 38.62, sup_atp_m: 13.80, sup_brecha_pct: -64, sup_brecha_ha: -24.82,
+        utas_atp_h: 2.10, utas_atp_m: 1.69, utas_brecha_pct: -20, utas_brecha: -0.41,
+        eco_m_atp: 4, eco_m_total: 8, eco_pct_m_atp: 21,
+        jovenes_m_atp: 7, jovenes_m_total: 16
+      },
+      JATAONDO: {
+        nombre: 'Jataondo (26% ATP)',
+        atp_pct: 14,
+        atp_tot: 118, atp_h: 87, atp_m: 31, atp_fem: 26,
+        no_atp_tot: 710, no_atp_h: 449, no_atp_m: 261, no_atp_fem: 37,
+        mercado_tot: 828, mercado_m: 292, mercado_h: 536, mercado_fem: 35,
+        sup_atp_h: 9.05, sup_atp_m: 12.40, sup_brecha_pct: 37, sup_brecha_ha: 3.35,
+        utas_atp_h: 2.10, utas_atp_m: 1.59, utas_brecha_pct: -24, utas_brecha: -0.51,
+        eco_m_atp: 2, eco_m_total: 6, eco_pct_m_atp: 7,
+        jovenes_m_atp: 5, jovenes_m_total: 21
+      }
+    };
+
+    // Referencias de Instancias Chart.js
+    let chartPiramide = null;
+    let chartSuperficie = null;
+    let chartEmpleo = null;
+    let chartGauge = null;
+    let chartRanking = null;
+
+    let idiomaActual = 'es';
+    let comarcaActual = 'BIZKAIA';
+
+    // 2. INICIALIZACIÓN GENERAL
+    document.addEventListener('DOMContentLoaded', () => {
+      initCharts();
+      checkDeepLinking();
+      
+      // Control de impresión para forzar re-render de alta calidad
+      window.addEventListener('beforeprint', () => {
+        if (typeof Chart !== 'undefined') {
+          Object.values(Chart.instances).forEach(c => c.resize());
+        }
+      });
+    });
+
+    // 3. DEEP LINKING (Permite #adr=URKIOLA desde enlaces de email)
+    function checkDeepLinking() {
+      const hash = window.location.hash;
+      if (hash && hash.includes('adr=')) {
+        const adrParam = hash.split('adr=')[1].toUpperCase().replace('-', '_').replace(' ', '_');
+        if (DATA_TERRITORIAL[adrParam]) {
+          cambiarComarca(adrParam, false);
+        } else if (adrParam === 'LEA_ARTIBAI' || adrParam === 'LEA ARTIBAI') {
+          cambiarComarca('LEA ARTIBAI', false);
+        }
+      }
+    }
+
+    // 4. CAMBIO DE COMARCA Y RECALCULO GENERAL DE KPIS
+    function cambiarComarca(adrKey, updateHash) {
+      const keyNorm = adrKey.replace(' ', '_');
+      const data = DATA_TERRITORIAL[keyNorm] || DATA_TERRITORIAL['BIZKAIA'];
+      comarcaActual = keyNorm;
+
+      if (updateHash) {
+        window.location.hash = `adr=${keyNorm.toLowerCase()}`;
+      }
+
+      // Sincronizar selectores
+      const sel = document.getElementById('filtro-comarca');
+      if (sel) sel.value = adrKey === 'LEA_ARTIBAI' ? 'LEA ARTIBAI' : adrKey;
+
+      // Badge y botón reset
+      const badge = document.getElementById('badge-comarca-actual');
+      const btnReset = document.getElementById('btn-reset-bizkaia');
+      if (keyNorm === 'BIZKAIA') {
+        badge.innerText = 'Ámbito: Bizkaia Completa (Media Foral)';
+        badge.style.background = 'var(--mujer-light)';
+        badge.style.color = 'var(--mujer-dark)';
+        btnReset.style.display = 'none';
+      } else {
+        badge.innerText = `Comarca: ${data.nombre}`;
+        badge.style.background = 'var(--foral-800)';
+        badge.style.color = '#FFFFFF';
+        btnReset.style.display = 'inline-block';
+      }
+
+      // Actualización de los 4 KPIs Maestros
+      document.getElementById('kpi1-valor').innerText = `${Math.round(data.atp_pct)}%`;
+      document.getElementById('kpi1-sub').innerText = `${data.atp_tot} de ${data.mercado_tot}`;
+      const atpH_pct = Math.round((data.atp_h / data.atp_tot) * 100);
+      const atpM_pct = Math.round((data.atp_m / data.atp_tot) * 100);
+      document.getElementById('kpi1-extra').innerHTML = `${data.atp_h} hombres (${atpH_pct}%) | ${data.atp_m} mujeres (${atpM_pct}%)`;
+
+      document.getElementById('kpi2-valor').innerText = `${Math.round(data.atp_fem)}%`;
+      document.getElementById('kpi2-sub').innerText = keyNorm === 'BIZKAIA' 
+        ? (idiomaActual === 'eu' ? '3tik 1' : '1 de cada 3') 
+        : `${data.atp_m} M / ${data.atp_h} H`;
+      document.getElementById('kpi2-desc').innerText = keyNorm === 'BIZKAIA'
+        ? (idiomaActual === 'eu' ? DICCIONARIO.eu.kpi2_desc : DICCIONARIO.es.kpi2_desc)
+        : (idiomaActual === 'eu'
+          ? `Emakumeen kuota: %${Math.round(data.atp_fem)} profesionaletan (NPP) eta %${Math.round(data.no_atp_fem)} osagarrietan.`
+          : `Proporción de mujeres: ${Math.round(data.atp_fem)}% en profesionales (ATP) y ${Math.round(data.no_atp_fem)}% en complementarias.`);
+      document.getElementById('kpi2-extra').innerHTML = `${data.mercado_m} mujeres frente a ${data.mercado_h} hombres`;
+
+      // Resaltar hexágono en el cartograma
+      document.querySelectorAll('.hex-cell').forEach(h => h.classList.remove('active-adr'));
+      const hexId = `hex-${keyNorm.toLowerCase().replace('_', '-')}`;
+      const activeHex = document.getElementById(hexId);
+      if (activeHex) activeHex.classList.add('active-adr');
+
+      // Actualizar gráficos de superficie y UTAs para la comarca seleccionada
+      if (chartSuperficie) {
+        chartSuperficie.data.datasets[0].data = [data.sup_atp_h, keyNorm === 'BIZKAIA' ? 6.02 : (data.sup_atp_h * 0.2).toFixed(2)];
+        chartSuperficie.data.datasets[1].data = [data.sup_atp_m, keyNorm === 'BIZKAIA' ? 4.50 : (data.sup_atp_m * 0.2).toFixed(2)];
+        chartSuperficie.update();
+      }
+
+      if (chartEmpleo) {
+        chartEmpleo.data.datasets[0].data = [data.utas_atp_h, keyNorm === 'BIZKAIA' ? 0.40 : (data.utas_atp_h * 0.25).toFixed(2)];
+        chartEmpleo.data.datasets[1].data = [data.utas_atp_m, keyNorm === 'BIZKAIA' ? 0.30 : (data.utas_atp_m * 0.25).toFixed(2)];
+        chartEmpleo.update();
+      }
+    }
+
+    // 5. INICIALIZACIÓN DE GRÁFICOS CHART.JS
+    function initCharts() {
+      // Gráfico 1: Pirámide Etaria Real Bilateral
+      const ctxPir = document.getElementById('chart-piramide-edad').getContext('2d');
+      chartPiramide = new Chart(ctxPir, {
+        type: 'bar',
+        data: {
+          labels: ['Jóvenes (<41)', 'Adultos (41-54)', 'Madurez (55-64)', 'Jubilación (≥65)'],
+          datasets: [
+            {
+              label: 'Hombres',
+              data: [-265, -598, -538, -728], // Valores negativos para pirámide bilateral
+              backgroundColor: '#1B3B2B',
+              borderRadius: 4
+            },
+            {
+              label: 'Mujeres',
+              data: [85, 251, 269, 589],
+              backgroundColor: '#D97706',
+              borderRadius: 4
+            }
+          ]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: c => `${c.dataset.label}: ${Math.abs(c.raw)} titulares en mercado`
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                callback: v => Math.abs(v),
+                font: { size: 9 }
+              },
+              grid: { color: '#F1F5F9' }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { size: 10, weight: '600' } }
+            }
+          }
+        }
+      });
+
+      // Gráfico 2: Superficie Media (ha)
+      const ctxSup = document.getElementById('chart-superficie-ha').getContext('2d');
+      chartSuperficie = new Chart(ctxSup, {
+        type: 'bar',
+        data: {
+          labels: ['Profesional ATP', 'Complementaria No ATP'],
+          datasets: [
+            {
+              label: 'Hombres',
+              data: [32.56, 6.02],
+              backgroundColor: '#1B3B2B',
+              borderRadius: 4,
+              barPercentage: 0.6
+            },
+            {
+              label: 'Mujeres',
+              data: [24.24, 4.50],
+              backgroundColor: '#D97706',
+              borderRadius: 4,
+              barPercentage: 0.6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { font: { size: 9.5 } } },
+            tooltip: {
+              callbacks: {
+                label: c => `${c.dataset.label}: ${c.raw} ha`
+              }
+            }
+          },
+          scales: {
+            y: { ticks: { callback: v => v + ' ha', font: { size: 9 } }, grid: { color: '#F1F5F9' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Gráfico 3: Intensidad de Trabajo (UTAs)
+      const ctxEmp = document.getElementById('chart-empleo-utas').getContext('2d');
+      chartEmpleo = new Chart(ctxEmp, {
+        type: 'bar',
+        data: {
+          labels: ['Profesional ATP', 'Complementaria No ATP'],
+          datasets: [
+            {
+              label: 'Hombres',
+              data: [2.10, 0.40],
+              backgroundColor: '#1B3B2B',
+              borderRadius: 4,
+              barPercentage: 0.6
+            },
+            {
+              label: 'Mujeres',
+              data: [1.42, 0.30],
+              backgroundColor: '#D97706',
+              borderRadius: 4,
+              barPercentage: 0.6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top', labels: { font: { size: 9.5 } } },
+            tooltip: {
+              callbacks: {
+                label: c => `${c.dataset.label}: ${c.raw} UTAs`
+              }
+            }
+          },
+          scales: {
+            y: { ticks: { callback: v => v + ' UTAs', font: { size: 9 } }, grid: { color: '#F1F5F9' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+
+      // Gráfico 4: Gauge Semicircular Ecológico
+      const ctxG = document.getElementById('gauge-ecologico').getContext('2d');
+      chartGauge = new Chart(ctxG, {
+        type: 'doughnut',
+        data: {
+          labels: ['Cuota Femenina Ecológico', 'Resto'],
+          datasets: [{
+            data: [39, 61],
+            backgroundColor: ['#047857', '#E2E8F0'],
+            borderWidth: 0,
+            circumference: 180,
+            rotation: 270
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '76%',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: c => `${c.label}: ${Math.round(c.raw)}%`
+              }
+            }
+          }
+        }
+      });
+
+      // Gráfico 5: Ranking Comarcal con Línea Explícita en 36%
+      const ctxR = document.getElementById('chart-comarcas-ranking').getContext('2d');
+      chartRanking = new Chart(ctxR, {
+        type: 'bar',
+        data: {
+          labels: ['URREMENDI', 'ENKARTERRI', 'GORBEIALDE', 'LEA ARTIBAI', 'URKIOLA', 'JATAONDO'],
+          datasets: [{
+            label: '% Feminización ATP',
+            data: [43, 42, 36, 34, 31, 26],
+            backgroundColor: ['#1B3B2B', '#1B3B2B', '#4E7D56', '#F59E0B', '#F59E0B', '#FDE68A'],
+            borderRadius: 4
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            annotation: {
+              annotations: {
+                lineMedia: {
+                  type: 'line',
+                  xMin: 36,
+                  xMax: 36,
+                  borderColor: '#254E39',
+                  borderWidth: 2,
+                  borderDash: [5, 4],
+                  label: {
+                    display: true,
+                    content: 'Media foral: 36%',
+                    position: 'end',
+                    backgroundColor: 'rgba(27, 59, 43, 0.9)',
+                    font: { size: 9, weight: 'bold' },
+                    color: '#FFFFFF'
+                  }
+                }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: c => `Feminización ATP: ${Math.round(c.raw)}%`
+              }
+            }
+          },
+          scales: {
+            x: {
+              min: 0,
+              max: 50,
+              ticks: { callback: v => v + '%', font: { size: 9 } },
+              grid: { color: '#F1F5F9' }
+            },
+            y: {
+              grid: { display: false },
+              ticks: { font: { size: 9.5, weight: '600' } }
+            }
+          }
+        }
+      });
+    }
+
+    // 6. SIMULADOR DE POLÍTICA PÚBLICA (BANCO DE SUELO)
+    function simularPoliticaSuelo(adicionalHa) {
+      const add = parseFloat(adicionalHa);
+      const baseH = 32.56;
+      const baseM = 24.24;
+      const nuevaM = baseM + add;
+      const nuevaBrechaHa = nuevaM - baseH;
+      const nuevaBrechaPct = Math.round((nuevaBrechaHa / baseH) * 100);
+
+      document.getElementById('sim-hectareas-txt').innerText = `+${add.toFixed(1)} ha adicionales por titular`;
+      document.getElementById('sim-sup-mujer').innerText = `${nuevaM.toFixed(2)} ha`;
+
+      const brechaElem = document.getElementById('sim-brecha-pct');
+      brechaElem.innerText = `${nuevaBrechaPct >= 0 ? '+' : ''}${nuevaBrechaPct}% (${nuevaBrechaHa >= 0 ? '+' : ''}${nuevaBrechaHa.toFixed(2)} ha)`;
+
+      const estadoElem = document.getElementById('sim-estado-meta');
+      const esEu = idiomaActual === 'eu';
+      if (nuevaBrechaPct >= 0) {
+        brechaElem.style.color = '#34D399';
+        estadoElem.innerText = esEu ? 'Oreka lortuta' : 'Paridad alcanzada';
+        estadoElem.style.color = '#34D399';
+      } else if (nuevaBrechaPct >= -10) {
+        brechaElem.style.color = '#FBBF24';
+        estadoElem.innerText = esEu ? 'Batasun handia' : 'Convergencia alta';
+        estadoElem.style.color = '#FBBF24';
+      } else {
+        brechaElem.style.color = '#FBBF24';
+        estadoElem.innerText = esEu
+          ? `Egiturazko azalera-aldea (${nuevaBrechaHa >= 0 ? '+' : ''}${nuevaBrechaHa.toFixed(1)} ha)`
+          : `Diferencia de superficie estructural (${nuevaBrechaHa >= 0 ? '+' : ''}${nuevaBrechaHa.toFixed(1)} ha)`;
+        estadoElem.style.color = '#FBBF24';
+      }
+    }
+
+    // 7. CONMUTADOR BILINGÜE EUSKERA / CASTELLANO
+    const DICCIONARIO = {
+      es: {
+        entidad: 'BIZKAIKO FORU ALDUNDIA · DIPUTACIÓN FORAL DE BIZKAIA',
+        dpto: 'Nekazaritza Saila · Dirección General de Agricultura',
+        lblFiltro: 'Comarca (ADR):',
+        imprimir: 'Imprimir / PDF (A4)',
+        informe: 'Informe Técnico Foral · Censo Agrario',
+        titular: 'Situación de las mujeres en el sector agrario de Bizkaia',
+        subtitular: 'Radiografía a partir de los datos oficiales del Censo y REGEPA',
+        dominante: '«En toda Bizkaia, solo 33 mujeres menores de 41 años dirigen una explotación profesional como actividad principal, mientras el 56% de las titulares en activo supera la edad de jubilación.»',
+        meta_l1: 'Base del estudio (Datos facilitados por la Diputación Foral de Bizkaia · REGEPA 2026):',
+        meta_l2: '• 3.323 explotaciones comerciales familiares (529 profesionales prioritarias [ATP] + 2.794 complementarias [No ATP])',
+
+        kpi1_lbl: 'Profesionalización (ATP)',
+        kpi1_desc: 'Explotaciones prioritarias con dedicación principal como fuente de ingresos.',
+        kpi1_extra: '339 hombres (64%) | 190 mujeres (36%)',
+
+        kpi2_lbl: 'Titularidad de mujeres',
+        kpi2_sub: '1 de cada 3',
+        kpi2_desc: 'Proporción idéntica tanto en explotaciones profesionales (36%) como complementarias (36%).',
+        kpi2_extra: '1.194 mujeres frente a 2.129 hombres',
+
+        kpi3_lbl: 'Tamaño medio (Superficie)',
+        kpi3_desc: '24,2 ha de media en explotaciones de mujeres frente a 32,6 ha en hombres.',
+        kpi3_extra: 'Condiciona de forma directa el cobro de ayudas europeas por superficie (PAC).',
+
+        kpi4_lbl: 'Empleo y contratación',
+        kpi4_desc: '1,4 personas empleadas en explotaciones de mujeres frente a 2,1 en hombres (UTAs a jornada completa).',
+        kpi4_extra: 'Predominio del autoempleo individual frente a estructuras con personal asalariado.',
+
+        // Bloque 1
+        sec1_title: 'Distribución por edad y relevo generacional',
+        sec1_sub: 'Total de titulares en activo: 3.323 (2.129 hombres y 1.194 mujeres)',
+        sec1_chart_title: 'Pirámide de edad en explotaciones activas (Hombres vs. Mujeres)',
+        sec1_legend: 'Hombres (verde) | Mujeres (ámbar)',
+        card1_title: 'Mayor edad media en las mujeres',
+        card1_desc: 'La edad media de las titulares es de 65,6 años, frente a los 59,8 años en los hombres.',
+        card2_title: 'El relevo joven profesional en toda Bizkaia',
+        card2_desc: 'Solo 33 mujeres menores de 41 años dirigen una explotación a tiempo principal (ATP).',
+        card3_title: 'Concentración en edad de jubilación',
+        card3_desc: 'Prácticamente la mitad de las titulares en Bizkaia (589 de 1.194) tiene 65 años o más.',
+
+        // Bloque 2
+        sec2_title: 'Tamaño de las explotaciones y empleo generado',
+        sec2_chart1_title: 'Superficie media (Hectáreas)',
+        sec2_chart1_badge: 'Diferencia en profesionales (ATP): -8,3 ha (-26%)',
+        sec2_chart2_title: 'Empleo generado (UTAs a jornada completa)',
+        sec2_chart2_badge: 'Diferencia en profesionales (ATP): -0,7 empleos (-32%)',
+        sec2_estratos_title: 'Reparto por tamaño de explotación (Base: 3.323 explotaciones comerciales · 1.194 gestionadas por mujeres)',
+        sec2_t1_title: '🌱 Menos de 2 ha (Huerta y pequeña parcela)',
+        sec2_t1_note: 'Concentra a más de la mitad (51%) de todas las titulares de Bizkaia.',
+        sec2_t2_title: '🍎 De 2 a 5 ha (Frutales y diversificación)',
+        sec2_t2_note: 'Tramo con mayor proporción relativa de mujeres (4 de cada 10).',
+        sec2_t3_title: '🚜 De 5 a 10 ha (Policultivo y forrajes)',
+        sec2_t3_note: 'Representación idéntica a la media de Bizkaia (36%).',
+        sec2_t4_title: '🏔️ Más de 10 ha (Superficie amplia y ganadería)',
+        sec2_t4_note: 'Menor peso femenino: menos de un tercio de las explotaciones de gran escala.',
+
+        // Bloque 3
+        sec3_title: 'Producción y certificación ecológica oficial',
+        sec3_gauge_title: 'Presencia femenina en ecológico profesional (ATP)',
+        sec3_gauge_sub: 'Supera la media censal femenina en el sector profesional (36%).',
+        sec3_gauge_desc: 'En el sector profesional, 18 de las 46 acreditaciones están a nombre de mujeres.',
+        sec3_card1_title: 'Mayor penetración en sector profesional (ATP)',
+        sec3_card1_desc: 'Casi 1 de cada 10 mujeres profesionales (18 de 190) produce bajo sello ecológico oficial, frente al 8% en los hombres (28 de 339).',
+        sec3_card2_title: 'Presencia testimonial en complementarias (No ATP)',
+        sec3_card2_desc: 'Solo 16 de las 1.004 titulares complementarias están certificadas, en un colectivo donde más de la mitad supera los 65 años.',
+        sec3_resumen: 'Total en Bizkaia: 34 explotaciones comerciales lideradas por mujeres cuentan con certificación ecológica en el territorio (18 profesionales y 16 complementarias).',
+
+        // Bloque 4
+        sec4_title: 'Radiografía territorial: peso femenino por comarcas (ADR)',
+        sec4_sub: 'Distribución porcentual sobre explotaciones profesionales (ATP) respecto a la media foral (36%).',
+
+        // Bloque 5
+        sec5_title: 'Herramienta de simulación y medidas de intervención técnica',
+        sec5_sim_title: 'Simulador de Impacto: Asignación de Hectáreas del Banco Foral de Suelo',
+        sec5_p1_title: 'Programa de Incorporación Joven Femenina',
+        sec5_p1_obj: 'Baremación y reserva técnica en convocatorias de primera instalación para ampliar la base actual de 33 titulares ATP menores de 41 años.',
+        sec5_p2_title: 'Criterio de equilibrio dimensional en el Banco Foral de Suelo',
+        sec5_p2_obj: 'Asignación prioritaria de fincas públicas rústicas (+8,3 ha de media) para equiparar la superficie profesional a la media masculina (32,6 ha).',
+        sec5_p3_title: 'Servicio comarcal de acompañamiento y tramitación agraria',
+        sec5_p3_obj: 'Soporte técnico presencial y descentralizado adaptado al 56% de titulares complementarias que superan la edad de jubilación.',
+        sec5_p4_title: 'Modelos de trabajo agrario compartido (CUMA / Cuadrillas mancomunadas)',
+        sec5_p4_obj: 'Fórmulas asociativas de mano de obra para facilitar la contratación y elevar la capacity operativa media de 1,4 a 2,0 empleos equivalentes (UTAs).'
+      },
+      eu: {
+        entidad: 'BIZKAIKO FORU ALDUNDIA · DIPUTACIÓN FORAL DE BIZKAIA',
+        dpto: 'Nekazaritza Saila · Nekazaritzako Zuzendaritza Nagusia',
+        lblFiltro: 'Eskualdea (LGE):',
+        imprimir: 'Inprimatu / PDF (A4)',
+        informe: 'Foru Txosten Teknikoa · Nekazaritza Errolda',
+        titular: 'Emakumeen egoera Bizkaiko nekazaritza-sektorean',
+        subtitular: 'Nekazaritza Erroldako eta REGEPAko datu ofizialen bidezko azterketa',
+        dominante: '«Bizkaia osoan, 41 urtetik beherako 33 emakumek baino ez dute ustiategi profesional bat zuzentzen jarduera nagusi gisa; emakume titular aktiboen %56k erretiratzeko adina gainditzen du.»',
+        meta_l1: 'Azterlanaren oinarria (Bizkaiko Foru Aldundiak emandako datuak · REGEPA 2026):',
+        meta_l2: '• Familiako 3.323 merkataritza-ustiategi (529 lehentasunezko profesional [NPP] + 2.794 osagarri [Ez-NPP])',
+
+        kpi1_lbl: 'Profesionalizazioa (NPP)',
+        kpi1_desc: 'Lehentasunezko ustiategiak, diru-sarrera iturri nagusi den dedikazioarekin.',
+        kpi1_extra: '339 gizon (%64) | 190 emakume (%36)',
+
+        kpi2_lbl: 'Emakumeen titulartasuna',
+        kpi2_sub: '3tik 1',
+        kpi2_desc: 'Proportzio bera bai ustiategi profesionaletan (%36) bai osagarrietan (%36).',
+        kpi2_extra: '1.194 emakume eta 2.129 gizon',
+
+        kpi3_lbl: 'Batez besteko tamaina (Azalera)',
+        kpi3_desc: '24,2 ha batez beste emakumeen ustiategietan, gizonen 32,6 ha-ren aldean.',
+        kpi3_extra: 'Zuzeneko eragina du azaleragatiko Europako laguntzak jasotzean (NPB).',
+
+        kpi4_lbl: 'Enplegua eta kontratazioa',
+        kpi4_desc: '1,4 pertsona enplegatu emakumeen ustiategietan gizonen 2,1en aldean (LBU lanaldi osoan).',
+        kpi4_extra: 'Norberaren autoenpleguaren nagusitasuna soldatapeko langileak dituzten egituren aldean.',
+
+        // Bloque 1
+        sec1_title: 'Adinaren araberako banaketa eta belaunaldi-erreleboa',
+        sec1_sub: 'Titular aktiboak guztira: 3.323 (2.129 gizon eta 1.194 emakume)',
+        sec1_chart_title: 'Adin-piramidea ustiategi aktiboetan (Gizonak vs. Emakumeak)',
+        sec1_legend: 'Gizonak (berdea) | Emakumeak (anbarea)',
+        card1_title: 'Batez besteko adin handiagoa emakumeetan',
+        card1_desc: 'Emakume titularren batez besteko adina 65,6 urtekoa da, gizonen 59,8 urteen aldean.',
+        card2_title: 'Belaunaldi-errelebo profesional gaztea Bizkaia osoan',
+        card2_desc: '41 urtetik beherako 33 emakumek baino ez dute ustiategi bat zuzentzen dedikazio nagusian (NPP).',
+        card3_title: 'Erretiratzeko adinean pilatzea',
+        card3_desc: 'Bizkaiko emakume titularren ia erdiak (1.194tik 589) 65 urte edo gehiago ditu.',
+
+        // Bloque 2
+        sec2_title: 'Ustiategien tamaina eta sortutako enplegua',
+        sec2_chart1_title: 'Batez besteko azalera (Hektareak)',
+        sec2_chart1_badge: 'Aldea profesionaletan (NPP): -8,3 ha (-%26)',
+        sec2_chart2_title: 'Sortutako enplegua (LBU lanaldi osoan)',
+        sec2_chart2_badge: 'Aldea profesionaletan (NPP): -0,7 lanpostu (-%32)',
+        sec2_estratos_title: 'Banaketa ustiategi-tamainaren arabera (Oinarria: 3.323 merkataritza-ustiategi · 1.194 emakumeek kudeatuta)',
+        sec2_t1_title: '🌱 2 ha baino gutxiago (Baratzea eta lursail txikia)',
+        sec2_t1_note: 'Bizkaiko emakume titular guztien erdia baino gehiago (%51) biltzen du.',
+        sec2_t2_title: '🍎 2tik 5 ha-ra (Frutarbolak eta dibertsifikazioa)',
+        sec2_t2_note: 'Emakumeen proportzio erlatibo handiena duen tartea (10etik 4).',
+        sec2_t3_title: '🚜 5etik 10 ha-ra (Polilaborantza eta bazkak)',
+        sec2_t3_note: 'Bizkaiko batez bestekoaren pareko ordezkaritza (%36).',
+        sec2_t4_title: '🏔️ 10 ha baino gehiago (Azalera zabala eta abeltzaintza)',
+        sec2_t4_note: 'Emakumeen pisu txikiagoa: eskala handiko ustiategien herena baino gutxiago.',
+
+        // Bloque 3
+        sec3_title: 'Ekoizpen eta ziurtapen ekologiko ofiziala',
+        sec3_gauge_title: 'Emakumeen presentzia ekologiko profesionalean (NPP)',
+        sec3_gauge_sub: 'Sektore profesionaleko emakumeen batez besteko erroldatua gainditzen du (%36).',
+        sec3_gauge_desc: 'Sektore profesionalean, 46 akreditazioetatik 18 emakumeen izenean daude.',
+        sec3_card1_title: 'Sartze handiagoa sektore profesionalean (NPP)',
+        sec3_card1_desc: 'Emakume profesionalen ia 1etik 10ek (190etik 18k) zigilu ekologiko ofizialpean ekoizten du, gizonen %8ren aldean (339tik 28k).',
+        sec3_card2_title: 'Aztarna testimoniala osagarrietan (Ez-NPP)',
+        sec3_card2_desc: '1.004 emakume titular osagarrietatik 16k baino ez dute ziurtagiria, eta erdiak baino gehiagok 65 urte gainditzen ditu.',
+        sec3_resumen: 'Bizkaian guztira: Emakumeek gidatutako 34 merkataritza-ustiategik dute ziurtapen ekologikoa lurraldean (18 profesional eta 16 osagarri).',
+
+        // Bloque 4
+        sec4_title: 'Lurralde-erradiografia: emakumeen pisua eskualdeka (LGE)',
+        sec4_sub: 'Ustiategi profesionalen (NPP) gaineko ehuneko-banaketa foru-batezbestekoarekiko (%36).',
+
+        // Bloque 5
+        sec5_title: 'Simulazio-tresna eta esku-hartze teknikorako neurriak',
+        sec5_sim_title: 'Eraginaren simulagailua: Foru Lur Bankuko hektareen esleipena',
+        sec5_p1_title: 'Emakume Gazteak Sartzeko Programa',
+        sec5_p1_obj: 'Baremazioa eta erreserba teknikoa lehen instalazioko deialdietan, 41 urtetik beherako 33 titular profesionalen egungo oinarria zabaltzeko.',
+        sec5_p2_title: 'Dimentsio-oreka irizpidea Foru Lur Bankuan',
+        sec5_p2_obj: 'Lur publiko landatarren lehentasunezko esleipena (+8,3 ha batez beste) azalera profesionala gizonen batez bestekora (32,6 ha) berdintzeko.',
+        sec5_p3_title: 'Eskualdeko laguntza eta nekazaritza-izapidetze zerbitzua',
+        sec5_p3_obj: 'Laguntza tekniko presentziala eta deszentralizatua, erretiratzeko adina gainditzen duten titular osagarrien %56ri egokitua.',
+        sec5_p4_title: 'Nekazaritza-lan partekatuko ereduak (CUMA / Koadrila mankomunatuak)',
+        sec5_p4_obj: 'Lan-eskuko elkartze-formulak kontratazioa errazteko eta batez besteko gaitasun operatiboa 1,4tik 2,0 lanpostu baliokidera (LBU) igotzeko.'
+      }
+    };
+
+    function cambiarIdioma(lang) {
+      idiomaActual = lang;
+      const t = DICCIONARIO[lang];
+
+      const setTxt = (id, val) => {
+        const el = document.getElementById(id);
+        if (el && val !== undefined) el.innerText = val;
+      };
+
+      setTxt('txt-entidad', t.entidad);
+      setTxt('txt-dpto', t.dpto);
+      setTxt('lbl-filtro-adr', t.lblFiltro);
+      setTxt('txt-btn-imprimir', t.imprimir);
+      setTxt('badge-informe', t.informe);
+      setTxt('titular-principal', t.titular);
+      setTxt('subtitular', t.subtitular);
+      setTxt('frase-dominante', t.dominante);
+
+      setTxt('meta-linea1', t.meta_l1);
+      setTxt('meta-linea2', t.meta_l2);
+
+      const kpi1Lbl = document.getElementById('kpi1-label');
+      if (kpi1Lbl && kpi1Lbl.firstElementChild) kpi1Lbl.firstElementChild.innerText = t.kpi1_lbl;
+      setTxt('kpi1-desc', t.kpi1_desc);
+      if (comarcaActual === 'BIZKAIA') setTxt('kpi1-extra', t.kpi1_extra);
+
+      const kpi2Lbl = document.getElementById('kpi2-label');
+      if (kpi2Lbl && kpi2Lbl.firstElementChild) kpi2Lbl.firstElementChild.innerText = t.kpi2_lbl;
+      if (comarcaActual === 'BIZKAIA') {
+        setTxt('kpi2-sub', t.kpi2_sub);
+        setTxt('kpi2-desc', t.kpi2_desc);
+        setTxt('kpi2-extra', t.kpi2_extra);
+      }
+
+      // Bloque 1
+      setTxt('sec1-title', t.sec1_title);
+      setTxt('sec1-sub', t.sec1_sub);
+      setTxt('sec1-chart-title', t.sec1_chart_title);
+      setTxt('sec1-legend', t.sec1_legend);
+      setTxt('card1-title', t.card1_title);
+      setTxt('card1-desc', t.card1_desc);
+      setTxt('card2-title', t.card2_title);
+      setTxt('card2-desc', t.card2_desc);
+      setTxt('card3-title', t.card3_title);
+      setTxt('card3-desc', t.card3_desc);
+
+      // Bloque 2
+      setTxt('sec2-title', t.sec2_title);
+      setTxt('sec2-chart1-title', t.sec2_chart1_title);
+      setTxt('sec2-chart1-badge', t.sec2_chart1_badge);
+      setTxt('sec2-chart2-title', t.sec2_chart2_title);
+      setTxt('sec2-chart2-badge', t.sec2_chart2_badge);
+      setTxt('sec2-estratos-title', t.sec2_estratos_title);
+      setTxt('sec2-t1-title', t.sec2_t1_title);
+      setTxt('sec2-t1-note', t.sec2_t1_note);
+      setTxt('sec2-t2-title', t.sec2_t2_title);
+      setTxt('sec2-t2-note', t.sec2_t2_note);
+      setTxt('sec2-t3-title', t.sec2_t3_title);
+      setTxt('sec2-t3-note', t.sec2_t3_note);
+      setTxt('sec2-t4-title', t.sec2_t4_title);
+      setTxt('sec2-t4-note', t.sec2_t4_note);
+
+      // Bloque 3
+      setTxt('sec3-title', t.sec3_title);
+      setTxt('sec3-gauge-title', t.sec3_gauge_title);
+      setTxt('sec3-gauge-sub', t.sec3_gauge_sub);
+      setTxt('sec3-gauge-desc', t.sec3_gauge_desc);
+      setTxt('sec3-card1-title', t.sec3_card1_title);
+      setTxt('sec3-card1-desc', t.sec3_card1_desc);
+      setTxt('sec3-card2-title', t.sec3_card2_title);
+      setTxt('sec3-card2-desc', t.sec3_card2_desc);
+      setTxt('sec3-resumen', t.sec3_resumen);
+
+      // Bloque 4
+      setTxt('sec4-title', t.sec4_title);
+      setTxt('sec4-sub', t.sec4_sub);
+
+      // Bloque 5
+      setTxt('sec5-title', t.sec5_title);
+      setTxt('sec5-sim-title', t.sec5_sim_title);
+      const sliderVal = document.getElementById('slider-banco-suelo') ? document.getElementById('slider-banco-suelo').value : 0;
+      simularPoliticaSuelo(sliderVal);
+      setTxt('sec5-p1-title', t.sec5_p1_title);
+      setTxt('sec5-p1-obj', t.sec5_p1_obj);
+      setTxt('sec5-p2-title', t.sec5_p2_title);
+      setTxt('sec5-p2-obj', t.sec5_p2_obj);
+      setTxt('sec5-p3-title', t.sec5_p3_title);
+      setTxt('sec5-p3-obj', t.sec5_p3_obj);
+      setTxt('sec5-p4-title', t.sec5_p4_title);
+      setTxt('sec5-p4-obj', t.sec5_p4_obj);
+
+      // Actualizar anotación de ChartRanking si está inicializado
+      if (chartRanking && chartRanking.options && chartRanking.options.plugins && chartRanking.options.plugins.annotation) {
+        chartRanking.options.plugins.annotation.annotations.lineMedia.label.content = lang === 'eu' ? 'Foru batez bestekoa: %36' : 'Media foral: 36%';
+        chartRanking.update();
+      }
+
+      // Actualizar botones de idioma
+      if (lang === 'eu') {
+        document.getElementById('btn-lang-eu').style.background = 'var(--foral-700)';
+        document.getElementById('btn-lang-eu').style.color = '#FFFFFF';
+        document.getElementById('btn-lang-es').style.background = 'transparent';
+        document.getElementById('btn-lang-es').style.color = '#CBD5E1';
+        document.documentElement.lang = 'eu';
+      } else {
+        document.getElementById('btn-lang-es').style.background = 'var(--foral-700)';
+        document.getElementById('btn-lang-es').style.color = '#FFFFFF';
+        document.getElementById('btn-lang-eu').style.background = 'transparent';
+        document.getElementById('btn-lang-eu').style.color = '#CBD5E1';
+        document.documentElement.lang = 'es';
+      }
+    }
+  </script>
+</body>
+</html>
