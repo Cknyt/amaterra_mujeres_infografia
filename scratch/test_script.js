@@ -543,12 +543,12 @@
       document.getElementById('txt-sec1-atp-card-title').textContent = t.sec1AtpCardTitle;
       document.getElementById('txt-sec1-atp-base').textContent = t.sec1AtpBase;
       document.getElementById('txt-sec1-atp-unit').textContent = t.sec1AtpUnit;
-      document.getElementById('txt-sec1-atp-text').innerHTML = t.sec1AtpText;
+      // document.getElementById('txt-sec1-atp-text').innerHTML = t.sec1AtpText;
       document.getElementById('txt-sec1-atp-btn').textContent = t.sec1AtpBtn;
       document.getElementById('txt-sec1-noatp-card-title').textContent = t.sec1NoatpCardTitle;
       document.getElementById('txt-sec1-noatp-base').textContent = t.sec1NoatpBase;
       document.getElementById('txt-sec1-noatp-unit').textContent = t.sec1NoatpUnit;
-      document.getElementById('txt-sec1-noatp-text').innerHTML = t.sec1NoatpText;
+      // document.getElementById('txt-sec1-noatp-text').innerHTML = t.sec1NoatpText;
       document.getElementById('txt-sec1-noatp-btn').textContent = t.sec1NoatpBtn;
       document.getElementById('txt-sec1-insight-title').textContent = t.sec1InsightTitle;
       document.getElementById('txt-sec1-insight-text').innerHTML = t.sec1InsightText;
