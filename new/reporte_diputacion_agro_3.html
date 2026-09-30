@@ -1,0 +1,4085 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Situación de las Mujeres en el Sector Agrario de Bizkaia (Reporte II) | Emakumeen Egoera Bizkaiko Nekazaritza Sektorean</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js 4.4.1 -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      /* Institutional Colors */
+      --foral-900: #0A2318;
+      --foral-800: #123826;
+      --foral-700: #1B4D36;
+      --foral-600: #266B4B;
+      --foral-100: #E6F3EC;
+      --foral-50:  #F4F9F6;
+
+      /* ATP Palette (Professional Emerald) */
+      --atp-primary: #047857;
+      --atp-dark: #065F46;
+      --atp-light: #ECFDF5;
+      --atp-border: #A7F3D0;
+      --atp-text: #065F46;
+      --atp-shadow: rgba(4, 120, 87, 0.15);
+
+      /* NO ATP Palette (Warm Amber / Terracotta) */
+      --noatp-primary: #D97706;
+      --noatp-dark: #B45309;
+      --noatp-light: #FFFBEB;
+      --noatp-border: #FDE68A;
+      --noatp-text: #92400E;
+      --noatp-shadow: rgba(217, 119, 6, 0.15);
+
+      /* General UI Accents */
+      --hombres-color: #334155;
+      --mujeres-color: #E11D48;
+      --eco-color: #059669;
+      --alert-red: #DC2626;
+
+      /* Slate Neutrals */
+      --slate-900: #0F172A;
+      --slate-800: #1E293B;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748B;
+      --slate-300: #CBD5E1;
+      --slate-200: #E2E8F0;
+      --slate-100: #F1F5F9;
+      --slate-50:  #F8FAFC;
+      --white: #FFFFFF;
+
+      --card-radius: 16px;
+      --card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+      --card-shadow-hover: 0 12px 28px -4px rgba(15, 23, 42, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.06);
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #F8FAF9;
+      color: var(--slate-800);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Top Institutional Header */
+    .gov-bar {
+      background: var(--foral-900);
+      color: #FFFFFF;
+      padding: 10px 24px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gov-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .gov-logo-img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .gov-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lang-btn {
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .lang-btn:hover, .lang-btn.active {
+      background: #FFFFFF;
+      color: var(--foral-900);
+    }
+
+    .print-btn {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .print-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Hero Header */
+    .hero-card {
+      background: linear-gradient(135deg, #0A2318 0%, #17422E 60%, #1F543B 100%);
+      color: #FFFFFF;
+      border-radius: var(--card-radius);
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px -5px rgba(10, 35, 24, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-title {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 900px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .hero-stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 20px;
+    }
+
+    .hero-stat {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-stat-val {
+      font-size: 24px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-top: 4px;
+    }
+
+    .hero-stat-desc {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 2px;
+    }
+
+    /* Global View Switcher & Sticky Navigation */
+    .control-panel {
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--card-radius);
+      padding: 12px 18px;
+      margin-bottom: 28px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .view-modes {
+      display: flex;
+      align-items: center;
+      background: var(--slate-100);
+      padding: 4px;
+      border-radius: 12px;
+      gap: 4px;
+    }
+
+    .view-btn {
+      border: none;
+      background: transparent;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--slate-600);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .view-btn.active {
+      background: #FFFFFF;
+      color: var(--slate-900);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .view-btn.mode-dual.active {
+      color: var(--foral-800);
+      border-bottom: 2px solid var(--foral-700);
+    }
+
+    .view-btn.mode-atp.active {
+      color: var(--atp-primary);
+      border-bottom: 2px solid var(--atp-primary);
+    }
+
+    .view-btn.mode-noatp.active {
+      color: var(--noatp-primary);
+      border-bottom: 2px solid var(--noatp-primary);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot-dual { background: linear-gradient(135deg, var(--atp-primary) 50%, var(--noatp-primary) 50%); }
+    .dot-atp { background: var(--atp-primary); }
+    .dot-noatp { background: var(--noatp-primary); }
+
+    .nav-shortcuts {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      max-width: 100%;
+      padding-bottom: 2px;
+    }
+
+    .nav-chip {
+      background: transparent;
+      color: var(--slate-600);
+      border: 1px solid var(--slate-200);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .nav-chip:hover {
+      background: var(--foral-100);
+      color: var(--foral-900);
+      border-color: var(--foral-600);
+    }
+
+    /* Global Mode Classes for Segmented Display */
+    .mode-atp-only .col-noatp,
+    .mode-atp-only .card-noatp {
+      display: none !important;
+    }
+
+    .mode-atp-only .col-atp,
+    .mode-atp-only .card-atp {
+      grid-column: 1 / -1 !important;
+      width: 100% !important;
+    }
+
+    .mode-noatp-only .col-atp,
+    .mode-noatp-only .card-atp {
+      display: none !important;
+    }
+
+    .mode-noatp-only .col-noatp,
+    .mode-noatp-only .card-noatp {
+      grid-column: 1 / -1 !important;
+      width: 100% !important;
+    }
+
+    /* Section Component Base */
+    .block-section {
+      margin-bottom: 40px;
+      scroll-margin-top: 90px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--slate-200);
+    }
+
+    .section-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--foral-700);
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--slate-900);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-desc {
+      font-size: 13.5px;
+      color: var(--slate-600);
+      max-width: 850px;
+    }
+
+    .section-badge-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-atp {
+      background: var(--atp-light);
+      color: var(--atp-text);
+      border: 1px solid var(--atp-border);
+    }
+
+    .badge-noatp {
+      background: var(--noatp-light);
+      color: var(--noatp-text);
+      border: 1px solid var(--noatp-border);
+    }
+
+    .badge-gray {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      border: 1px solid var(--slate-200);
+    }
+
+    /* Dual Grid Layout */
+    .dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 992px) {
+      .dual-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Cards */
+    .card {
+      background: #FFFFFF;
+      border-radius: var(--card-radius);
+      border: 1px solid var(--slate-200);
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .card:hover {
+      box-shadow: var(--card-shadow-hover);
+      border-color: var(--slate-300);
+    }
+
+    .card-atp {
+      border-top: 4px solid var(--atp-primary);
+    }
+
+    .card-noatp {
+      border-top: 4px solid var(--noatp-primary);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--slate-100);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--slate-900);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-subtext {
+      font-size: 12px;
+      color: var(--slate-500);
+      font-weight: 500;
+    }
+
+    /* KPI metric display */
+    .metric-hero {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .metric-val {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.5px;
+    }
+
+    .metric-val.atp-text { color: var(--atp-primary); }
+    .metric-val.noatp-text { color: var(--noatp-primary); }
+
+    .metric-unit {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--slate-500);
+    }
+
+    /* Segmented List Items (Subsectores, Superficie, etc.) */
+    .segment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .segment-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 10px;
+      padding: 10px 14px;
+      transition: var(--transition);
+    }
+
+    .segment-item:hover {
+      background: #FFFFFF;
+      border-color: var(--slate-300);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    }
+
+    .segment-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .segment-item-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--slate-800);
+      max-width: 70%;
+    }
+
+    .segment-item-pct {
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .segment-item-pct.atp-pct { color: var(--atp-primary); }
+    .segment-item-pct.noatp-pct { color: var(--noatp-primary); }
+
+    .segment-item-sub {
+      font-size: 11px;
+      color: var(--slate-500);
+      font-weight: 500;
+    }
+
+    .progress-bar-bg {
+      height: 7px;
+      background: var(--slate-200);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .progress-atp { background: linear-gradient(90deg, var(--atp-primary), #10B981); }
+    .progress-noatp { background: linear-gradient(90deg, var(--noatp-primary), #F59E0B); }
+
+    /* Insights Callout Box */
+    .insight-card {
+      background: #FFFFFF;
+      border-radius: var(--card-radius);
+      border-left: 5px solid var(--foral-800);
+      border-right: 1px solid var(--slate-200);
+      border-top: 1px solid var(--slate-200);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 18px 22px;
+      margin-top: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .insight-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--foral-900);
+      margin-bottom: 6px;
+    }
+
+    .insight-text {
+      font-size: 13.5px;
+      color: var(--slate-700);
+      line-height: 1.6;
+    }
+
+    .insight-text strong {
+      color: var(--slate-900);
+    }
+
+    /* Charts Container */
+    .chart-box {
+      position: relative;
+      height: 280px;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .chart-box-lg {
+      height: 380px;
+    }
+
+    /* Table Styles */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--slate-200);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 12.5px;
+    }
+
+    .data-table th {
+      background: var(--slate-100);
+      color: var(--slate-700);
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--slate-200);
+      white-space: nowrap;
+    }
+
+    .data-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--slate-100);
+      color: var(--slate-700);
+    }
+
+    .data-table tr:hover td {
+      background: var(--slate-50);
+    }
+
+    .data-table .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+    }
+
+    .data-table .pct-cell {
+      font-weight: 700;
+    }
+
+    /* Table specific accents */
+    .table-atp th {
+      background: #ECFDF5;
+      color: #065F46;
+      border-bottom: 2px solid #A7F3D0;
+    }
+    .table-noatp th {
+      background: #FFFBEB;
+      color: #92400E;
+      border-bottom: 2px solid #FDE68A;
+    }
+    .donut-container {
+      position: relative;
+      height: 270px;
+      max-width: 360px;
+      margin: 0 auto 10px auto;
+    }
+
+    /* Expand / Collapse Toggle */
+    .btn-toggle-expand {
+      background: var(--slate-100);
+      border: 1px solid var(--slate-200);
+      color: var(--slate-700);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      transition: var(--transition);
+    }
+
+    .btn-toggle-expand:hover {
+      background: var(--slate-200);
+      color: var(--slate-900);
+    }
+
+    /* Comarca Grid Cards */
+    .comarca-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .comarca-card {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-200);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .comarca-card:hover, .comarca-card.selected {
+      border-color: var(--foral-700);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+
+    .comarca-card.selected {
+      background: var(--foral-50);
+    }
+
+    .comarca-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 8px;
+    }
+
+    .comarca-badge-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .comarca-mini-metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      padding: 4px 6px;
+      border-radius: 6px;
+    }
+
+    .comarca-mini-atp {
+      background: var(--atp-light);
+      color: var(--atp-text);
+      font-weight: 700;
+    }
+
+    .comarca-mini-noatp {
+      background: var(--noatp-light);
+      color: var(--noatp-text);
+      font-weight: 700;
+    }
+
+    /* Intervention Policy Cards */
+    .policy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .policy-card {
+      background: #FFFFFF;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--card-radius);
+      padding: 20px;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .policy-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .policy-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .policy-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin-bottom: 8px;
+    }
+
+    .policy-desc {
+      font-size: 13px;
+      color: var(--slate-600);
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      background: var(--foral-900);
+      color: #FFFFFF;
+      padding: 30px 24px;
+      border-top: 4px solid var(--atp-primary);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* Print styling */
+    @media print {
+      .gov-bar, .control-panel, .btn-toggle-expand, .print-btn {
+        display: none !important;
+      }
+      .card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+      }
+      body {
+        background: #FFF;
+      }
+      .container {
+        padding: 0;
+        max-width: 100%;
+      }
+    }
+  
+    /* --- ESTILOS PARA COMENTARIOS TEXTUALES E INFOGRAFÍA (VERSIÓN 2) --- */
+    .infografia-callout {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.55;
+      position: relative;
+    }
+    .infografia-callout.callout-atp {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      color: #065F46;
+    }
+    .infografia-callout.callout-noatp {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      color: #92400E;
+    }
+    .infografia-callout.callout-neutral {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      color: #1E293B;
+    }
+    .infografia-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .callout-atp .infografia-badge {
+      background: #047857;
+      color: #FFFFFF;
+    }
+    .callout-noatp .infografia-badge {
+      background: #D97706;
+      color: #FFFFFF;
+    }
+    .callout-neutral .infografia-badge {
+      background: #334155;
+      color: #FFFFFF;
+    }
+    .literal-text {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--slate-700);
+      margin-bottom: 12px;
+    }
+    .literal-text p {
+      margin-bottom: 10px;
+    }
+    .literal-text p:last-child {
+      margin-bottom: 0;
+    }
+    .literal-text strong {
+      color: var(--slate-900);
+    }
+    .callout-atp strong {
+      color: #064E3B;
+    }
+    .callout-noatp strong {
+      color: #78350F;
+    }
+
+    /* Ocultar bloque ecológico cuando el usuario selecciona Solo NO ATP */
+    body.mode-noatp-only #bloque-ecologico {
+      display: none !important;
+    }
+    
+  
+    /* --- SUBSECTORES ATP: SPLIT LAYOUT Y PÍLDORAS ESTRUCTURADAS --- */
+    .atp-subsector-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 14px;
+    }
+    @media (min-width: 1100px) {
+      body.mode-atp-only .atp-subsector-split {
+        grid-template-columns: 1.02fr 1.18fr;
+        gap: 28px;
+        align-items: start;
+      }
+    }
+    .subsector-side-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--slate-500);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .subsector-side-title svg {
+      color: var(--atp-primary);
+    }
+    .micro-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .micro-kpi-box {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    .micro-kpi-box.kpi-emerald {
+      background: #F4FBF7;
+      border-color: #A7F3D0;
+    }
+    .micro-kpi-box.kpi-purple {
+      background: #FAF5FF;
+      border-color: #E9D5FF;
+    }
+    .micro-kpi-val {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--slate-900);
+      line-height: 1.1;
+      display: block;
+    }
+    .micro-kpi-box.kpi-emerald .micro-kpi-val {
+      color: #065F46;
+    }
+    .micro-kpi-box.kpi-purple .micro-kpi-val {
+      color: #6B21A8;
+    }
+    .micro-kpi-lbl {
+      font-size: 11px;
+      color: var(--slate-600);
+      font-weight: 600;
+      margin-top: 3px;
+      display: block;
+      line-height: 1.25;
+    }
+    .insight-pill-card {
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      background: #FFFFFF;
+      border: 1px solid var(--slate-200);
+      box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04);
+    }
+    .insight-pill-card.pill-emerald {
+      background: #F4FBF7;
+      border-color: #A7F3D0;
+    }
+    .insight-pill-card.pill-purple {
+      background: #FAF5FF;
+      border-color: #E9D5FF;
+    }
+    .pill-header {
+      margin-bottom: 10px;
+    }
+    .pill-tag {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .pill-tag.tag-emerald {
+      background: #047857;
+      color: #FFFFFF;
+    }
+    .pill-tag.tag-purple {
+      background: #7E22CE;
+      color: #FFFFFF;
+    }
+    .pill-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--slate-900);
+      line-height: 1.35;
+    }
+    .pill-body {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--slate-700);
+    }
+    .pill-body p {
+      margin-bottom: 8px;
+    }
+    .pill-body p:last-child {
+      margin-bottom: 0;
+    }
+    .pill-summary-box {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+    .pill-summary-box.summary-emerald {
+      background: rgba(4, 120, 87, 0.08);
+      border-left: 3px solid #047857;
+      color: #064E3B;
+    }
+    .pill-summary-box.summary-purple {
+      background: rgba(126, 34, 206, 0.08);
+      border-left: 3px solid #7E22CE;
+      color: #581C87;
+    }
+    .paridad-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .paridad-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12.5px;
+      line-height: 1.4;
+      color: var(--slate-700);
+      background: rgba(255, 255, 255, 0.7);
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(233, 213, 255, 0.6);
+    }
+    .paridad-badge {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 6px;
+      letter-spacing: 0.3px;
+    }
+    .paridad-badge.badge-green {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    .paridad-badge.badge-blue {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+    .paridad-badge.badge-purple {
+      background: #F3E8FF;
+      color: #6B21A8;
+    }
+
+  
+    /* --- ESTILOS AMBER PARA NO ATP SUBSECTORES --- */
+    @media (min-width: 1100px) {
+      body.mode-noatp-only .atp-subsector-split {
+        grid-template-columns: 1.02fr 1.18fr;
+        gap: 28px;
+        align-items: start;
+      }
+    }
+    .micro-kpi-box.kpi-amber {
+      background: #FFFBEB;
+      border-color: #FDE68A;
+    }
+    .micro-kpi-box.kpi-amber .micro-kpi-val {
+      color: #B45309;
+    }
+    .insight-pill-card.pill-amber {
+      background: #FFFDF5;
+      border-color: #FDE68A;
+    }
+    .pill-tag.tag-amber {
+      background: #D97706;
+      color: #FFFFFF;
+    }
+    .pill-summary-box.summary-amber {
+      background: rgba(217, 119, 6, 0.08);
+      border-left: 3px solid #D97706;
+      color: #78350F;
+    }
+    .paridad-item.paridad-amber {
+      border-color: rgba(253, 230, 138, 0.7);
+      background: rgba(255, 255, 255, 0.85);
+    }
+    .paridad-badge.badge-amber {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+  </style>
+</head>
+<body class="mode-dual">
+
+  <!-- TOP INSTITUTIONAL BAR -->
+  <header class="gov-bar">
+    <div class="gov-brand">
+      <img src="logo_dipu.png" alt="Bizkaiko Foru Aldundia · Diputación Foral de Bizkaia" class="gov-logo-img">
+      <span id="txt-gov-brand">BIZKAIKO FORU ALDUNDIA · DIPUTACIÓN FORAL DE BIZKAIA</span>
+    </div>
+    <div class="gov-actions">
+      <button class="lang-btn active" id="btn-lang-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" id="btn-lang-eu" onclick="setLang('eu')">EU</button>
+      <button class="print-btn" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        <span id="txt-print-btn">Imprimir Informe</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HERO SECTION -->
+    <section class="hero-card">
+      <div class="hero-badge">
+        <span class="dot dot-dual"></span>
+        <span id="txt-hero-badge">INFORME FORAL · OBSERVATORIO AGRARIO Y PERSPECTIVA DE GÉNERO · ELABORADO POR AMATERRA</span>
+      </div>
+      <h1 class="hero-title" id="txt-hero-title">
+        Situación de las Mujeres en el Sector Agrario de Bizkaia
+      </h1>
+      <p class="hero-subtitle" id="txt-hero-subtitle">
+        Análisis estructural diferenciado y segmentado entre las <strong>Mujeres Profesionales a Título Principal (ATP)</strong> y el colectivo de explotaciones comerciales <strong>No ATP</strong>, basado en los registros oficiales de altas forales de Bizkaia.
+      </p>
+
+      <div class="hero-stats-row">
+        <div class="hero-stat">
+          <div class="hero-stat-label" id="txt-kpi1-lbl">Censo Total Bizkaia</div>
+          <div class="hero-stat-val">12.126</div>
+          <div class="hero-stat-desc" id="txt-kpi1-desc">3.664 Mujeres (30,2%) | 8.462 Hombres</div>
+        </div>
+        <div class="hero-stat" style="border-left: 3px solid #F59E0B;">
+          <div class="hero-stat-label" id="txt-kpi2-lbl">NO ATP Mercado (≥0,5 UTAs)</div>
+          <div class="hero-stat-val" id="txt-kpi2-val">691</div>
+          <div class="hero-stat-desc" id="txt-kpi2-desc">232 Mujeres (33,6%) | 459 Hombres</div>
+        </div>
+        <div class="hero-stat" style="border-left: 3px solid #10B981;">
+          <div class="hero-stat-label" id="txt-kpi3-lbl">Universo ATP (Profesional)</div>
+          <div class="hero-stat-val" id="txt-kpi3-val" style="color: #6EE7B7;">190 Mujeres</div>
+          <div class="hero-stat-desc" id="txt-kpi3-desc" style="line-height: 1.4; margin-top: 4px;">El 16% de las personas productoras con fines de mercado son ATP en Bizkaia. Las mujeres representan el 36% de las personas ATP, frente al 64% de los hombres.</div>
+        </div>
+        <div class="hero-stat" style="border-left: 3px solid #F59E0B;">
+          <div class="hero-stat-label" id="txt-kpi4-lbl">Universo NO ATP (Mercado)</div>
+          <div class="hero-stat-val" id="txt-kpi4-val" style="color: #FCD34D;">232 Mujeres</div>
+          <div class="hero-stat-desc" id="txt-kpi4-desc">33,6% de los 691 No ATPs comerciales (≥0,5 UTAs)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STICKY CONTROL PANEL: VIEW MODE SELECTOR -->
+    <nav class="control-panel">
+      <div class="view-modes">
+        <button class="view-btn mode-dual active" id="btn-view-dual" onclick="setViewMode('dual')">
+          <span class="dot dot-dual"></span>
+          <span id="txt-view-dual">Comparativa Dual (Lado a Lado)</span>
+        </button>
+        <button class="view-btn mode-atp" id="btn-view-atp" onclick="setViewMode('atp')">
+          <span class="dot dot-atp"></span>
+          <span id="txt-view-atp">Solo ATP (190 mujeres)</span>
+        </button>
+        <button class="view-btn mode-noatp" id="btn-view-noatp" onclick="setViewMode('noatp')">
+          <span class="dot dot-noatp"></span>
+          <span id="txt-view-noatp">Solo NO ATP (232 mujeres ≥0,5 UTAs)</span>
+        </button>
+      </div>
+
+      <div class="nav-shortcuts">
+        <a href="#bloque-subsectores" class="nav-chip" id="nav-chip-1">1. Subsectores</a>
+        <a href="#bloque-superficie" class="nav-chip" id="nav-chip-2">2. Superficie</a>
+        <a href="#bloque-ecologico" class="nav-chip" id="nav-chip-3">3. Ecológico (Solo ATP)</a>
+        <a href="#bloque-comarcas" class="nav-chip" id="nav-chip-4">4. Comarcas</a>
+        <a href="#bloque-edad" class="nav-chip" id="nav-chip-5">5. Edad y Relevo</a>
+      </div>
+    </nav>
+
+    <!-- BLOQUE 1: SUBSECTORES -->
+    <section class="block-section" id="bloque-subsectores">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-tag" id="txt-sec1-tag">INDICADOR ESTRUCTURAL 1</div>
+          <h2 class="section-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M3 3v18h18"/>
+              <path d="M18 17V9"/>
+              <path d="M13 17V5"/>
+              <path d="M8 17v-3"/>
+            </svg>
+            <span id="txt-sec1-title">Distribución por Subsectores Productivos</span>
+          </h2>
+          <p class="section-desc" id="txt-sec1-desc">
+            Comparativa del <strong>% del total de mujeres por subsectores</strong>. Contraste de especializaciones productivas entre el segmento profesional ATP (190 mujeres) y el segmento No ATP (232 mujeres ≥0,5 UTAs).
+          </p>
+        </div>
+        <div class="section-badge-group">
+          <span class="badge badge-atp" id="badge-atp-pill-1">ATP: 190 Mujeres</span>
+          <span class="badge badge-noatp" id="badge-noatp-pill-1">NO ATP: 232 Mujeres (≥0,5 UTAs)</span>
+        </div>
+      </div>
+
+      <!-- Gráficos de Especialización Productiva: Top Subsectores (Hombres vs Mujeres) -->
+      <div class="dual-grid" style="margin-bottom: 24px;">
+        <!-- Gráfico Barras ATP -->
+        <div class="card card-atp col-atp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-atp">ATP</span>
+              <span id="txt-sec1-bar-atp-title">Top Subsectores en ATP (Hombres vs Mujeres)</span>
+            </div>
+            <span class="card-subtext">Base: 190 M · 339 H</span>
+          </div>
+          <div class="chart-box" style="height: 310px;">
+            <canvas id="chartSubsectoresBarATP"></canvas>
+          </div>
+        </div>
+
+        <!-- Gráfico Barras NO ATP -->
+        <div class="card card-noatp col-noatp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-noatp">NO ATP</span>
+              <span id="txt-sec1-bar-noatp-title">Top Subsectores en NO ATP ≥0,5 UTAs (Hombres vs Mujeres)</span>
+            </div>
+            <span class="card-subtext">Base: 232 M · 459 H</span>
+          </div>
+          <div class="chart-box" style="height: 310px;">
+            <canvas id="chartSubsectoresBarNoATP"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparativa Directa de Especialización Productiva: Tablas Paralelas (Alternativa A) -->
+      <div class="dual-grid" style="margin-bottom: 24px;">
+        <!-- TABLA ATP -->
+        <div class="card card-atp col-atp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-atp">ATP</span>
+              <span id="txt-sec1-tab-atp-title">Especialización Productiva en ATP</span>
+            </div>
+            <span class="card-subtext" id="txt-sec1-tab-atp-sub">Base: 190 Mujeres · 339 Hombres (529 Total)</span>
+          </div>
+          <div class="table-responsive" style="max-height: 480px; overflow-y: auto;">
+            <table class="data-table table-atp">
+              <thead>
+                <tr>
+                  <th id="th-sub-atp-full-name">Subsector</th>
+                  <th class="num" id="th-sub-atp-full-h">Hombres</th>
+                  <th class="num" id="th-sub-atp-full-m">Mujeres</th>
+                  <th class="num" id="th-sub-atp-full-tot">Total</th>
+                  <th class="num" id="th-sub-atp-full-par">% Paridad (M)</th>
+                  <th class="num" id="th-sub-atp-full-pct">% s/190 M</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-subsectores-atp-full"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TABLA NO ATP -->
+        <div class="card card-noatp col-noatp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-noatp">NO ATP</span>
+              <span id="txt-sec1-tab-noatp-title">Especialización Productiva en NO ATP (≥0,5 UTAs)</span>
+            </div>
+            <span class="card-subtext" id="txt-sec1-tab-noatp-sub">Base: 232 Mujeres · 459 Hombres (691 Total)</span>
+          </div>
+          <div class="table-responsive" style="max-height: 480px; overflow-y: auto;">
+            <table class="data-table table-noatp">
+              <thead>
+                <tr>
+                  <th id="th-sub-noatp-full-name">Subsector</th>
+                  <th class="num" id="th-sub-noatp-full-h">Hombres</th>
+                  <th class="num" id="th-sub-noatp-full-m">Mujeres</th>
+                  <th class="num" id="th-sub-noatp-full-tot">Total</th>
+                  <th class="num" id="th-sub-noatp-full-par">% Paridad (M)</th>
+                  <th class="num" id="th-sub-noatp-full-pct">% s/232 M</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-subsectores-noatp-full"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual Cards: ATP vs NO ATP Detail -->
+      <div class="dual-grid">
+                <!-- COL ATP SUBSECTORES -->
+        <div class="card card-atp col-atp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-atp">ATP</span>
+              <span id="txt-sec1-atp-card-title">Subsectores en Mujeres Profesionales</span>
+            </div>
+            <span class="card-subtext" id="txt-sec1-atp-base">Base: 190 Mujeres ATP (100%)</span>
+          </div>
+
+          <!-- Micro KPIs de síntesis sectorial -->
+          <div class="micro-kpi-grid">
+            <div class="micro-kpi-box kpi-emerald">
+              <span class="micro-kpi-val">43,7%</span>
+              <span class="micro-kpi-lbl">Bovino Carne (83 mujeres)</span>
+            </div>
+            <div class="micro-kpi-box kpi-purple">
+              <span class="micro-kpi-val">71,4%</span>
+              <span class="micro-kpi-lbl">Caprino (Liderazgo Femenino)</span>
+            </div>
+            <div class="micro-kpi-box kpi-purple">
+              <span class="micro-kpi-val">50% / 50%</span>
+              <span class="micro-kpi-lbl">Porcino y Frutícola (Paridad)</span>
+            </div>
+            <div class="micro-kpi-box kpi-emerald">
+              <span class="micro-kpi-val">47,8%</span>
+              <span class="micro-kpi-lbl">Aves Ponedoras (Paridad Técnica)</span>
+            </div>
+          </div>
+
+          <!-- Estructura Bipartita: Datos a la izquierda / Análisis cualitativo a la derecha -->
+          <div class="atp-subsector-split">
+            <!-- Zona Izquierda: Gráfico Circular / Anillo (Donut) -->
+            <div class="atp-subsector-data">
+              <div class="subsector-side-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+                <span id="txt-sec1-atp-donut-title">Distribución por Subsectores (Estructura de Anillo)</span>
+              </div>
+
+              <div class="donut-container">
+                <canvas id="chartSubsectoresDonutATP"></canvas>
+              </div>
+
+              <div class="pill-summary-box summary-emerald" style="margin-top: 12px; font-size: 12.5px;">
+                <strong>Concentración vacuna:</strong> Carne (43,7%) y leche (13,2%) aglutinan el <strong>56,8%</strong> de las 190 mujeres profesionales.
+              </div>
+            </div>
+
+            <!-- Zona Derecha: Píldoras de Hallazgos y Análisis Narrativo -->
+            <div class="atp-subsector-narrative" id="txt-sec1-atp-text">
+              <!-- Píldora 1: Especialización en Vacuno -->
+              <div class="insight-pill-card pill-emerald">
+                <div class="pill-header">
+                  <span class="pill-tag tag-emerald">Especialización Productiva</span>
+                  <h4 class="pill-title">Concentración en Ganado Vacuno vs. Diversificación Masculina</h4>
+                </div>
+                <div class="pill-body">
+                  <p>En comparación con los hombres, la actividad de las mujeres ATP se concentra en mayor medida en el ganado bovino. El <strong>57% de las mujeres ATP se dedica a explotaciones de vacuno</strong>, principalmente de carne (<strong>44%</strong>) y, en menor medida, de leche (<strong>13%</strong>). A continuación, se sitúan las hortalizas en invernadero (<strong>9%</strong>).</p>
+                  <p>En el caso de los hombres ATP, aunque el vacuno también representa una parte importante de la actividad (47%), su distribución es algo más diversa: el <strong>33%</strong> se dedica al vacuno de carne, el <strong>14%</strong> al vacuno de leche y un <strong>19% a las hortalizas en invernadero</strong>.</p>
+                  <div class="pill-summary-box summary-emerald">
+                    <strong>Conclusión:</strong> Se muestra una mayor concentración de la actividad de las mujeres ATP en el sector bovino, mientras que entre los hombres existe una distribución algo más diversificada, con un peso relevante también de la horticultura en invernadero.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Píldora 2: Paridad y Pequeños Animales -->
+              <div class="insight-pill-card pill-purple">
+                <div class="pill-header">
+                  <span class="pill-tag tag-purple">Perspectiva de Género</span>
+                  <h4 class="pill-title">Distribución por Género: Liderazgo en Pequeños Animales y Paridad</h4>
+                </div>
+                <div class="pill-body">
+                  <p>Si revisamos los datos poniendo el foco en cómo se distribuyen los distintos subsectores según el género de las personas titulares, se observa que, en la mayoría de ellos, los hombres tienen una mayor presencia. Sin embargo, surgen claras excepciones de liderazgo femenino y equilibrio:</p>
+                  
+                  <div class="paridad-list">
+                    <div class="paridad-item">
+                      <span class="paridad-badge badge-green">71% Mujeres</span>
+                      <div><strong>Explotaciones de caprinos:</strong> Principal excepción sectorial, donde las mujeres representan el 71% de los proyectos frente al 29% masculino.</div>
+                    </div>
+                    <div class="paridad-item">
+                      <span class="paridad-badge badge-blue">50% / 50%</span>
+                      <div><strong>Porcino y Fruticultura:</strong> Distribución en paridad equilibrada; hombres y mujeres representan exactamente el 50% de las titularidades en ambos casos.</div>
+                    </div>
+                    <div class="paridad-item">
+                      <span class="paridad-badge badge-purple">48% Mujeres</span>
+                      <div><strong>Aves ponedoras:</strong> Distribución prácticamente equilibrada, con un 48% de proyectos correspondientes a mujeres y un 52% a hombres.</div>
+                    </div>
+                  </div>
+
+                  <div class="pill-summary-box summary-purple">
+                    <strong>Conclusión infográfica:</strong> Los datos apuntan a una <strong>mayor presencia relativa de las mujeres en aquellos subsectores vinculados a pequeños animales</strong>.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+                <!-- COL NO ATP SUBSECTORES -->
+        <div class="card card-noatp col-noatp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-noatp">NO ATP</span>
+              <span id="txt-sec1-noatp-card-title">Subsectores en Explotaciones Comerciales</span>
+            </div>
+            <span class="card-subtext" id="txt-sec1-noatp-base">Base: 232 Mujeres No ATP (≥0,5 UTAs)</span>
+          </div>
+
+          <!-- Micro KPIs de síntesis sectorial NO ATP (≥0,5 UTAs) -->
+          <div class="micro-kpi-grid">
+            <div class="micro-kpi-box kpi-amber">
+              <span class="micro-kpi-val">66,8%</span>
+              <span class="micro-kpi-lbl">Bovino Carne (155 mujeres)</span>
+            </div>
+            <div class="micro-kpi-box kpi-amber">
+              <span class="micro-kpi-val">8,2%</span>
+              <span class="micro-kpi-lbl">Huerta Invernadero (19 mujeres)</span>
+            </div>
+            <div class="micro-kpi-box kpi-amber">
+              <span class="micro-kpi-val">7,8%</span>
+              <span class="micro-kpi-lbl">Ovinos (18 mujeres)</span>
+            </div>
+            <div class="micro-kpi-box kpi-amber">
+              <span class="micro-kpi-val">5,2%</span>
+              <span class="micro-kpi-lbl">Viticultura (12 mujeres)</span>
+            </div>
+          </div>
+
+          <!-- Estructura Bipartita: Datos a la izquierda / Análisis cualitativo a la derecha -->
+          <div class="atp-subsector-split">
+            <!-- Zona Izquierda: Gráfico Circular / Anillo (Donut Gemelo NO ATP) -->
+            <div class="atp-subsector-data">
+              <div class="subsector-side-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 10 10"/></svg>
+                <span id="txt-sec1-noatp-donut-title">Distribución por Subsectores (Estructura de Anillo)</span>
+              </div>
+
+              <div class="donut-container">
+                <canvas id="chartSubsectoresDonutNoATP"></canvas>
+              </div>
+
+              <div class="pill-summary-box summary-amber" style="margin-top: 12px; font-size: 12.5px;">
+                <strong>Alta concentración:</strong> Dos tercios de las titulares (66,8% · 155 m.) se concentran en vacuno de carne, complementadas por huerta de invernadero (8,2%) y ovino (7,8%).
+              </div>
+            </div>
+
+            <!-- Zona Derecha: Píldoras de Hallazgos y Análisis Narrativo -->
+            <div class="atp-subsector-narrative" id="txt-sec1-noatp-text">
+              <!-- Píldora 1: Concentración en Bovino de Carne -->
+              <div class="insight-pill-card pill-amber">
+                <div class="pill-header">
+                  <span class="pill-tag tag-amber">Patrón Productivo Mayoritario</span>
+                  <h4 class="pill-title">Concentración en Vacuno de Carne y Estructura por Género</h4>
+                </div>
+                <div class="pill-body">
+                  <p>Entre las personas NO ATP con fines de mercado, tanto hombres como mujeres se concentran principalmente en las explotaciones de <strong>bovinos especializadas en orientación cría y carne</strong>, que representan el <strong>44% de los hombres y el 45% de las mujeres</strong>.</p>
+                  <p>A bastante distancia de la cría y carne vacuna, destacan entre las mujeres las explotaciones de <strong>hortalizas en invernadero (8,2%)</strong>, las de <strong>ovinos (7,8%)</strong> y la <strong>viticultura (5,2%)</strong>. Entre los hombres, tras el vacuno de carne destacan igualmente las explotaciones ovinas (7,0%) y la huerta en invernadero (5,9%).</p>
+                  <p>En el resto de subsectores, el peso es más reducido, sin superar el 6% ni entre las mujeres ni entre los hombres.</p>
+                  <div class="pill-summary-box summary-amber">
+                    <strong>Conclusión:</strong> El vacuno de carne vertebra la actividad de casi la mitad de los titulares en ambos géneros, con una estructura proporcional prácticamente idéntica entre hombres y mujeres.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Píldora 2: Claves para la Infografía y Segundas Actividades -->
+              <div class="insight-pill-card pill-amber" style="border-top: 3px solid #D97706;">
+                <div class="pill-header">
+                  <span class="pill-tag tag-amber">Claves para la Infografía</span>
+                  <h4 class="pill-title">Jerarquía Sectorial y Datos Destacados</h4>
+                </div>
+                <div class="pill-body">
+                  <div class="paridad-list">
+                    <div class="paridad-item paridad-amber">
+                      <span class="paridad-badge badge-amber">Dato Principal</span>
+                      <div>El <strong>66,8% de las mujeres</strong> (155 titulares) y el <strong>63,4% de los hombres</strong> NO ATP (≥0,5 UTAs) se concentran en <strong>bovinos de cría y carne</strong>.</div>
+                    </div>
+                    <div class="paridad-item paridad-amber">
+                      <span class="paridad-badge badge-amber">Segundo Dato</span>
+                      <div><strong>Huerta en invernadero (8,2%)</strong> y <strong>ovinos (7,8%)</strong> son las siguientes actividades con mayor presencia femenina.</div>
+                    </div>
+                    <div class="paridad-item paridad-amber">
+                      <span class="paridad-badge badge-amber">Viticultura y Huerta</span>
+                      <div>La <strong>viticultura alcanza el 5,2%</strong> (12 mujeres), consolidando una diversificación orientada al valor comercial añadido.</div>
+                    </div>
+                  </div>
+
+                  <div class="pill-summary-box summary-amber">
+                    <strong>Contraste con el segmento ATP:</strong> En el modelo No ATP comercial, la ganadería ovina extensiva y la huerta al aire libre reemplazan la fuerte presencia que en ATP tienen el vacuno de leche (13,2%) y los invernaderos tecnificados (8,9%).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytical Key Takeaway -->
+      <div class="insight-card">
+        <div class="insight-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span id="txt-sec1-insight-title">Conclusión Analítica: Diferenciación Productiva</span>
+        </div>
+        <p class="insight-text" id="txt-sec1-insight-text">
+          Aunque el <strong>bovino de carne</strong> es el pilar en ambos grupos (~44%), el perfil ATP profesional muestra una presencia decisiva en <strong>bovinos de leche (13,2% vs 1,0%)</strong> y en <strong>invernadero hortícola (8,9% vs 6,0%)</strong>, actividades con altos requerimientos de capital, tecnología y dedicación plena. En contraste, el colectivo No ATP exhibe una fuerte concentración en <strong>ovino extensivo (12,2%)</strong> y huerta al aire libre no mecanizada (7,8%).
+        </p>
+      </div>
+    </section>
+
+    <!-- BLOQUE 2: SUPERFICIE -->
+    <section class="block-section" id="bloque-superficie">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-tag" id="txt-sec2-tag">INDICADOR ESTRUCTURAL 2</div>
+          <h2 class="section-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18"/>
+              <path d="M9 21V9"/>
+            </svg>
+            <span id="txt-sec2-title">Dimensión y Superficie de las Explotaciones</span>
+          </h2>
+          <p class="section-desc" id="txt-sec2-desc">
+            Distribución del <strong>% del total de mujeres por estratos de superficie</strong> (0,5-5 ha, 5-20 ha, 20-50 ha, >50 ha). Contraste estructural entre la viabilidad territorial del ATP y el minifundismo en el modelo No ATP.
+          </p>
+        </div>
+        <div class="section-badge-group">
+          <span class="badge badge-atp" id="badge-atp-pill-2">ATP: 190 Mujeres</span>
+          <span class="badge badge-noatp" id="badge-noatp-pill-2">NO ATP: 232 Mujeres (≥0,5 UTAs)</span>
+        </div>
+      </div>
+
+      <!-- Dual Comparative Charts: Superficie ATP vs NO ATP (Alternativa A) -->
+      <div class="dual-grid" style="margin-bottom: 24px;">
+        <!-- Chart Superficie ATP -->
+        <div class="card card-atp col-atp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-atp">ATP</span>
+              <span id="txt-sec2-chart-atp-title">Estratos de Superficie en ATP (Hombres vs Mujeres)</span>
+            </div>
+            <span class="card-subtext">Base: 190 M · 339 H</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartSuperficieATP"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart Superficie NO ATP -->
+        <div class="card card-noatp col-noatp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-noatp">NO ATP</span>
+              <span id="txt-sec2-chart-noatp-title">Estratos en NO ATP ≥0,5 UTAs (Hombres vs Mujeres)</span>
+            </div>
+            <span class="card-subtext">Base: 232 M · 459 H</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartSuperficieNoATP"></canvas>
+          </div>
+        </div>
+      </div>
+
+            <div class="dual-grid">
+        <!-- COL ATP SUPERFICIE -->
+        <div class="card card-atp col-atp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-atp">ATP</span>
+              <span id="txt-sec2-atp-card-title">Superficie en Mujeres Profesionales</span>
+            </div>
+            <span class="card-subtext" id="txt-sec2-atp-base">Base: 190 Mujeres ATP</span>
+          </div>
+
+          <!-- Micro KPIs ATP Superficie -->
+          <div class="micro-kpi-grid">
+            <div class="micro-kpi-box kpi-emerald" style="border: 2px solid #059669;">
+              <span class="micro-kpi-val">59,5%</span>
+              <span class="micro-kpi-lbl">Menos de 20 ha · Mayoría Femenina (113 m.)</span>
+            </div>
+            <div class="micro-kpi-box kpi-emerald">
+              <span class="micro-kpi-val">32,1%</span>
+              <span class="micro-kpi-lbl">Muy Pequeña (0,5–5 ha · 61 m.)</span>
+            </div>
+            <div class="micro-kpi-box kpi-purple" style="border: 2px solid #7C3AED;">
+              <span class="micro-kpi-val">27,4%</span>
+              <span class="micro-kpi-lbl">Pequeña (5–20 ha · 52 m.) vs 16,5% H</span>
+            </div>
+            <div class="micro-kpi-box kpi-emerald">
+              <span class="micro-kpi-val">14,2%</span>
+              <span class="micro-kpi-lbl">Grande (> 50 ha · 27 m.) vs 24,2% H</span>
+            </div>
+          </div>
+
+          <!-- Estructura Bipartita ATP -->
+          <div class="atp-subsector-split">
+            <!-- Zona Izquierda: Datos y Estratos -->
+            <div class="atp-subsector-data">
+              <div class="subsector-side-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                Estratos de Superficie (ATP)
+              </div>
+              <div class="segment-list" id="list-superficie-atp"></div>
+            </div>
+
+            <!-- Zona Derecha: Píldoras de Análisis Narrativo L34 -->
+            <div class="atp-subsector-narrative" id="txt-sec2-atp-text">
+              <div class="insight-pill-card pill-emerald">
+                <div class="pill-header">
+                  <span class="pill-tag tag-emerald">Estructura Dimensional</span>
+                  <h4 class="pill-title">Distribución según Escala y Diferencias de Género</h4>
+                </div>
+                <div class="pill-body">
+                  <p>La distribución de las explotaciones según su superficie muestra diferencias entre mujeres y hombres ATP. En el caso de las mujeres, más de la mitad (<strong>59%</strong>) gestiona explotaciones de menos de 20 hectáreas: un <strong>32%</strong> corresponde a explotaciones de entre 0,5 y 5 hectáreas y un <strong>27%</strong> a explotaciones de entre 5 y 20 hectáreas.</p>
+                  <p>Entre los hombres ATP, el 50% se concentra también en explotaciones de menos de 20 hectáreas, aunque con una distribución diferente: el <strong>33%</strong> gestiona de 0,5 a 5 hectáreas y el <strong>17%</strong> explotaciones de 5 a 20 hectáreas.</p>
+                </div>
+              </div>
+
+              <div class="insight-pill-card pill-emerald" style="border-top: 3px solid #047857;">
+                <div class="pill-header">
+                  <span class="pill-tag tag-emerald">Brecha en Grandes Fincas</span>
+                  <h4 class="pill-title">Concentración en Fincas Superiores a 20 Hectáreas</h4>
+                </div>
+                <div class="pill-body">
+                  <p>A partir de las 20 hectáreas, el peso relativo de las explotaciones es mayor entre los hombres: representan el <strong>50% de sus explotaciones, frente al 41% entre las mujeres</strong>.</p>
+                  <p>La diferencia es especialmente significativa en las explotaciones de <strong>más de 50 hectáreas</strong>, que suponen el <strong>24% entre los hombres y el 14% entre las mujeres</strong>.</p>
+                  <div class="pill-summary-box summary-emerald">
+                    <strong>Conclusión:</strong> Las mujeres ATP presentan una mayor concentración relativa en explotaciones de menos de 20 hectáreas, mientras que entre los hombres tiene mayor peso la gestión de fincas de gran escala (>50 ha).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COL NO ATP SUPERFICIE -->
+        <div class="card card-noatp col-noatp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-noatp">NO ATP</span>
+              <span id="txt-sec2-noatp-card-title">Superficie en Explotaciones Comerciales</span>
+            </div>
+            <span class="card-subtext" id="txt-sec2-noatp-base">Base: 1.004 Mujeres No ATP</span>
+          </div>
+
+          <!-- Micro KPIs NO ATP Superficie -->
+          <div class="micro-kpi-grid">
+            <div class="micro-kpi-box kpi-amber">
+              <span class="micro-kpi-val">74,6%</span>
+              <span class="micro-kpi-lbl">Minifundio (&lt; 5 ha - 749 m.)</span>
+            </div>
+            <div class="micro-kpi-box kpi-amber">
+              <span class="micro-kpi-val">19,8%</span>
+              <span class="micro-kpi-lbl">Pequeña (5 - 20 ha - 199 m.)</span>
+            </div>
+            <div class="micro-kpi-box kpi-amber">
+              <span class="micro-kpi-val">5,0%</span>
+              <span class="micro-kpi-lbl">Mediana (20 - 50 ha - 50 m.)</span>
+            </div>
+            <div class="micro-kpi-box kpi-amber">
+              <span class="micro-kpi-val">0,6%</span>
+              <span class="micro-kpi-lbl">Grande (> 50 ha - solo 6 m.)</span>
+            </div>
+          </div>
+
+          <!-- Estructura Bipartita NO ATP -->
+          <div class="atp-subsector-split">
+            <!-- Zona Izquierda: Datos y Estratos -->
+            <div class="atp-subsector-data">
+              <div class="subsector-side-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                Estratos de Superficie (NO ATP)
+              </div>
+              <div class="segment-list" id="list-superficie-noatp"></div>
+            </div>
+
+            <!-- Zona Derecha: Píldoras de Análisis Narrativo J56 -->
+            <div class="atp-subsector-narrative" id="txt-sec2-noatp-text">
+              <div class="insight-pill-card pill-amber">
+                <div class="pill-header">
+                  <span class="pill-tag tag-amber">Patrón de Minifundio</span>
+                  <h4 class="pill-title">Predominio de Pequeñas Dimensiones en Ambos Géneros</h4>
+                </div>
+                <div class="pill-body">
+                  <p>La distribución por superficie es muy similar entre hombres y mujeres NO ATP. En ambos casos predominan claramente las explotaciones muy pequeñas, de <strong>0,5 a 5 hectáreas, que representan el 69% de los hombres y el 75% de las mujeres</strong>.</p>
+                  <p>A medida que aumenta la superficie, el peso disminuye rápidamente en ambos géneros: las fincas de 5 a 20 ha suponen el <strong>23% de los hombres y el 20% de las mujeres</strong>, mientras que las de 20 a 50 ha apenas alcanzan el <strong>6% y 5%</strong>, respectivamente.</p>
+                </div>
+              </div>
+
+              <div class="insight-pill-card pill-amber" style="border-top: 3px solid #D97706;">
+                <div class="pill-header">
+                  <span class="pill-tag tag-amber">Gran Escala Testimonial</span>
+                  <h4 class="pill-title">Escasa Presencia en Superficies Superiores a 50 Hectáreas</h4>
+                </div>
+                <div class="pill-body">
+                  <p>Las explotaciones de más de 50 ha tienen un peso extraordinariamente reducido: <strong>2% entre los hombres y solo un 1% entre las mujeres</strong> (apenas 6 titulares en toda la provincia de Bizkaia).</p>
+                  <div class="pill-summary-box summary-amber">
+                    <strong>Conclusión:</strong> En el modelo NO ATP comercial, 3 de cada 4 mujeres no alcanzan las 5 hectáreas, reflejando una fragmentación territorial estructural que limita la mecanización y el aprovechamiento de pastos forrajeros.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span id="txt-sec2-insight-title">Conclusión Analítica: La Brecha Territorial</span>
+        </div>
+        <p class="insight-text" id="txt-sec2-insight-text">
+          La brecha de superficie es el principal condicionante de rentabilidad. Mientras que el <strong>74,6% de las mujeres No ATP se encuentran atrapadas en el minifundio (&lt;5 ha)</strong> con escasa capacidad de rotación y capitalización, el <strong>67,9% de las mujeres ATP disponen de bases territoriales viables (&gt;5 ha)</strong>, permitiendo el pastoreo intensivo y la rotación forrajera indispensable para la viabilidad económica.
+        </p>
+      </div>
+    </section>
+
+    <!-- BLOQUE 3: ECOLÓGICO (EXCLUSIVO ATP) -->
+    <section class="block-section" id="bloque-ecologico">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-tag" id="txt-sec3-tag">INDICADOR ESTRUCTURAL 3</div>
+          <h2 class="section-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M12 2a10 10 0 0 0-10 10c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+            </svg>
+            <span id="txt-sec3-title">Sostenibilidad y Producción Ecológica Oficial (ATP)</span>
+          </h2>
+          <p class="section-desc" id="txt-sec3-desc">
+            Análisis de la <strong>producción ecológica en las mujeres profesionales ATP</strong> (certificado, parcial y en proceso de certificación). El colectivo No ATP se excluye del cómputo ecológico según las directrices forales.
+          </p>
+        </div>
+        <div class="section-badge-group">
+          <span class="badge badge-atp" id="badge-atp-pill-3">ATP: 190 Mujeres</span>
+        </div>
+      </div>
+
+      <!-- Micro-KPIs Resumen Ecológico ATP -->
+      <div class="micro-kpi-grid">
+        <div class="micro-kpi-box">
+          <span class="micro-kpi-val atp-text">11,58%</span>
+          <span class="micro-kpi-lbl">Tasa Eco Mujeres ATP · 22 de 190</span>
+        </div>
+        <div class="micro-kpi-box">
+          <span class="micro-kpi-val atp-text">12% vs 9%</span>
+          <span class="micro-kpi-lbl">Mayor Vocación Eco · Mujeres vs Hombres</span>
+        </div>
+        <div class="micro-kpi-box">
+          <span class="micro-kpi-val atp-text">40,7%</span>
+          <span class="micro-kpi-lbl">Cuota Femenina · 22 de 54 eco Bizkaia</span>
+        </div>
+        <div class="micro-kpi-box">
+          <span class="micro-kpi-val atp-text">54 Proyectos</span>
+          <span class="micro-kpi-lbl">Total Agroecológico ATP · 22 m. y 32 h.</span>
+        </div>
+      </div>
+
+      <!-- Tarjeta Principal con Estructura Bipartita Lado a Lado -->
+      <div class="card card-atp col-atp" style="border-top: 4px solid var(--atp-primary); margin-bottom: 24px;">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="badge badge-atp">ATP</span>
+            <span id="txt-sec3-atp-card-title">Certificaciones y Grado de Conversión Ecológica</span>
+          </div>
+          <span class="card-subtext" id="txt-sec3-atp-base">Base: 190 Mujeres ATP (22 en producción ecológica)</span>
+        </div>
+
+        <div class="atp-subsector-split" style="grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));">
+          <!-- Columna Izquierda: Datos y Barras -->
+          <div class="atp-subsector-data">
+            <div class="metric-hero">
+              <span class="metric-val atp-text">11,58%</span>
+              <span class="metric-unit" id="txt-sec3-atp-unit">con actividad ecológica (22 mujeres)</span>
+            </div>
+            <p style="font-size: 13.5px; color: var(--slate-600); margin-bottom: 16px; line-height: 1.5;" id="txt-sec3-atp-text">
+              Un total de <strong>22 mujeres profesionales ATP (11,58%)</strong> gestionan explotaciones con certificación ecológica oficial en Bizkaia, frente a <strong>32 hombres (9,44%)</strong>.
+            </p>
+
+            <div class="segment-list" id="list-ecologico-atp"></div>
+
+            <div class="pill-summary-box summary-emerald" style="margin-top: 18px;" id="txt-sec3-atp-note">
+              <strong>Liderazgo femenino en el sector eco ATP:</strong> Las mujeres representan el <strong>40,7% de todas las explotaciones ecológicas profesionales</strong> (54 en total: 32 hombres y 22 mujeres).
+            </div>
+          </div>
+
+          <!-- Columna Derecha: Análisis Oficial Celda N39 -->
+          <div class="atp-subsector-narrative">
+            <div class="insight-pill-card pill-emerald">
+              <div class="pill-header">
+                <span class="pill-tag tag-emerald">1. Vocación Productiva por Género</span>
+                <h4 class="pill-title">Mayor Tasa de Conversión Ecológica en Mujeres</h4>
+              </div>
+              <div class="pill-body">
+                <p>El <strong>12% de las mujeres ATP produce en ecológico</strong>, frente al <strong>9% de los hombres</strong>.</p>
+                <p>Este dato refleja una orientación prioritaria hacia modelos de alto valor añadido, respeto medioambiental y circuitos cortos de comercialización dentro del perfil profesional femenino.</p>
+              </div>
+            </div>
+
+            <div class="insight-pill-card pill-emerald" style="border-top: 3px solid #059669;">
+              <div class="pill-header">
+                <span class="pill-tag tag-emerald">2. Representatividad Sectorial · Modelo Producción Ecológica</span>
+                <h4 class="pill-title">Cuota Femenina en la Producción Agroecológica</h4>
+              </div>
+              <div class="pill-body">
+                <p>Las mujeres representan el <strong>40,7% de todas las explotaciones ecológicas profesionales</strong> (54 en total: 32 hombres y 22 mujeres).</p>
+                <p>Esta destacada participación posiciona a las titulares profesionales de Bizkaia a la vanguardia de la sostenibilidad y de las prácticas agroecológicas certificadas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOQUE 4: COMARCAS -->
+    <section class="block-section" id="bloque-comarcas">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-tag" id="txt-sec4-tag">INDICADOR ESTRUCTURAL 4</div>
+          <h2 class="section-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+              <line x1="8" y1="2" x2="8" y2="18"></line>
+              <line x1="16" y1="6" x2="16" y2="22"></line>
+            </svg>
+            <span id="txt-sec4-title">Distribución Territorial por Comarcas (ADR)</span>
+          </h2>
+          <p class="section-desc" id="txt-sec4-desc">
+            Análisis del <strong>% del total de mujeres por comarca</strong> en las 6 comarcas agrarias de Bizkaia. Revela una divergencia geográfica radical en la localización del talento profesional frente a las explotaciones comerciales no ATP.
+          </p>
+        </div>
+        <div class="section-badge-group">
+          <span class="badge badge-atp" id="badge-atp-pill-4">ATP: 190 Mujeres</span>
+          <span class="badge badge-noatp" id="badge-noatp-pill-4">NO ATP: 232 Mujeres (≥0,5 UTAs)</span>
+        </div>
+      </div>
+
+      <!-- Micro-KPIs Resumen Territorial -->
+      <div class="micro-kpi-grid">
+        <div class="micro-kpi-box kpi-emerald">
+          <span class="micro-kpi-val atp-text">41,1%</span>
+          <span class="micro-kpi-lbl">Enkarterrialde ATP · Mayor concentración femenina (78 titulares - 41,1%)</span>
+        </div>
+        <div class="micro-kpi-box kpi-amber">
+          <span class="micro-kpi-val noatp-text">25,4%</span>
+          <span class="micro-kpi-lbl">Jata Ondo NO ATP · Principal comarca No ATP (59 titulares - 25,4%)</span>
+        </div>
+        <div class="micro-kpi-box kpi-emerald">
+          <span class="micro-kpi-val atp-text">44,2%</span>
+          <span class="micro-kpi-lbl">Urremendi · Máxima tasa de paridad ATP (19 m. y 24 h.)</span>
+        </div>
+        <div class="micro-kpi-box kpi-emerald">
+          <span class="micro-kpi-val atp-text">42,2%</span>
+          <span class="micro-kpi-lbl">Enkarterrialde · Alta cuota de paridad ATP (78 m. y 107 h.)</span>
+        </div>
+      </div>
+
+      <!-- Dual Comparative Charts: Comarcas ATP vs NO ATP (Alternativa A) -->
+      <div class="dual-grid" style="margin-bottom: 24px;">
+        <!-- Chart Comarcas ATP -->
+        <div class="card card-atp col-atp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-atp">ATP</span>
+              <span id="txt-sec4-chart-atp-title">Distribución Territorial en ATP (Hombres vs Mujeres)</span>
+            </div>
+            <span class="card-subtext">Base: 190 M · 339 H</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartComarcasATP"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart Comarcas NO ATP -->
+        <div class="card card-noatp col-noatp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-noatp">NO ATP</span>
+              <span id="txt-sec4-chart-noatp-title">Distribución Territorial en NO ATP ≥0,5 UTAs (Hombres vs Mujeres)</span>
+            </div>
+            <span class="card-subtext">Base: 232 M · 459 H</span>
+          </div>
+          <div class="chart-box">
+            <canvas id="chartComarcasNoATP"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Comarca Detail Cards -->
+      <div class="comarca-cards-grid" id="comarca-interactive-grid"></div>
+
+      <!-- DUAL COMMENTARY: ANÁLISIS COMARCAL ATP vs NO ATP -->
+      <div class="dual-grid" style="margin-top: 24px;">
+        <!-- COL ATP COMARCAS -->
+        <div class="card card-atp col-atp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-atp">ATP</span>
+              <span>Distribución y Composición Territorial</span>
+            </div>
+            <span class="card-subtext">Base: 190 Mujeres ATP</span>
+          </div>
+
+          <div class="atp-subsector-narrative" style="display: flex; flex-direction: column; gap: 14px; margin-top: 10px;">
+            <!-- Celda K46 -->
+            <div class="insight-pill-card pill-emerald">
+              <div class="pill-header">
+                <span class="pill-tag tag-emerald">Distribución Territorial</span>
+                <h4 class="pill-title">Concentración en Enkarterrialde y Contraste con Jata Ondo</h4>
+              </div>
+              <div class="pill-body">
+                <p>La distribución territorial muestra diferencias entre mujeres y hombres ATP. <strong>Enkarterrialde concentra la mayor proporción de mujeres ATP, con un 41%</strong>, frente al 32% de los hombres. También se observa una mayor presencia relativa de mujeres en <strong>Urremendi</strong>, donde se concentra el 11% de las mujeres frente al 8% de los hombres.</p>
+                <p>En <strong>Jata Ondo</strong>, en cambio, el peso relativo de los hombres es mayor: representa el 26% del total de hombres ATP, frente al 16% de las mujeres. En Urkiola también se observa una diferencia a favor de los hombres (12% frente a 10%). En Gorbeialde y Lea-Artibai, la distribución es idéntica entre ambos géneros: 15% y 7%, respectivamente.</p>
+                <p>En conjunto, las mujeres ATP presentan una mayor concentración territorial en Enkarterrialde y Urremendi, mientras que los hombres tienen un peso relativo mayor en Jata Ondo y Urkiola.</p>
+                <div class="pill-summary-box summary-emerald">
+                  <strong>Para la infografía:</strong> El <strong>41% de las mujeres ATP se concentra en Enkarterrialde</strong>, frente al 32% de los hombres. Y como contraste: <strong>Jata Ondo concentra el 26% de los hombres ATP</strong>, frente al 16% de las mujeres.
+                </div>
+              </div>
+            </div>
+
+            <!-- Celda S44 -->
+            <div class="insight-pill-card pill-emerald" style="border-top: 3px solid #059669;">
+              <div class="pill-header">
+                <span class="pill-tag tag-emerald">Composición por Género</span>
+                <h4 class="pill-title">Variación de la Representatividad Femenina por Comarca</h4>
+              </div>
+              <div class="pill-body">
+                <p>La composición por género muestra que los hombres son mayoría en todas las comarcas, aunque el peso relativo de mujeres y hombres presenta diferencias territoriales.</p>
+                <p><strong>Urremendi y Enkarterrialde son las comarcas con mayor presencia relativa de mujeres, con un 43% y un 42%</strong>, respectivamente. En Gorbeialde, las mujeres representan el 36%, mientras que en Lea-Artibai alcanzan el 34%.</p>
+                <p>Por debajo de la media del conjunto (36% de mujeres), se encuentran <strong>Urkiola (31%) y Jata Ondo (26%)</strong>. Esta última presenta la mayor diferencia entre hombres y mujeres: 74% de hombres frente a 26% de mujeres.</p>
+                <div class="pill-summary-box summary-emerald">
+                  <strong>Para la infografía:</strong> Las mujeres representan el <strong>43% de las personas ATP en Urremendi y el 42% en Enkarterrialde</strong>. En fuerte contraste, en <strong>Jata Ondo las mujeres representan el 26%</strong> de las personas ATP, frente al 74% de hombres.
+                </div>
+              </div>
+            </div>
+
+            <!-- Celda AE29 -->
+            <div class="insight-pill-card pill-emerald" style="border-top: 3px solid #047857;">
+              <div class="pill-header">
+                <span class="pill-tag tag-emerald">Distribución Territorial por Edad</span>
+                <h4 class="pill-title">Liderazgo de Enkarterrialde en Madurez y Juventud</h4>
+              </div>
+              <div class="pill-body">
+                <p>La distribución territorial de las mujeres varía según el tramo de edad. Entre las <strong>mujeres de 18 a 40 años, Enkarterrialde concentra el mayor porcentaje (36%)</strong>, seguida de Gorbeialde y Lea-Artibai, ambas con un 6%, mientras que el resto de comarcas presentan porcentajes intermedios.</p>
+                <p>En el grupo de <strong>41 a 65 años, Enkarterrialde vuelve a concentrar la mayor proporción de mujeres, con un 44%</strong>, muy por encima del resto de comarcas. Le siguen Gorbeialde (18%), Jata Ondo (14%) y, con porcentajes menores, Urkiola y Urremendi (9% cada una) y Lea-Artibai (7%).</p>
+                <p>Entre las <strong>mujeres mayores de 65 años, cambia parcialmente el patrón: Jata Ondo concentra el mayor porcentaje (37%)</strong>, seguida de Enkarterrialde (26%) y Urremendi (16%). Gorbeialde y Lea-Artibai representan un 11% cada una, mientras que en Urkiola no se registran mujeres en este tramo (0%).</p>
+                <div class="pill-summary-box summary-emerald">
+                  <strong>Dato destacado para la infografía:</strong> Enkarterrialde concentra el <strong>44% de las mujeres de 41–65 años y el 36% de las mujeres de 18–40 años</strong>. Y en mayores de 65 años, <strong>Jata Ondo concentra el 37%</strong>, frente al 26% de Enkarterrialde.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COL NO ATP COMARCAS -->
+        <div class="card card-noatp col-noatp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-noatp">NO ATP</span>
+              <span>Distribución y Composición Territorial</span>
+            </div>
+            <span class="card-subtext">Base: 1.004 Mujeres No ATP Comerciales</span>
+          </div>
+
+          <div class="atp-subsector-narrative" style="display: flex; flex-direction: column; gap: 14px; margin-top: 10px;">
+            <!-- Celda I71 -->
+            <div class="insight-pill-card pill-amber">
+              <div class="pill-header">
+                <span class="pill-tag tag-amber">Distribución Territorial NO ATP</span>
+                <h4 class="pill-title">Jata Ondo y Enkarterrialde Concentran la Mitad del Colectivo</h4>
+              </div>
+              <div class="pill-body">
+                <p>La distribución territorial es bastante similar entre hombres y mujeres NO ATP. <strong>Jata Ondo concentra el mayor peso en ambos casos, con un 25% de los hombres y 26% de las mujeres</strong>, seguida de <strong>Enkarterrialde, con un 25% de los hombres y un 21% de las mujeres</strong>.</p>
+                <p>En <strong>Urremendi y Lea-Artibai</strong>, las mujeres tienen un peso relativo ligeramente mayor que los hombres: 15% frente a 12% y 13% frente a 10%, respectivamente. En el resto de comarcas, los porcentajes son muy similares.</p>
+                <div class="pill-summary-box summary-amber">
+                  <strong>Dato clave para la infografía:</strong> <strong>Jata Ondo concentra el 26% de las mujeres NO ATP</strong> (261 mujeres), el porcentaje más alto entre todas las comarcas de Bizkaia.
+                </div>
+              </div>
+            </div>
+
+            <!-- Celda P71 -->
+            <div class="insight-pill-card pill-amber" style="border-top: 3px solid #D97706;">
+              <div class="pill-header">
+                <span class="pill-tag tag-amber">Composición por Género según Comarca</span>
+                <h4 class="pill-title">Máxima Representatividad en Lea-Artibai y Urremendi</h4>
+              </div>
+              <div class="pill-body">
+                <p>En todas las comarcas, los hombres tienen un peso mayor que las mujeres en el colectivo no profesional comercial.</p>
+                <p><strong>Lea-Artibai y Urremendi presentan la mayor proporción relativa de mujeres, con un 41% y 40%</strong>, respectivamente.</p>
+                <p>En el extremo contrario, <strong>Enkarterrialde (32%) y Jata Ondo (37%)</strong> presentan una menor proporción de mujeres.</p>
+                <div class="pill-summary-box summary-amber">
+                  <strong>Conclusión Territorial NO ATP:</strong> En el modelo comercial a tiempo parcial, la costa oriental (Lea-Artibai y Urremendi) alcanza los mayores índices de paridad femenina (40%-41%), mientras que las zonas con vocación extensiva como Enkarterrialde ven descender la cuota femenina no ATP hasta el 32%.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-card" style="margin-top: 20px;">
+        <div class="insight-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          <span id="txt-sec4-insight-title">Conclusión Analítica: La Polaridad Geográfica</span>
+        </div>
+        <p class="insight-text" id="txt-sec4-insight-text">
+          Existe una inversión territorial asombrosa: <strong>Enkarterrialde</strong> es el bastión indiscutible del modelo profesional femenino, aglutinando por sí sola el <strong>41,05% de todas las mujeres ATP de Bizkaia</strong> (78 mujeres), debido a su relieve y vocación ganadera extensiva. En cambio, en el colectivo No ATP comercial, la mayor concentración se traslada a <strong>Jata Ondo</strong> con el <strong>26,00%</strong> (261 mujeres), impulsada por la huerta de ribera y la proximidad metropolitana.
+        </p>
+      </div>
+    </section>
+
+    <!-- BLOQUE 6: EDAD Y RELEVO -->
+    <section class="block-section" id="bloque-edad">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-tag" id="txt-sec6-tag">INDICADOR ESTRUCTURAL 5</div>
+          <h2 class="section-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span id="txt-sec6-title">Pirámide de Edad y Alerta de Relevo Generacional</span>
+          </h2>
+          <p class="section-desc" id="txt-sec6-desc">
+            Comparativa de la <strong>edad media</strong> y la distribución de las mujeres en los tramos oficiales: 18-40 años, 41-65 años y mayores de 65 años.
+          </p>
+        </div>
+        <div class="section-badge-group">
+          <span class="badge badge-atp" id="badge-atp-pill-6">ATP: 190 Mujeres</span>
+          <span class="badge badge-noatp" id="badge-noatp-pill-6">NO ATP: 232 Mujeres (≥0,5 UTAs)</span>
+        </div>
+      </div>
+
+      <!-- Micro-KPIs Resumen Edad y Relevo -->
+      <div class="micro-kpi-grid">
+        <div class="micro-kpi-box">
+          <span class="micro-kpi-val atp-text">53 vs 64</span>
+          <span class="micro-kpi-lbl">Brecha de Edad Media · +11 años en NO ATP</span>
+        </div>
+        <div class="micro-kpi-box">
+          <span class="micro-kpi-val atp-text">72,6%</span>
+          <span class="micro-kpi-lbl">Madurez Productiva ATP · 41-65 años (138 titulares)</span>
+        </div>
+        <div class="micro-kpi-box kpi-emerald">
+          <span class="micro-kpi-val atp-text">44,2%</span>
+          <span class="micro-kpi-lbl">Enkarterrialde · Concentra el 44,2% de mujeres maduras ATP (41–65 a.)</span>
+        </div>
+        <div class="micro-kpi-box kpi-emerald">
+          <span class="micro-kpi-val atp-text">31,8%</span>
+          <span class="micro-kpi-lbl">Urkiola · Líder de juventud femenina ATP (18–40 años)</span>
+        </div>
+      </div>
+
+      <div class="dual-grid">
+        <!-- COL ATP EDAD -->
+        <div class="card card-atp col-atp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-atp">ATP</span>
+              <span id="txt-sec6-atp-card-title">Demografía Femenina Profesional</span>
+            </div>
+            <span class="card-subtext" id="txt-sec6-atp-base">Edad Media: 53 años (Base: 190 Mujeres ATP)</span>
+          </div>
+
+          <div class="atp-subsector-split">
+            <!-- Datos Pirámide ATP -->
+            <div class="atp-subsector-data">
+              <div class="metric-hero">
+                <span class="metric-val atp-text">53 años</span>
+                <span class="metric-unit" id="txt-sec6-atp-unit">edad media (frente a 66 en No ATP)</span>
+              </div>
+
+              <div class="segment-list" id="list-edad-atp"></div>
+
+              <div class="pill-summary-box summary-emerald" style="margin-top: 14px;">
+                <strong>Pirámide Sostenible:</strong> El <strong>86,3% de las mujeres profesionales en activo son menores de 65 años</strong>, concentrando su núcleo en la etapa de máxima experiencia productiva y consolidación técnica.
+              </div>
+            </div>
+
+            <!-- Narrativa Celda P37 -->
+            <div class="atp-subsector-narrative" id="txt-sec6-atp-text">
+              <div class="insight-pill-card pill-emerald">
+                <div class="pill-header">
+                  <span class="pill-tag tag-emerald">Estructura Demográfica ATP</span>
+                  <h4 class="pill-title">Concentración en Madurez y Dinámica de Relevo</h4>
+                </div>
+                <div class="pill-body">
+                  <p>La distribución por edad muestra una estructura similar entre hombres y mujeres ATP, con una clara <strong>concentración en el tramo de 41 a 65 años. Este grupo representa el 69% de los hombres ATP y el 73% de las mujeres</strong>.</p>
+                  <p>En el grupo de <strong>18 a 40 años, los hombres tienen un mayor peso relativo, con un 24%, frente al 17% de las mujeres</strong>. Esta diferencia se invierte en el grupo de mayores de 65 años, donde las mujeres representan el <strong>10% y los hombres el 7%</strong>.</p>
+                  <p>Se observa una mayor presencia relativa de hombres en el tramo más joven y de mujeres en el tramo de mayor edad.</p>
+                  <div class="pill-summary-box summary-emerald">
+                    <strong>Dato clave para la infografía:</strong> El <strong>72,6% de las mujeres ATP se concentra entre 41 y 65 años</strong> (138 titulares), formando el núcleo productivo del agro profesional en Bizkaia.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Píldora Territorial de Edad -->
+              <div class="insight-pill-card pill-emerald" style="border-top: 3px solid #059669; margin-top: 14px;">
+                <div class="pill-header">
+                  <span class="pill-tag tag-emerald">Dinámica Territorial de Relevo</span>
+                  <h4 class="pill-title">Urkiola lidera la juventud y Enkarterrialde la madurez productiva</h4>
+                </div>
+                <div class="pill-body">
+                  <p><strong>Urkiola destaca como la comarca con mayor vitalidad generacional de Bizkaia:</strong> el <strong>31,8% de sus mujeres ATP tienen entre 18 y 40 años</strong> (frente a la media territorial del 17,4%), y no registra ninguna titular mayor de 65 años (edad media de 48,5 años).</p>
+                  <p><strong>Urremendi</strong> se sitúa en segunda posición en dinamismo joven, con un <strong>26,3% de juventud</strong> (5 de 19 mujeres en 18–40 años).</p>
+                  <p>En el plano opuesto, <strong>Enkarterrialde aglutina el núcleo de madurez</strong> (el 44,2% de todas las mujeres maduras de Bizkaia), mientras que <strong>Jata Ondo concentra la mayor proporción de edad avanzada</strong>, con 7 mujeres mayores de 65 años (el 36,8% de todas las mayores de 65 ATP del territorio).</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COL NO ATP EDAD -->
+        <div class="card card-noatp col-noatp">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="badge badge-noatp">NO ATP</span>
+              <span id="txt-sec6-noatp-card-title">Demografía Femenina Comercial</span>
+            </div>
+            <span class="card-subtext" id="txt-sec6-noatp-base">Edad Media: 64 años (Base: 232 Mujeres No ATP ≥0,5 UTAs)</span>
+          </div>
+
+          <div class="atp-subsector-split">
+            <!-- Datos Pirámide NO ATP -->
+            <div class="atp-subsector-data">
+              <div class="metric-hero">
+                <span class="metric-val noatp-text">64 años</span>
+                <span class="metric-unit" id="txt-sec6-noatp-unit">edad media (riesgo de cese)</span>
+              </div>
+
+              <div class="segment-list" id="list-edad-noatp"></div>
+
+              <div class="pill-summary-box summary-amber" style="margin-top: 14px; border-left: 3px solid #DC2626;">
+                <strong style="color: #DC2626;">Alerta Demográfica:</strong> <strong>119 mujeres (51,3%) superan los 65 años</strong> (frente al 27,0% de los hombres). Más de la mitad de las explotaciones comerciales no profesionales (≥0,5 UTAs) afrontan riesgo de cese en esta década por jubilación sin relevo tutelado.
+              </div>
+            </div>
+
+            <!-- Narrativa Celda I20 -->
+            <div class="atp-subsector-narrative" id="txt-sec6-noatp-text">
+              <div class="insight-pill-card pill-amber">
+                <div class="pill-header">
+                  <span class="pill-tag tag-amber">Distribución por Edad NO ATP</span>
+                  <h4 class="pill-title">Estructura Envejecida y Déficit Juvenil</h4>
+                </div>
+                <div class="pill-body">
+                  <p>La distribución por edad muestra una <strong>estructura significativamente más envejecida entre las mujeres no ATP que entre los hombres</strong>. En el colectivo femenino (≥0,5 UTAs), más de la mitad se encuentra en el tramo de <strong>mayores de 65 años (51,3% · 119 titulares)</strong>, frente al <strong>27,0% de los hombres (124 titulares)</strong>.</p>
+                  <p>En el grupo de 41 a 65 años, los hombres tienen un peso relativo mayor, con un <strong>59,5% (273 titulares), frente al 41,4% de las mujeres (96 titulares)</strong>. En el tramo joven (18 a 40 años), los hombres suponen el <strong>13,5% (62 titulares) y las mujeres el 7,3% (17 titulares)</strong>.</p>
+                  <p>La edad media femenina en este segmento comercial no profesional alcanza los <strong>64 años</strong> (frente a 56 años en hombres), situándose al borde de la edad de jubilación.</p>
+                  <div class="pill-summary-box summary-amber">
+                    <strong>Dato destacado para la infografía:</strong> El <strong>51,3% de las mujeres NO ATP comerciales supera los 65 años</strong> (frente al 27,0% de los hombres), mientras que <strong>solo el 7,3% tiene entre 18 y 40 años</strong> (17 mujeres en toda Bizkaia).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <div class="insight-header" style="color: #DC2626;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span id="txt-sec6-insight-title">Alerta Demográfica: Riesgo Inminente de Abandono</span>
+        </div>
+        <p class="insight-text" id="txt-sec6-insight-text">
+          Existe una brecha generacional de <strong>11 años en la edad media</strong> (53 años en ATP frente a 64 años en No ATP). En el colectivo No ATP (≥0,5 UTAs), <strong>más de la mitad de las mujeres (51,3% - 119 titulares) superan la edad oficial de jubilación</strong>, mientras que las menores de 40 años suponen el 7,3% (17 mujeres). Sin un plan de relevo tutelado, más de 100 explotaciones activas corren riesgo de cese en la presente década.
+        </p>
+      </div>
+    </section>
+
+    </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div>
+        <strong style="color: #FFFFFF;" id="txt-footer-title">Diputación Foral de Bizkaia · Nekazaritza Saila</strong><br>
+        <span id="txt-footer-source">Informe Técnico y Demográfico con perspectiva de género · Fuente oficial: Diputación Foral de Bizkaia.</span><br>
+        <span style="display: inline-block; margin-top: 5px; color: rgba(255, 255, 255, 0.9); font-size: 12.5px;">
+          <span id="txt-footer-amaterra">Elaboración técnica, análisis y visualización desarrollados por Amaterra.</span> <a href="https://www.amaterra.eu/" target="_blank" rel="noopener noreferrer" style="color: #A7F3D0; font-weight: 700; text-decoration: underline; text-underline-offset: 3px;">Amaterra</a>.
+        </span>
+      </div>
+      <div class="footer-links">
+        <a href="#bloque-subsectores" id="txt-footer-link-1">Subsectores</a>
+        <a href="#bloque-superficie" id="txt-footer-link-2">Superficie</a>
+        <a href="#bloque-ecologico" id="txt-footer-link-3">Ecológico (ATP)</a>
+        <a href="#bloque-comarcas" id="txt-footer-link-4">Comarcas</a>
+        <a href="#bloque-edad" id="txt-footer-link-5">Edad y Relevo</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT CON DATOS DEL EXCEL Y LÓGICA INTERACTIVA BILINGÜE -->
+  <script>
+    // DATOS EXTRAÍDOS CON EXACTITUD MATEMÁTICA DEL EXCEL OFICIAL
+    const DATA_EXCEL = {
+  "No_ATP": {
+    "marco_general": {
+      "total_explotaciones": 12128,
+      "hombres_total": 8464,
+      "hombres_pct": 69.79,
+      "mujeres_total": 3664,
+      "mujeres_pct": 30.21,
+      "autoconsumo": {
+        "total": 8805,
+        "hombres": 6335,
+        "mujeres": 2470,
+        "pct_h": 52.23,
+        "pct_m": 20.37
+      },
+      "fines_mercado": {
+        "total": 3323,
+        "hombres": 2129,
+        "mujeres": 1194,
+        "pct_h": 17.55,
+        "pct_m": 9.84
+      },
+      "no_atp_mercado": {
+        "total": 691,
+        "hombres": 459,
+        "mujeres": 232,
+        "pct_h": 66.43,
+        "pct_m": 33.57
+      }
+    },
+    "edad": {
+      "edad_media": {
+        "hombres": 56,
+        "mujeres": 64
+      },
+      "tramos": [
+        {
+          "tramo": "18-40",
+          "h": 62,
+          "m": 17,
+          "h_pct": 13.51,
+          "m_pct_sobre_m": 7.33
+        },
+        {
+          "tramo": "41-65",
+          "h": 273,
+          "m": 96,
+          "h_pct": 59.48,
+          "m_pct_sobre_m": 41.38
+        },
+        {
+          "tramo": "Mayor de 65",
+          "h": 124,
+          "m": 119,
+          "h_pct": 27.02,
+          "m_pct_sobre_m": 51.29
+        }
+      ]
+    },
+    "subsectores": [
+      {
+        "nombre": "EXPLOTACIONES DE BOVINOS ESPECIALIZADAS: ORIENTACIÓN CRIA Y CARNE",
+        "h": 291,
+        "m": 155,
+        "pct_m_de_1004": 66.81,
+        "pct_m_de_232": 66.81
+      },
+      {
+        "nombre": "EXPLOTACIONES DE OVINOS ESPECIALIZADAS",
+        "h": 32,
+        "m": 18,
+        "pct_m_de_1004": 7.76,
+        "pct_m_de_232": 7.76
+      },
+      {
+        "nombre": "EXPLOTACIONES NO CLASIFICADAS",
+        "h": 6,
+        "m": 3,
+        "pct_m_de_1004": 1.29,
+        "pct_m_de_232": 1.29
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN HORTALIZAS AL AIRE LIBRE",
+        "h": 20,
+        "m": 6,
+        "pct_m_de_1004": 2.59,
+        "pct_m_de_232": 2.59
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN HORTALIZAS EN INVERNADERO",
+        "h": 27,
+        "m": 19,
+        "pct_m_de_1004": 8.19,
+        "pct_m_de_232": 8.19
+      },
+      {
+        "nombre": "EXPLOTACIONES FRUTÍCOLAS ESPECIALIZADAS",
+        "h": 21,
+        "m": 5,
+        "pct_m_de_1004": 2.16,
+        "pct_m_de_232": 2.16
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN VITICULTURA",
+        "h": 21,
+        "m": 12,
+        "pct_m_de_1004": 5.17,
+        "pct_m_de_232": 5.17
+      },
+      {
+        "nombre": "EXPLOTACIONES DE HERBÍVOROS",
+        "h": 9,
+        "m": 4,
+        "pct_m_de_1004": 1.72,
+        "pct_m_de_232": 1.72
+      },
+      {
+        "nombre": "EXPLOTACIONES DE CAPRINOS ESPECIALIZADAS",
+        "h": 6,
+        "m": 1,
+        "pct_m_de_1004": 0.43,
+        "pct_m_de_232": 0.43
+      },
+      {
+        "nombre": "EXPLOTACIONES DE BOVINOS ESPECIALIZADAS: ORIENTACIÓN LECHE",
+        "h": 5,
+        "m": 2,
+        "pct_m_de_1004": 0.86,
+        "pct_m_de_232": 0.86
+      },
+      {
+        "nombre": "EXPLOTACIONES DE AVES PONEDORAS ESPECIALIZADAS",
+        "h": 8,
+        "m": 1,
+        "pct_m_de_1004": 0.43,
+        "pct_m_de_232": 0.43
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN FLORICULTURA Y PLANTAS ORNAMENTALES EN INVERNADERO",
+        "h": 0,
+        "m": 2,
+        "pct_m_de_1004": 0.86,
+        "pct_m_de_232": 0.86
+      },
+      {
+        "nombre": "EXPLOTACIONES APÍCOLAS",
+        "h": 9,
+        "m": 3,
+        "pct_m_de_1004": 1.29,
+        "pct_m_de_232": 1.29
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN FLORICULTURA Y PLANTAS ORNAMENTALES AL AIRE LIBRE",
+        "h": 1,
+        "m": 1,
+        "pct_m_de_1004": 0.43,
+        "pct_m_de_232": 0.43
+      },
+      {
+        "nombre": "EXPLOTACIONES QUE COMBINAN LA CRÍA Y ENGORDE DE PORCINOS",
+        "h": 1,
+        "m": 0,
+        "pct_m_de_1004": 0,
+        "pct_m_de_232": 0
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN CEREALICULTURA (DISTINTA DE LA DE ARROZ), EN CULTIVO DE PLANTAS OLEAGINOSAS Y PROTEAGINOSAS",
+        "h": 0,
+        "m": 0,
+        "pct_m_de_1004": 0,
+        "pct_m_de_232": 0
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN CULTIVO DE SETAS",
+        "h": 1,
+        "m": 0,
+        "pct_m_de_1004": 0,
+        "pct_m_de_232": 0
+      },
+      {
+        "nombre": "EXPLOTACIONES DE AVES DE CORRAL DE CARNE ESPECIALIZADAS",
+        "h": 1,
+        "m": 0,
+        "pct_m_de_1004": 0,
+        "pct_m_de_232": 0
+      }
+    ],
+    "superficie": [
+      {
+        "estrato": "Muy pequeña: < 5 ha",
+        "h": 134,
+        "m": 96,
+        "pct_m_de_1004": 41.38,
+        "pct_m_de_232": 41.38
+      },
+      {
+        "estrato": "Pequeña: 5–20 ha",
+        "h": 191,
+        "m": 85,
+        "pct_m_de_1004": 36.64,
+        "pct_m_de_232": 36.64
+      },
+      {
+        "estrato": "Mediana: 20–50 ha",
+        "h": 106,
+        "m": 45,
+        "pct_m_de_1004": 19.4,
+        "pct_m_de_232": 19.4
+      },
+      {
+        "estrato": "Grande: > 50 ha",
+        "h": 28,
+        "m": 6,
+        "pct_m_de_1004": 2.59,
+        "pct_m_de_232": 2.59
+      }
+    ],
+    "ecologico": [
+      {
+        "tipo": "Certificado ecológico",
+        "h": 23,
+        "m": 9,
+        "pct_m_de_1004": 3.88,
+        "pct_m_de_232": 3.88
+      }
+    ],
+    "comarca": [
+      {
+        "comarca": "Jata Ondo",
+        "h": 95,
+        "m": 59,
+        "pct_m_de_1004": 25.65,
+        "pct_m_de_232": 25.65
+      },
+      {
+        "comarca": "Enkarterrialde",
+        "h": 129,
+        "m": 44,
+        "pct_m_de_1004": 19.13,
+        "pct_m_de_232": 19.13
+      },
+      {
+        "comarca": "Urremendi",
+        "h": 66,
+        "m": 40,
+        "pct_m_de_1004": 17.39,
+        "pct_m_de_232": 17.39
+      },
+      {
+        "comarca": "Gorbeialde",
+        "h": 71,
+        "m": 34,
+        "pct_m_de_1004": 14.78,
+        "pct_m_de_232": 14.78
+      },
+      {
+        "comarca": "Urkiola",
+        "h": 55,
+        "m": 31,
+        "pct_m_de_1004": 13.48,
+        "pct_m_de_232": 13.48
+      },
+      {
+        "comarca": "Lea-Artibai",
+        "h": 38,
+        "m": 22,
+        "pct_m_de_1004": 9.57,
+        "pct_m_de_232": 9.57
+      }
+    ],
+    "forma_juridica": [
+      {
+        "forma": "Persona física",
+        "h": 422,
+        "m": 218,
+        "pct_m_de_1004": 93.97,
+        "pct_m_de_232": 93.97
+      },
+      {
+        "forma": "Sociedad limitada",
+        "h": 25,
+        "m": 7,
+        "pct_m_de_1004": 3.02,
+        "pct_m_de_232": 3.02
+      },
+      {
+        "forma": "Comunidad de bienes",
+        "h": 4,
+        "m": 3,
+        "pct_m_de_1004": 1.29,
+        "pct_m_de_232": 1.29
+      },
+      {
+        "forma": "Sociedad civil",
+        "h": 4,
+        "m": 3,
+        "pct_m_de_1004": 1.29,
+        "pct_m_de_232": 1.29
+      },
+      {
+        "forma": "Sociedad agraria de transformación",
+        "h": 0,
+        "m": 1,
+        "pct_m_de_1004": 0.43,
+        "pct_m_de_232": 0.43
+      },
+      {
+        "forma": "Titularidad compartida",
+        "h": 1,
+        "m": 0,
+        "pct_m_de_1004": 0,
+        "pct_m_de_232": 0
+      },
+      {
+        "forma": "Cooperativa",
+        "h": 2,
+        "m": 0,
+        "pct_m_de_1004": 0,
+        "pct_m_de_232": 0
+      },
+      {
+        "forma": "Asociaciones",
+        "h": 1,
+        "m": 0,
+        "pct_m_de_1004": 0,
+        "pct_m_de_232": 0
+      }
+    ]
+  },
+  "ATP": {
+    "marco_general": {
+      "total_atp": 529,
+      "hombres": 339,
+      "hombres_pct": 64.08,
+      "mujeres": 190,
+      "mujeres_pct": 35.92,
+      "pct_atp_sobre_fines_mercado": 15.92
+    },
+    "edad": {
+      "edad_media_m": 53,
+      "tramos": [
+        {
+          "tramo": "18-40",
+          "h": 80,
+          "m": 33,
+          "h_pct": 24.24,
+          "m_pct_sobre_m": 17.37
+        },
+        {
+          "tramo": "41-65",
+          "h": 227,
+          "m": 138,
+          "h_pct": 68.79,
+          "m_pct_sobre_m": 72.63
+        },
+        {
+          "tramo": "Mayor de 65",
+          "h": 23,
+          "m": 19,
+          "h_pct": 6.97,
+          "m_pct_sobre_m": 10
+        }
+      ]
+    },
+    "subsectores": [
+      {
+        "nombre": "EXPLOTACIONES DE BOVINOS ESPECIALIZADAS: ORIENTACIÓN CRIA Y CARNE",
+        "h": 113,
+        "m": 83,
+        "pct_m_de_190": 43.68
+      },
+      {
+        "nombre": "EXPLOTACIONES DE BOVINOS ESPECIALIZADAS: ORIENTACIÓN LECHE",
+        "h": 47,
+        "m": 25,
+        "pct_m_de_190": 13.16
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN HORTALIZAS EN INVERNADERO",
+        "h": 64,
+        "m": 17,
+        "pct_m_de_190": 8.95
+      },
+      {
+        "nombre": "EXPLOTACIONES DE AVES PONEDORAS ESPECIALIZADAS",
+        "h": 12,
+        "m": 11,
+        "pct_m_de_190": 5.79
+      },
+      {
+        "nombre": "EXPLOTACIONES DE OVINOS ESPECIALIZADAS",
+        "h": 24,
+        "m": 9,
+        "pct_m_de_190": 4.74
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN HORTALIZAS AL AIRE LIBRE",
+        "h": 17,
+        "m": 9,
+        "pct_m_de_190": 4.74
+      },
+      {
+        "nombre": "EXPLOTACIONES FRUTÍCOLAS ESPECIALIZADAS",
+        "h": 9,
+        "m": 9,
+        "pct_m_de_190": 4.74
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN VITICULTURA",
+        "h": 14,
+        "m": 7,
+        "pct_m_de_190": 3.68
+      },
+      {
+        "nombre": "EXPLOTACIONES NO CLASIFICADAS",
+        "h": 10,
+        "m": 5,
+        "pct_m_de_190": 2.63
+      },
+      {
+        "nombre": "EXPLOTACIONES DE CAPRINOS ESPECIALIZADAS",
+        "h": 2,
+        "m": 5,
+        "pct_m_de_190": 2.63
+      },
+      {
+        "nombre": "EXPLOTACIONES DE AVES DE CORRAL DE CARNE ESPECIALIZADAS",
+        "h": 6,
+        "m": 3,
+        "pct_m_de_190": 1.58
+      },
+      {
+        "nombre": "EXPLOTACIONES DE HERBÍVOROS",
+        "h": 5,
+        "m": 3,
+        "pct_m_de_190": 1.58
+      },
+      {
+        "nombre": "EXPLOTACIONES ESPECIALIZADAS EN FLORICULTURA Y PLANTAS ORNAMENTALES EN INVERNADERO",
+        "h": 10,
+        "m": 3,
+        "pct_m_de_190": 1.58
+      },
+      {
+        "nombre": "EXPLOTACIONES QUE COMBINAN LA CRÍA Y ENGORDE DE PORCINOS",
+        "h": 1,
+        "m": 1,
+        "pct_m_de_190": 0.53
+      },
+      {
+        "nombre": "EXPLOTACIONES APÍCOLAS",
+        "h": 5,
+        "m": 0,
+        "pct_m_de_190": 0
+      }
+    ],
+    "superficie": [
+      {
+        "estrato": "Muy pequeña: 0,5 - 5 ha",
+        "h": 113,
+        "m": 61,
+        "pct_m_de_190": 32.11
+      },
+      {
+        "estrato": "Pequeña: 5–20 ha",
+        "h": 59,
+        "m": 52,
+        "pct_m_de_190": 27.37
+      },
+      {
+        "estrato": "Mediana: 20–50 ha",
+        "h": 85,
+        "m": 50,
+        "pct_m_de_190": 26.32
+      },
+      {
+        "estrato": "Grande: > 50 ha",
+        "h": 82,
+        "m": 27,
+        "pct_m_de_190": 14.21
+      }
+    ],
+    "ecologico": [
+      {
+        "tipo": "Certificado ecológico",
+        "h": 32,
+        "m": 22,
+        "pct_m_de_190": 11.58
+      }
+    ],
+    "comarca": [
+      {
+        "comarca": "Enkarterrialde",
+        "h": 107,
+        "m": 78,
+        "pct_m_de_190": 41.05
+      },
+      {
+        "comarca": "Jata Ondo",
+        "h": 87,
+        "m": 31,
+        "pct_m_de_190": 16.32
+      },
+      {
+        "comarca": "Gorbeialde",
+        "h": 51,
+        "m": 29,
+        "pct_m_de_190": 15.26
+      },
+      {
+        "comarca": "Urkiola",
+        "h": 42,
+        "m": 19,
+        "pct_m_de_190": 10
+      },
+      {
+        "comarca": "Urremendi",
+        "h": 27,
+        "m": 20,
+        "pct_m_de_190": 10.53
+      },
+      {
+        "comarca": "Lea-Artibai",
+        "h": 25,
+        "m": 13,
+        "pct_m_de_190": 6.84
+      }
+    ],
+    "forma_juridica": [
+      {
+        "forma": "Persona física",
+        "h": 255,
+        "m": 152,
+        "pct_m_de_190": 80
+      },
+      {
+        "forma": "Comunidad de bienes",
+        "h": 42,
+        "m": 18,
+        "pct_m_de_190": 9.47
+      },
+      {
+        "forma": "Sociedad civil",
+        "h": 19,
+        "m": 12,
+        "pct_m_de_190": 6.32
+      },
+      {
+        "forma": "Titularidad compartida",
+        "h": 4,
+        "m": 3,
+        "pct_m_de_190": 1.58
+      },
+      {
+        "forma": "Sociedad limitada",
+        "h": 14,
+        "m": 3,
+        "pct_m_de_190": 1.58
+      },
+      {
+        "forma": "Asociaciones",
+        "h": 1,
+        "m": 0,
+        "pct_m_de_190": 0
+      },
+      {
+        "forma": "Sociedad agraria de transformación",
+        "h": 1,
+        "m": 0,
+        "pct_m_de_190": 0
+      },
+      {
+        "forma": "Cooperativa",
+        "h": 3,
+        "m": 2,
+        "pct_m_de_190": 1.05
+      }
+    ]
+  }
+};
+
+  const I18N = {
+      "es": {
+        "govBrand": "BIZKAIKO FORU ALDUNDIA · DIPUTACIÓN FORAL DE BIZKAIA",
+        "printBtn": "Imprimir Informe",
+        "heroBadge": "INFORME FORAL · OBSERVATORIO AGRARIO Y PERSPECTIVA DE GÉNERO · ELABORADO POR AMATERRA",
+        "heroTitle": "Situación de las Mujeres en el Sector Agrario de Bizkaia",
+        "heroSubtitle": "Análisis estructural diferenciado y segmentado entre las <strong>Mujeres Profesionales a Título Principal (ATP)</strong> y el colectivo de explotaciones comerciales <strong>No ATP</strong>, basado en los registros oficiales de altas forales de Bizkaia.",
+        "kpi1Lbl": "Censo Total Bizkaia",
+        "kpi1Desc": "3.664 Mujeres (30,2%) | 8.462 Hombres",
+        "kpi2Lbl": "NO ATP Mercado (≥0,5 UTAs)",
+        "kpi2Val": "691",
+        "kpi2Desc": "232 Mujeres (33,6%) | 459 Hombres",
+        "kpi3Lbl": "Universo ATP (Profesional)",
+        "kpi3Val": "190 Mujeres",
+        "kpi3Desc": "El 16% de las personas con fines de mercado son ATP. Mujeres representan el 36%, frente al 64% hombres.",
+        "kpi4Lbl": "Universo NO ATP (Mercado)",
+        "kpi4Val": "232 Mujeres",
+        "kpi4Desc": "33,6% de los 691 No ATPs comerciales (≥0,5 UTAs)",
+        "viewDual": "Comparativa Dual (Lado a Lado)",
+        "viewAtp": "Solo ATP (190 mujeres)",
+        "viewNoatp": "Solo NO ATP (232 mujeres ≥0,5 UTAs)",
+        "navChip1": "1. Subsectores",
+        "navChip2": "2. Superficie",
+        "navChip3": "3. Ecológico (Solo ATP)",
+        "navChip4": "4. Comarcas",
+        "navChip5": "5. Edad y Relevo",
+        "badgeAtpPill": "ATP: 190 Mujeres",
+        "badgeNoatpPill": "NO ATP: 232 Mujeres (≥0,5 UTAs)",
+        "sec1Tag": "INDICADOR ESTRUCTURAL 1",
+        "sec1Title": "Distribución por Subsectores Productivos",
+        "sec1Desc": "Comparativa del <strong>% del total de mujeres por subsectores</strong>. Contraste de especializaciones productivas entre el segmento profesional ATP (190 mujeres) y el segmento No ATP (232 mujeres ≥0,5 UTAs).",
+        "sec1ChartTitle": "Comparativa Directa de Especialización Productiva (% de Mujeres en cada colectivo)",
+        "sec1ChartBadge": "Top 8 Subsectores",
+        "sec1AtpCardTitle": "Subsectores en Mujeres Profesionales",
+        "sec1AtpBase": "Base: 190 Mujeres ATP (100%)",
+        "sec1AtpUnit": "en Bovinos Cría y Carne (83 mujeres)",
+        "sec1AtpText": "En el sector ATP destaca además una fuerte presencia en <strong>bovinos de leche (13,2%)</strong> y <strong>hortalizas de invernadero (8,9%)</strong>, sectores de alta exigencia laboral e inversión tecnológica.",
+        "sec1AtpBtn": "Mostrar tabla completa de 15 subsectores ATP",
+        "sec1NoatpCardTitle": "Subsectores en Explotaciones Comerciales",
+        "sec1NoatpBase": "Base: 1.004 Mujeres No ATP (100%)",
+        "sec1NoatpUnit": "en Bovinos Cría y Carne (448 mujeres)",
+        "sec1NoatpText": "En el colectivo No ATP, el segundo y tercer puesto corresponden al <strong>ovino tradicional (12,2%)</strong> y a explotaciones <strong>no clasificadas (10,4%)</strong>, mientras que el bovino de leche apenas alcanza el 1%.",
+        "sec1NoatpBtn": "Mostrar tabla completa de 18 subsectores NO ATP",
+        "sec1InsightTitle": "Conclusión Analítica: Diferenciación Productiva",
+        "sec1InsightText": "Aunque el <strong>bovino de carne</strong> es el pilar en ambos grupos (~44%), el perfil ATP profesional muestra una presencia decisiva en <strong>bovinos de leche (13,2% vs 1,0%)</strong> y en <strong>invernadero hortícola (8,9% vs 6,0%)</strong>, actividades con altos requerimientos de capital, tecnología y dedicación plena. En contraste, el colectivo No ATP exhibe una fuerte concentración en <strong>ovino extensivo (12,2%)</strong> y huerta al aire libre no mecanizada (7,8%).",
+        "sec2Tag": "INDICADOR ESTRUCTURAL 2",
+        "sec2Title": "Dimensión y Superficie de las Explotaciones",
+        "sec2Desc": "Distribución del <strong>% del total de mujeres por estratos de superficie</strong> (0,5-5 ha, 5-20 ha, 20-50 ha, >50 ha). Contraste estructural entre la viabilidad territorial del ATP y el minifundismo en el modelo No ATP.",
+        "sec2ChartTitle": "Contraste Dimensional: % de Mujeres según Estrato de Hectáreas",
+        "sec2ChartBadge": "4 Estratos Oficiales",
+        "sec2AtpCardTitle": "Superficie en Mujeres Profesionales",
+        "sec2AtpBase": "Base: 190 Mujeres ATP",
+        "sec2AtpUnit": "supera las 5 hectáreas (129 mujeres)",
+        "sec2AtpText": "Estructura equilibrada: el <strong>40,5%</strong> de las mujeres profesionales gestiona fincas medianas o grandes (>20 ha), con un 14,2% en explotaciones de más de 50 hectáreas.",
+        "sec2NoatpCardTitle": "Superficie en Explotaciones Comerciales",
+        "sec2NoatpBase": "Base: 1.004 Mujeres No ATP",
+        "sec2NoatpUnit": "en minifundio < 5 hectáreas (749 mujeres)",
+        "sec2NoatpText": "Extrema fragmentación: <strong>3 de cada 4 mujeres</strong> no alcanzan las 5 hectáreas, y solo un <strong>0,6%</strong> (6 mujeres en todo Bizkaia) tiene más de 50 ha.",
+        "sec2InsightTitle": "Conclusión Analítica: La Brecha Territorial",
+        "sec2InsightText": "La brecha de superficie es el principal condicionante de rentabilidad. Mientras que el <strong>74,6% de las mujeres No ATP se encuentran atrapadas en el minifundio (&lt;5 ha)</strong> con escasa capacidad de rotación y capitalización, el <strong>67,9% de las mujeres ATP disponen de bases territoriales viables (&gt;5 ha)</strong>, permitiendo el pastoreo intensivo y la rotación forrajera indispensable para la viabilidad económica.",
+        "sec3Tag": "INDICADOR ESTRUCTURAL 3",
+        "sec3Title": "Sostenibilidad y Producción Ecológica Oficial",
+        "sec3Desc": "Análisis del <strong>% de ecológico del total de mujeres</strong> (certificado, parcial y en proceso de certificación). El impacto catalizador de la profesionalización sobre la transición verde.",
+        "sec3BannerTag": "FACTOR MULTIPLICADOR CLAVE",
+        "sec3BannerTitle": "La condición ATP multiplica por 6,5 la tasa de producción ecológica femenina",
+        "sec3BannerDesc": "El <strong>11,6%</strong> de las mujeres ATP son ecológicas (22 de 190), frente a solo el <strong>1,8%</strong> en No ATP (18 de 1.004).",
+        "sec3BannerKpiLbl": "Tasa Eco Femenina ATP",
+        "sec3AtpCardTitle": "Producción Ecológica en ATP",
+        "sec3AtpBase": "Base: 190 Mujeres ATP",
+        "sec3AtpUnit": "con actividad ecológica (22 mujeres)",
+        "sec3AtpText": "Un total de <strong>22 mujeres profesionales ATP (11,58%)</strong> gestionan explotaciones con certificación ecológica oficial en Bizkaia, frente a <strong>32 hombres (9,44%)</strong>.",
+        "sec3AtpNote": "<strong>Liderazgo femenino en el sector eco ATP:</strong> Las 22 mujeres representan el <strong>40,7% de todas las explotaciones ecológicas profesionales</strong> de Bizkaia (54 en total: 32 hombres y 22 mujeres).",
+        "sec3NoatpCardTitle": "Producción Ecológica en NO ATP",
+        "sec3NoatpBase": "Base: 1.004 Mujeres No ATP",
+        "sec3NoatpUnit": "con actividad ecológica (18 mujeres)",
+        "sec3NoatpText": "De las 1.004 mujeres comerciales No ATP: solo <strong>13 cuentan con certificado oficial</strong> (1,29%), 2 en parte (0,20%) y 3 en proceso (0,30%).",
+        "sec3NoatpNote": "<strong>Peso femenino en No ATP:</strong> Las 18 mujeres representan el <strong>28,6%</strong> de los 63 ecológicos No ATP comerciales (45 hombres y 18 mujeres).",
+        "sec4Tag": "INDICADOR ESTRUCTURAL 4",
+        "sec4Title": "Distribución Territorial por Comarcas (ADR)",
+        "sec4Desc": "Análisis del <strong>% del total de mujeres por comarca</strong> en las 6 comarcas agrarias de Bizkaia. Revela una divergencia geográfica radical en la localización del talento profesional frente a las explotaciones no ATP.",
+        "sec4ChartTitle": "Distribución Comarcal Comparativa: % de Mujeres en cada Comarca",
+        "sec4ChartBadge": "6 Comarcas de Bizkaia",
+        "sec4InsightTitle": "Conclusión Analítica: La Polaridad Geográfica",
+        "sec4InsightText": "Existe una inversión territorial asombrosa: <strong>Enkarterrialde</strong> es el bastión indiscutible del modelo profesional femenino, aglutinando por sí sola el <strong>41,05% de todas las mujeres ATP de Bizkaia</strong> (78 mujeres), debido a su relieve y vocación ganadera extensiva. En cambio, en el colectivo No ATP comercial, la mayor concentración se traslada a <strong>Jata Ondo</strong> con el <strong>26,00%</strong> (261 mujeres), impulsada por la huerta de ribera y la proximidad metropolitana.",
+        "sec5Tag": "INDICADOR ESTRUCTURAL 5",
+        "sec5Title": "Condición Jurídica y Modelos de Titularidad",
+        "sec5Desc": "Análisis del <strong>% de forma jurídica dentro del total de mujeres</strong>. Muestra cómo la profesionalización fomenta fórmulas asociativas compartidas frente al individualismo de la persona física.",
+        "sec5AtpCardTitle": "Modelos Jurídicos en ATP",
+        "sec5AtpBase": "Base: 190 Mujeres ATP",
+        "sec5AtpUnit": "en fórmulas societarias y asociativas (38 mujeres)",
+        "sec5AtpText": "El <strong>80,0%</strong> son personas físicas individuales, pero existe una presencia destacada de <strong>Comunidades de Bienes (9,47%)</strong>, <strong>Sociedades Civiles (6,32%)</strong> y <strong>Titularidad Compartida (1,58%)</strong>.",
+        "sec5NoatpCardTitle": "Modelos Jurídicos en NO ATP",
+        "sec5NoatpBase": "Base: 1.004 Mujeres No ATP",
+        "sec5NoatpUnit": "persona física individual (956 mujeres)",
+        "sec5NoatpText": "Hegemonía casi total de la persona física aislada. Las Comunidades de Bienes apenas representan el 0,80% y <strong>no hay ninguna explotación registrada bajo Titularidad Compartida (0,0%)</strong>.",
+        "sec5InsightTitle": "Conclusión Analítica: Colectivización y Protección Laboral",
+        "sec5InsightText": "La profesionalización actúa como un motor de estructuración jurídica. En el segmento ATP, <strong>1 de cada 5 mujeres (20%)</strong> opta por figuras como Comunidades de Bienes, Sociedades Civiles o Titularidad Compartida (Ley 35/2011), lo que reduce el riesgo financiero individual y asegura visibilidad en las cotizaciones a la Seguridad Social agraria. En el segmento No ATP, el 95,2% opera bajo persona física tradicional con nula penetración de la cotitularidad formal.",
+        "sec6Tag": "INDICADOR ESTRUCTURAL 6",
+        "sec6Title": "Pirámide de Edad y Alerta de Relevo Generacional",
+        "sec6Desc": "Comparativa de la <strong>edad media</strong> y la distribución de las mujeres en los tramos oficiales: 18-40 años, 41-65 años y mayores de 65 años.",
+        "sec6AtpCardTitle": "Demografía Femenina Profesional",
+        "sec6AtpBase": "Edad Media: 53 años",
+        "sec6AtpUnit": "edad media (frente a 66 en No ATP)",
+        "sec6NoatpCardTitle": "Demografía Femenina Comercial",
+        "sec6NoatpBase": "Edad Media: 64 años (Base: 232 Mujeres No ATP ≥0,5 UTAs)",
+        "sec6NoatpUnit": "edad media (riesgo de cese)",
+        "sec6InsightTitle": "Alerta Demográfica: Riesgo Inminente de Abandono",
+        "sec6InsightText": "Existe una brecha generacional de <strong>11 años en la edad media</strong> (53 años en ATP frente a 64 años en No ATP). En el colectivo No ATP (≥0,5 UTAs), <strong>más de la mitad de las mujeres (51,3% - 119 titulares) superan la edad oficial de jubilación</strong>, mientras que las menores de 40 años suponen el 7,3% (17 mujeres). Sin un plan de relevo tutelado, más de 100 explotaciones activas corren riesgo de cese en la presente década.",
+        "footerTitle": "Diputación Foral de Bizkaia · Nekazaritza Saila",
+        "footerSource": "Informe Técnico y Demográfico con perspectiva de género · Fuente oficial: Diputación Foral de Bizkaia.",
+        "footerAmaterra": "Elaboración técnica, análisis y visualización desarrollados por Amaterra.",
+        "sec1BarAtpTitle": "Top Subsectores en ATP (Hombres vs Mujeres)",
+        "sec1BarNoatpTitle": "Top Subsectores en NO ATP ≥0,5 UTAs (Hombres vs Mujeres)",
+        "sec1TabAtpTitle": "Especialización Productiva en ATP",
+        "sec1TabNoatpTitle": "Especialización Productiva en NO ATP (≥0,5 UTAs)",
+        "sec2ChartAtpTitle": "Estratos de Superficie en ATP (Hombres vs Mujeres)",
+        "sec2ChartNoatpTitle": "Estratos en NO ATP ≥0,5 UTAs (Hombres vs Mujeres)",
+        "sec4ChartAtpTitle": "Distribución Territorial en ATP (Hombres vs Mujeres)",
+        "sec4ChartNoatpTitle": "Distribución Territorial en NO ATP ≥0,5 UTAs (Hombres vs Mujeres)",
+        "thTotal": "Total",
+        "thParidad": "% Paridad (M)",
+        "thPctS190": "% s/190 M",
+        "thPctS232": "% s/232 M",
+        "thSubsector": "Subsector",
+        "thHombres": "Hombres",
+        "thMujeres": "Mujeres",
+        "thPctMujeresAtp": "% Mujeres (de 190)",
+        "thPctMujeresNoatp": "% Mujeres (de 232)",
+        "ageYoung": "Jóvenes (18 - 40 años)",
+        "ageMid": "Madurez Productiva (41 - 65 años)",
+        "ageOld": "Mayores de 65 años",
+        "ageOldAlert": "⚠️ Mayores de 65 años (Jubilación)",
+        "hombresPrefix": "Hombres",
+        "mujeresPrefix": "Mujeres",
+        "chartAtpSeries": "Mujeres ATP (% de 190)",
+        "chartNoatpSeries": "Mujeres NO ATP (% de 1.004)"
+      },
+      "eu": {
+        "govBrand": "BIZKAIKO FORU ALDUNDIA · DIPUTACIÓN FORAL DE BIZKAIA",
+        "printBtn": "Txostena Inprimatu",
+        "heroBadge": "FORU TXOSTENA · NEKAZARITZA BEHATOKIA ETA GENERO IKUSPEGIA · AMATERRAK EGINA",
+        "heroTitle": "Emakumeen Egoera Bizkaiko Nekazaritza Sektorean",
+        "heroSubtitle": "Egitura-azterketa bereizia <strong>Nekazari Profesionalen (ATP)</strong> eta merkataritza-helburuko <strong>Ez-ATP</strong> ustiategien artean, Bizkaiko foru erregistro ofizialetan oinarritua.",
+        "kpi1Lbl": "Bizkaiko Errolda Guztira",
+        "kpi1Desc": "3.664 Emakume (%30,2) | 8.462 Gizon",
+        "kpi2Lbl": "Merkatu-helburuko EZ-ATP (≥0,5 LUA)",
+        "kpi2Val": "691",
+        "kpi2Desc": "232 Emakume (% 33,6) | 459 Gizon",
+        "kpi3Lbl": "ATP Unibertsoa (Profesionala)",
+        "kpi3Val": "190 Emakume",
+        "kpi3Desc": "Merkatuko ekoizleen %16 ATP dira. Emakumeak %36 dira, gizonak %64.",
+        "kpi4Lbl": "EZ-ATP Unibertsoa (Merkatua)",
+        "kpi4Val": "232 Emakume",
+        "kpi4Desc": "691 Ez-ATP komertzialen %33,6 (≥0,5 UTA)",
+        "viewDual": "Alderaketa Duala (Ondoan)",
+        "viewAtp": "ATP Bakarrik (190 emakume)",
+        "viewNoatp": "EZ-ATP Bakarrik (232 emakume ≥0,5 LUA)",
+        "navChip1": "1. Azpisektoreak",
+        "navChip2": "2. Azalera",
+        "navChip3": "3. Ekologikoa (ATP Bakarrik)",
+        "navChip4": "4. Eskualdeak",
+        "navChip5": "5. Adina eta Erreleboa",
+        "badgeAtpPill": "ATP: 190 Emakume",
+        "badgeNoatpPill": "EZ-ATP: 1.004 Emakume",
+        "sec1Tag": "EGITURA-ADIERAZLEA 1",
+        "sec1Title": "Banaketa Ekoizpen Azpisektoreen Arabera",
+        "sec1Desc": "<strong>Emakumeen guztizkoaren % azpisektoreka</strong> alderaketa. Ekoizpen-espezializazioen kontrastea ATP profesionalen (190 emakume) eta Ez-ATP segmentuaren (1.004 emakume) artean.",
+        "sec1ChartTitle": "Ekoizpen-espezializazioaren alderaketa zuzena (% emakumeak talde bakoitzean)",
+        "sec1ChartBadge": "Top 8 Azpisektoreak",
+        "sec1AtpCardTitle": "Azpisektoreak Emakume Profesionaletan",
+        "sec1AtpBase": "Oinarria: 190 Emakume ATP (%100)",
+        "sec1AtpUnit": "Haragitarako Behian (83 emakume)",
+        "sec1AtpText": "ATP sektorean, gainera, presentzia handia dute <strong>esnetarako behiak (%13,2)</strong> eta <strong>berotegiko baratzezaintzak (%8,9)</strong>, lan-eskakizun eta inbertsio teknologiko handiko sektoreak.",
+        "sec1AtpBtn": "Erakutsi 15 ATP azpisektoreen taula osoa",
+        "sec1NoatpCardTitle": "Azpisektoreak Merkataritza Ustiategietan",
+        "sec1NoatpBase": "Oinarria: 1.004 Emakume Ez-ATP (%100)",
+        "sec1NoatpUnit": "Haragitarako Behian (448 emakume)",
+        "sec1NoatpText": "Ez-ATP taldean, bigarren eta hirugarren postuak <strong>ardi tradizionalari (%12,2)</strong> eta <strong>sailkatu gabeko ustiategiei (%10,4)</strong> dagozkie; esnetarako behiak, berriz, apenas iristen den %1era.",
+        "sec1NoatpBtn": "Erakutsi 18 Ez-ATP azpisektoreen taula osoa",
+        "sec1InsightTitle": "Ondorio Analitikoa: Ekoizpen-Bereizketa",
+        "sec1InsightText": "Haragitarako behia bi taldeetan funtsezkoa den arren (~%44), ATP profil profesionalak presentzia erabakigarria du <strong>esnetarako behian (%13,2 vs %1,0)</strong> eta <strong>berotegiko baratzezaintzan (%8,9 vs %6,0)</strong>, kapital, teknologia eta dedikazio osoa eskatzen duten jarduerak. Aitzitik, Ez-ATP taldeak kontzentrazio handia du <strong>ardi estentsiboan (%12,2)</strong> eta aire zabaleko baratze ez-mekanizatuan (%7,8).",
+        "sec2Tag": "EGITURA-ADIERAZLEA 2",
+        "sec2Title": "Ustiategien Dimentsioa eta Azalera",
+        "sec2Desc": "<strong>Emakumeen guztizkoaren % azalera-estratuen arabera</strong> (0,5-5 ha, 5-20 ha, 20-50 ha, >50 ha). ATPren lurralde-bideragarritasunaren eta Ez-ATP ereduaren lurzoru-zatikatzearen (minifundismoaren) arteko egitura-kontrastea.",
+        "sec2ChartTitle": "Dimentsio-kontrastea: Emakumeen % hektarea-estratuaren arabera",
+        "sec2ChartBadge": "4 Estratu Ofizialak",
+        "sec2AtpCardTitle": "Azalera Emakume Profesionaletan",
+        "sec2AtpBase": "Oinarria: 190 Emakume ATP",
+        "sec2AtpUnit": "5 hektarea baino gehiago ditu (129 emakume)",
+        "sec2AtpText": "Egitura orekatua: emakume profesionalen <strong>%40,5ek</strong> ustiategi ertain edo handiak (>20 ha) kudeatzen ditu, eta %14,2k 50 hektareatik gorako ustiategiak.",
+        "sec2NoatpCardTitle": "Azalera Merkataritza Ustiategietan",
+        "sec2NoatpBase": "Oinarria: 1.004 Emakume Ez-ATP",
+        "sec2NoatpUnit": "5 hektarea baino gutxiagoko lursailetan (749 emakume)",
+        "sec2NoatpText": "Muturreko zatikatzea: <strong>4 emakumetik 3k</strong> ez dute 5 hektarea lortzen, eta <strong>%0,6k</strong> baino ez (6 emakume Bizkaia osoan) ditu 50 ha baino gehiago.",
+        "sec2InsightTitle": "Ondorio Analitikoa: Lurralde Arrakala",
+        "sec2InsightText": "Azalera-arrakala da errentagarritasunaren baldintzatzaile nagusia. <strong>Ez-ATP emakumeen %74,6 lursail txikietan (&lt;5 ha) harrapatuta</strong> dagoen bitartean, txandakatze eta kapitalizazio ahalmen txikiarekin, <strong>ATP emakumeen %67,9k lur-oinarri bideragarriak (&gt;5 ha)</strong> ditu, bideragarritasun ekonomikorako ezinbestekoa den bazka-txandaketa eta artzaintza ahalbidetuz.",
+        "sec3Tag": "EGITURA-ADIERAZLEA 3",
+        "sec3Title": "Iraunkortasuna eta Ekoizpen Ekologiko Ofiziala",
+        "sec3Desc": "<strong>Emakumeen guztizkoaren % ekologikoan</strong> azterketa (ziurtatua, zati bat eta trantsizioan). Profesionalizazioak trantsizio berdean duen eragin bideratzailea.",
+        "sec3BannerTag": "FAKTORE BIDERKATZAILE NAGUSIA",
+        "sec3BannerTitle": "ATP izaerak 6,5 aldiz biderkatzen du emakumeen ekoizpen ekologikoaren tasa",
+        "sec3BannerDesc": "ATP emakumeen <strong>%11,6</strong> ekologikoak dira (190tik 22), Ez-ATP-ko <strong>%1,8aren</strong> aldean (1.004tik 18).",
+        "sec3BannerKpiLbl": "ATP Emakumeen Eko Tasa",
+        "sec3AtpCardTitle": "Ekoizpen Ekologikoa ATPn",
+        "sec3AtpBase": "Oinarria: 190 Emakume ATP",
+        "sec3AtpUnit": "jarduera ekologikoarekin (22 emakume)",
+        "sec3AtpText": "ATP profesionaletako <strong>22 emakumek (%11,58)</strong> ziurtagiri ekologiko ofiziala duten ustiategiak kudeatzen dituzte Bizkaian, <strong>32 gizonen (%9,44)</strong> aldean.",
+        "sec3AtpNote": "<strong>Emakumeen lidergoa ATP eko sektorean:</strong> 22 emakume horiek Bizkaiko ustiategi ekologiko profesional guztien <strong>%40,7</strong> ordezkatzen dute (54 guztira: 32 gizon eta 22 emakume).",
+        "sec3NoatpCardTitle": "Ekoizpen Ekologikoa EZ-ATPn",
+        "sec3NoatpBase": "Oinarria: 1.004 Emakume Ez-ATP",
+        "sec3NoatpUnit": "jarduera ekologikoarekin (18 emakume)",
+        "sec3NoatpText": "Ez-ATPko 1.004 emakumeetatik: <strong>13k baino ez dute ziurtagiri ofiziala</strong> (%1,29), 2k zati batean (%0,20) eta 3k prozesuan (%0,30).",
+        "sec3NoatpNote": "<strong>Emakumeen pisua Ez-ATPn:</strong> 18 emakume horiek 63 ustiategi ekologiko komertzialen <strong>%28,6</strong> dira (45 gizon eta 18 emakume).",
+        "sec4Tag": "EGITURA-ADIERAZLEA 4",
+        "sec4Title": "Lurralde Banaketa Eskualdeka (LGE)",
+        "sec4Desc": "<strong>Emakumeen guztizkoaren % eskualdeka</strong> Bizkaiko 6 nekazaritza-eskualdeetan. Dibergentzia geografiko handia erakusten du talentu profesionalaren eta Ez-ATP ustiategien artean.",
+        "sec4ChartTitle": "Eskualdeetako banaketa konparatua: Emakumeen % eskualde bakoitzean",
+        "sec4ChartBadge": "Bizkaiko 6 Eskualdeak",
+        "sec4InsightTitle": "Ondorio Analitikoa: Polaritate Geografikoa",
+        "sec4InsightText": "Lurralde-alderantzikatze harrigarria dago: <strong>Enkarterrialde</strong> da emakume profesionalen gotorleku nagusia, Bizkaiko emakume ATP guztien <strong>%41,05</strong> biltzen baitu (78 emakume), bertako erliebe eta abeltzaintza-bokazioari esker. Aitzitik, Ez-ATP talde komertzialean kontzentraziorik handiena <strong>Jata Ondora</strong> lekualdatzen da (<strong>%26,00</strong>, 261 emakume), ibai-ertzeko baratzezaintzak eta hiri-hurbiltasunak bultzatuta.",
+        "sec5Tag": "EGITURA-ADIERAZLEA 5",
+        "sec5Title": "Egoera Juridikoa eta Titulartasun Ereduak",
+        "sec5Desc": "<strong>Forma juridikoaren % emakumeen guztizkoaren barruan</strong> azterketa. Profesionalizazioak elkartze-formulak nola sustatzen dituen erakusten du pertsona fisikoaren indibidualismoaren aurrean.",
+        "sec5AtpCardTitle": "Eredu Juridikoak ATPn",
+        "sec5AtpBase": "Oinarria: 190 Emakume ATP",
+        "sec5AtpUnit": "sozietate eta elkartze-formuletan (38 emakume)",
+        "sec5AtpText": "<strong>%80,0</strong> pertsona fisiko indibidualak dira, baina presentzia nabarmena dute <strong>Ondasun-erkidegoek (%9,47)</strong>, <strong>Sozietate Zibilek (%6,32)</strong> eta <strong>Titulartasun Partekatuak (%1,58)</strong>.",
+        "sec5NoatpCardTitle": "Eredu Juridikoak EZ-ATPn",
+        "sec5NoatpBase": "Oinarria: 1.004 Emakume Ez-ATP",
+        "sec5NoatpUnit": "pertsona fisiko indibiduala (956 emakume)",
+        "sec5NoatpText": "Pertsona fisiko isolatuaren nagusitasun ia osoa. Ondasun-erkidegoek apenas ordezkatzen duten %0,80 eta <strong>ez dago Titulartasun Partekatuan erregistratutako ustiategirik (%0,0)</strong>.",
+        "sec5InsightTitle": "Ondorio Analitikoa: Kolektibizazioa eta Lan Babesa",
+        "sec5InsightText": "Profesionalizazioa egituraketa juridikoaren eragile da. ATP segmentuan, <strong>5 emakumetik 1ek (%20)</strong> Ondasun-erkidegoak, Sozietate Zibilak edo Titulartasun Partekatua (35/2011 Legea) bezalako formulak hautatzen ditu; horrek finantza-arriskua murrizten du eta nekazaritza-Gizarte Segurantzako kotizazioak bermatzen ditu. Ez-ATP segmentuan, %95,2 pertsona fisiko tradizionalaren pean aritzen da, kotitulartasun formalaren sartze nulua izanik.",
+        "sec6Tag": "EGITURA-ADIERAZLEA 6",
+        "sec6Title": "Adin Piramidea eta Belaunaldi Erreleboaren Alerta",
+        "sec6Desc": "<strong>Batez besteko adinaren</strong> eta emakumeen banaketaren konparaketa tarte ofizialetan: 18-40 urte, 41-65 urte eta 65 urtetik gorakoak.",
+        "sec6AtpCardTitle": "Emakume Profesionalen Demografia",
+        "sec6AtpBase": "Batez Besteko Adina: 53 urte",
+        "sec6AtpUnit": "batez besteko adina (Ez-ATP-ko 66 urteen aldean)",
+        "sec6NoatpCardTitle": "Merkataritza Emakumeen Demografia",
+        "sec6NoatpBase": "Batez Besteko Adina: 66 urte",
+        "sec6NoatpUnit": "batez besteko adina (uzteko arriskua)",
+        "sec6InsightTitle": "Alerta Demografikoa: Berehalako Uzte Arriskua",
+        "sec6InsightText": "Belaunaldi-arrakala handia dago, <strong>13 urteko aldearekin batez besteko adinean</strong> (53 urte ATPn eta 66 urte Ez-ATPn). Ez-ATP taldean, <strong>emakumeen ia hiru laurdenak (%74,2 - 745 titular) erretiratzeko adin ofiziala gainditzen du</strong>; 40 urtetik beherakoak, berriz, apenas dira %5,8 (58 emakume). Errelebo-planik gabe, 700 ustiategi baino gehiago desagertzeko arriskuan daude hamarkada honetan.",
+        "footerTitle": "Bizkaiko Foru Aldundia · Nekazaritza Saila",
+        "footerSource": "Foru Txosten Tekniko eta Demografikoa genero ikuspegiarekin · Iturri ofiziala: Bizkaiko Foru Aldundia.",
+        "footerAmaterra": "Elaborazio teknikoa, analisia eta bistaratzea Amaterrak garatua.",
+        "sec1BarAtpTitle": "ATPko Azpisektore Nagusiak (Gizonak vs Emakumeak)",
+        "sec1BarNoatpTitle": "EZ-ATPko Azpisektore Nagusiak ≥0,5 LUA (Gizonak vs Emakumeak)",
+        "sec1TabAtpTitle": "Espezializazio Produktiboa ATPn",
+        "sec1TabNoatpTitle": "Espezializazio Produktiboa EZ-ATPn (≥0,5 LUA)",
+        "sec2ChartAtpTitle": "Azalera-Estratuak ATPn (Gizonak vs Emakumeak)",
+        "sec2ChartNoatpTitle": "Azalera-Estratuak EZ-ATPn ≥0,5 LUA (Gizonak vs Emakumeak)",
+        "sec4ChartAtpTitle": "Lurralde-Banaketa ATPn (Gizonak vs Emakumeak)",
+        "sec4ChartNoatpTitle": "Lurralde-Banaketa EZ-ATPn ≥0,5 LUA (Gizonak vs Emakumeak)",
+        "thTotal": "Guztira",
+        "thParidad": "% Parekotasuna (E)",
+        "thPctS190": "% 190tik (E)",
+        "thPctS232": "% 232tik (E)",
+        "thSubsector": "Azpisektorea",
+        "thHombres": "Gizonak",
+        "thMujeres": "Emakumeak",
+        "thPctMujeresAtp": "% Emakumeak (190tik)",
+        "thPctMujeresNoatp": "% Emakumeak (232tik)",
+        "ageYoung": "Gazteak (18 - 40 urte)",
+        "ageMid": "Helduaro Produktiboa (41 - 65 urte)",
+        "ageOld": "65 urtetik gorakoak",
+        "ageOldAlert": "⚠️ 65 urtetik gorakoak (Erretiratzea)",
+        "hombresPrefix": "Gizonak",
+        "mujeresPrefix": "Emakumeak",
+        "chartAtpSeries": "Emakumeak ATP (% 190tik)",
+        "chartNoatpSeries": "Emakumeak EZ-ATP (% 1.004tik)"
+      }
+    };
+
+    const LOOKUP_EU = {
+      "EXPLOTACIONES DE BOVINOS ESPECIALIZADAS: ORIENTACIÓN CRIA Y CARNE": "Haragitarako behi-aziendaren ustiategi espezializatuak",
+      "EXPLOTACIONES DE BOVINOS ESPECIALIZADAS: ORIENTACIÓN LECHE": "Esnetarako behi-aziendaren ustiategi espezializatuak",
+      "EXPLOTACIONES ESPECIALIZADAS EN HORTALIZAS EN INVERNADERO": "Berotegiko barazkietan espezializatutako ustiategiak",
+      "EXPLOTACIONES DE AVES PONEDORAS ESPECIALIZADAS": "Hegazti erruleetan espezializatutako ustiategiak",
+      "EXPLOTACIONES DE OVINOS ESPECIALIZADAS": "Ardi-aziendaren ustiategi espezializatuak",
+      "EXPLOTACIONES ESPECIALIZADAS EN HORTALIZAS AL AIRE LIBRE": "Aire zabaleko barazkietan espezializatutako ustiategiak",
+      "EXPLOTACIONES FRUTÍCOLAS ESPECIALIZADAS": "Frutazaintzako ustiategi espezializatuak",
+      "EXPLOTACIONES ESPECIALIZADAS EN VITICULTURA": "Mahastizaintzako ustiategi espezializatuak",
+      "EXPLOTACIONES NO CLASIFICADAS": "Sailkatu gabeko ustiategiak",
+      "EXPLOTACIONES DE CAPRINOS ESPECIALIZADAS": "Ahuntz-aziendaren ustiategi espezializatuak",
+      "EXPLOTACIONES DE AVES DE CORRAL DE CARNE ESPECIALIZADAS": "Haragitarako hegaztien ustiategi espezializatuak",
+      "EXPLOTACIONES DE HERBÍVOROS": "Belarjaleen ustiategiak",
+      "EXPLOTACIONES ESPECIALIZADAS EN FLORICULTURA Y PLANTAS ORNAMENTALES EN INVERNADERO": "Lorezaintza eta landare apaingarriak berotegian",
+      "EXPLOTACIONES QUE COMBINAN LA CRÍA Y ENGORDE DE PORCINOS": "Txerriak hazi eta gizentzeko ustiategiak",
+      "EXPLOTACIONES APÍCOLAS": "Erlezaintzako ustiategiak",
+      "EXPOTACIONES APÍCOLAS": "Erlezaintzako ustiategiak",
+      "FLORICULTURA Y PLANTAS ORNAMENTALES AL AIRE LIBRE": "Lorezaintza eta landare apaingarriak aire zabalean",
+      "EXPLOTACIONES ESPECIALIZADAS EN CEREALICULTURA (DISTINTA DE LA DE ARROZ), EN CULTIVO DE PLANTAS OLEAGINOSAS Y PROTEAGINOSAS": "Zerealak, koipetsuak eta proteaginosak",
+      "CULTIVO DE SETAS": "Onddo eta perretxikoen laborantza",
+      "Muy pequeña: 0,5 - 5 ha": "Oso txikia: 0,5 - 5 ha",
+      "Pequeña: 5–20 ha": "Txikia: 5–20 ha",
+      "Mediana: 20–50 ha": "Ertaina: 20–50 ha",
+      "Grande: > 50 ha": "Handia: > 50 ha",
+      "Certificado ecológico": "Ziurtagiri ekologikoa",
+      "Una parte de la explotación": "Ustiategiaren zati bat",
+      "En proceso de certificación": "Ziurtatze-prozesuan",
+      "Persona física": "Pertsona fisikoa",
+      "Comunidad de bienes": "Ondasun-erkidegoa",
+      "Sociedad civil": "Sozietate zibila",
+      "Titularidad compartida": "Titulartasun partekatua",
+      "Sociedad limitada": "Sozietate mugatua (SM)",
+      "Cooperativa": "Kooperatiba",
+      "Asociaciones": "Elkarteak",
+      "Otros": "Beste batzuk",
+      "Sociedad anónima": "Sozietate anonimoa (SA)",
+      "Sociedad agraria de transformación": "Nekazaritzako Eraldaketa Sozietatea (NES)"
+    };
+
+    let CURRENT_LANG = 'es';
+    let chartSubsectoresDonutATPInstance = null;
+    let chartSubsectoresDonutNoATPInstance = null;
+    let chartSubsectoresBarATPInstance = null;
+    let chartSubsectoresBarNoATPInstance = null;
+    let chartSuperficieATPInstance = null;
+    let chartSuperficieNoATPInstance = null;
+    let chartComarcasATPInstance = null;
+    let chartComarcasNoATPInstance = null;
+
+    // Global View Mode Controller
+    function setViewMode(mode) {
+      const body = document.body;
+      body.classList.remove('mode-dual', 'mode-atp-only', 'mode-noatp-only');
+      
+      document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+
+      if (mode === 'dual') {
+        body.classList.add('mode-dual');
+        document.getElementById('btn-view-dual').classList.add('active');
+      } else if (mode === 'atp') {
+        body.classList.add('mode-atp-only');
+        document.getElementById('btn-view-atp').classList.add('active');
+      } else if (mode === 'noatp') {
+        body.classList.add('mode-noatp-only');
+        document.getElementById('btn-view-noatp').classList.add('active');
+      }
+
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    // Toggle Collapsible Tables
+    function toggleExpand(elementId, btn) {
+      const el = document.getElementById(elementId);
+      const isEu = CURRENT_LANG === 'eu';
+      if (el.style.display === 'none' || el.style.display === '') {
+        el.style.display = 'block';
+        btn.querySelector('span').textContent = isEu ? 'Ezkutatu taula xehatua' : 'Ocultar tabla detallada';
+        btn.querySelector('svg').style.transform = 'rotate(180deg)';
+      } else {
+        el.style.display = 'none';
+        btn.querySelector('span').textContent = isEu ? 'Erakutsi taula osoa' : 'Mostrar tabla completa';
+        btn.querySelector('svg').style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // Comprehensive Bilingual Switcher
+    function setLang(lang) {
+      CURRENT_LANG = lang;
+
+      const setElText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el && text !== undefined) el.textContent = text;
+      };
+      const setElHtml = (id, html) => {
+        const el = document.getElementById(id);
+        if (el && html !== undefined) el.innerHTML = html;
+      };
+
+      document.getElementById('btn-lang-es').classList.toggle('active', lang === 'es');
+      document.getElementById('btn-lang-eu').classList.toggle('active', lang === 'eu');
+
+      const t = I18N[lang] || I18N.es;
+
+      // Top bar & Hero
+      setElText('txt-gov-brand', t.govBrand);
+      setElText('txt-print-btn', t.printBtn);
+      setElText('txt-hero-badge', t.heroBadge);
+      setElText('txt-hero-title', t.heroTitle);
+      setElHtml('txt-hero-subtitle', t.heroSubtitle);
+
+      setElText('txt-kpi1-lbl', t.kpi1Lbl);
+      setElText('txt-kpi1-desc', t.kpi1Desc);
+      setElText('txt-kpi2-lbl', t.kpi2Lbl);
+      setElText('txt-kpi2-val', t.kpi2Val);
+      setElText('txt-kpi2-desc', t.kpi2Desc);
+      setElText('txt-kpi3-lbl', t.kpi3Lbl);
+      setElText('txt-kpi3-val', t.kpi3Val);
+      setElText('txt-kpi3-desc', t.kpi3Desc);
+      setElText('txt-kpi4-lbl', t.kpi4Lbl);
+      setElText('txt-kpi4-val', t.kpi4Val);
+      setElText('txt-kpi4-desc', t.kpi4Desc);
+
+      // Nav buttons
+      setElText('txt-view-dual', t.viewDual);
+      setElText('txt-view-atp', t.viewAtp);
+      setElText('txt-view-noatp', t.viewNoatp);
+
+      setElText('nav-chip-1', t.navChip1);
+      setElText('nav-chip-2', t.navChip2);
+      setElText('nav-chip-3', t.navChip3);
+      setElText('nav-chip-4', t.navChip4);
+      setElText('nav-chip-5', t.navChip5);
+
+      for (let i = 1; i <= 6; i++) {
+        setElText('badge-atp-pill-' + i, t.badgeAtpPill);
+        setElText('badge-noatp-pill-' + i, t.badgeNoatpPill);
+      }
+
+      // Bloque 1
+      setElText('txt-sec1-tag', t.sec1Tag);
+      setElText('txt-sec1-title', t.sec1Title);
+      setElHtml('txt-sec1-desc', t.sec1Desc);
+      setElText('txt-sec1-chart-title', t.sec1ChartTitle);
+      setElText('txt-sec1-chart-badge', t.sec1ChartBadge);
+      setElText('txt-sec1-atp-card-title', t.sec1AtpCardTitle);
+      setElText('txt-sec1-atp-base', t.sec1AtpBase);
+      setElText('txt-sec1-atp-btn', t.sec1AtpBtn);
+      setElText('txt-sec1-noatp-card-title', t.sec1NoatpCardTitle);
+      setElText('txt-sec1-noatp-base', t.sec1NoatpBase);
+      setElText('txt-sec1-noatp-btn', t.sec1NoatpBtn);
+      setElText('txt-sec1-insight-title', t.sec1InsightTitle);
+      setElHtml('txt-sec1-insight-text', t.sec1InsightText);
+
+      setElText('th-sub-atp-name', t.thSubsector);
+      setElText('th-sub-atp-h', t.thHombres);
+      setElText('th-sub-atp-m', t.thMujeres);
+      setElText('th-sub-atp-pct', t.thPctMujeresAtp);
+      setElText('th-sub-noatp-name', t.thSubsector);
+      setElText('th-sub-noatp-h', t.thHombres);
+      setElText('th-sub-noatp-m', t.thMujeres);
+      setElText('th-sub-noatp-pct', t.thPctMujeresNoatp);
+
+      setElText('txt-sec1-bar-atp-title', t.sec1BarAtpTitle);
+      setElText('txt-sec1-bar-noatp-title', t.sec1BarNoatpTitle);
+      setElText('txt-sec1-tab-atp-title', t.sec1TabAtpTitle);
+      setElText('txt-sec1-tab-noatp-title', t.sec1TabNoatpTitle);
+      setElText('th-sub-atp-full-name', t.thSubsector);
+      setElText('th-sub-atp-full-h', t.thHombres);
+      setElText('th-sub-atp-full-m', t.thMujeres);
+      setElText('th-sub-atp-full-tot', t.thTotal);
+      setElText('th-sub-atp-full-par', t.thParidad);
+      setElText('th-sub-atp-full-pct', t.thPctS190);
+
+      setElText('th-sub-noatp-full-name', t.thSubsector);
+      setElText('th-sub-noatp-full-h', t.thHombres);
+      setElText('th-sub-noatp-full-m', t.thMujeres);
+      setElText('th-sub-noatp-full-tot', t.thTotal);
+      setElText('th-sub-noatp-full-par', t.thParidad);
+      setElText('th-sub-noatp-full-pct', t.thPctS232);
+
+      setElText('txt-sec2-chart-atp-title', t.sec2ChartAtpTitle);
+      setElText('txt-sec2-chart-noatp-title', t.sec2ChartNoatpTitle);
+      setElText('txt-sec4-chart-atp-title', t.sec4ChartAtpTitle);
+      setElText('txt-sec4-chart-noatp-title', t.sec4ChartNoatpTitle);
+
+      // Bloque 2
+      setElText('txt-sec2-tag', t.sec2Tag);
+      setElText('txt-sec2-title', t.sec2Title);
+      setElHtml('txt-sec2-desc', t.sec2Desc);
+      setElText('txt-sec2-chart-title', t.sec2ChartTitle);
+      setElText('txt-sec2-chart-badge', t.sec2ChartBadge);
+      setElText('txt-sec2-atp-card-title', t.sec2AtpCardTitle);
+      setElText('txt-sec2-atp-base', t.sec2AtpBase);
+      setElText('txt-sec2-noatp-card-title', t.sec2NoatpCardTitle);
+      setElText('txt-sec2-noatp-base', t.sec2NoatpBase);
+      setElText('txt-sec2-insight-title', t.sec2InsightTitle);
+      setElHtml('txt-sec2-insight-text', t.sec2InsightText);
+
+      // Bloque 3
+      setElText('txt-sec3-tag', t.sec3Tag);
+      setElText('txt-sec3-title', t.sec3Title);
+      setElHtml('txt-sec3-desc', t.sec3Desc);
+      setElText('txt-sec3-atp-card-title', t.sec3AtpCardTitle);
+      setElText('txt-sec3-atp-base', t.sec3AtpBase);
+      setElText('txt-sec3-atp-unit', t.sec3AtpUnit);
+      setElHtml('txt-sec3-atp-text', t.sec3AtpText);
+      setElHtml('txt-sec3-atp-note', t.sec3AtpNote);
+
+      // Bloque 4
+      setElText('txt-sec4-tag', t.sec4Tag);
+      setElText('txt-sec4-title', t.sec4Title);
+      setElHtml('txt-sec4-desc', t.sec4Desc);
+      setElText('txt-sec4-chart-title', t.sec4ChartTitle);
+      setElText('txt-sec4-chart-badge', t.sec4ChartBadge);
+      setElText('txt-sec4-insight-title', t.sec4InsightTitle);
+      setElHtml('txt-sec4-insight-text', t.sec4InsightText);
+
+      // Bloque 5
+      setElText('txt-sec6-tag', t.sec6Tag);
+      setElText('txt-sec6-title', t.sec6Title);
+      setElHtml('txt-sec6-desc', t.sec6Desc);
+      setElText('txt-sec6-atp-card-title', t.sec6AtpCardTitle);
+      setElText('txt-sec6-atp-base', t.sec6AtpBase);
+      setElText('txt-sec6-atp-unit', t.sec6AtpUnit);
+      setElText('txt-sec6-noatp-card-title', t.sec6NoatpCardTitle);
+      setElText('txt-sec6-noatp-base', t.sec6NoatpBase);
+      setElText('txt-sec6-noatp-unit', t.sec6NoatpUnit);
+      setElText('txt-sec6-insight-title', t.sec6InsightTitle);
+      setElHtml('txt-sec6-insight-text', t.sec6InsightText);
+
+      // Footer
+      setElText('txt-footer-title', t.footerTitle);
+      setElText('txt-footer-source', t.footerSource);
+      setElText('txt-footer-amaterra', t.footerAmaterra);
+      setElText('txt-footer-link-1', t.navChip1.replace(/^\d+\.\s*/, ''));
+      setElText('txt-footer-link-2', t.navChip2.replace(/^\d+\.\s*/, ''));
+      setElText('txt-footer-link-3', t.navChip3.replace(/^\d+\.\s*/, ''));
+      setElText('txt-footer-link-4', t.navChip4.replace(/^\d+\.\s*/, ''));
+      setElText('txt-footer-link-5', t.navChip5.replace(/^\d+\.\s*/, ''));
+
+      // Re-render dynamic lists with translated item labels
+      renderSubsectores();
+      renderSuperficie();
+      renderEcologico();
+      renderComarcas();
+      renderEdad();
+
+      // Update Chart.js datasets & labels
+      updateChartsLanguage();
+    }
+
+    function translateName(name) {
+      if (CURRENT_LANG === 'eu' && LOOKUP_EU[name]) {
+        return LOOKUP_EU[name];
+      }
+      return name;
+    }
+
+    // 1. RENDER SUBSECTORES & PARALLEL TABLES
+    function renderSubsectores() {
+      const atpTbodyFull = document.getElementById('tbody-subsectores-atp-full');
+      const noatpTbodyFull = document.getElementById('tbody-subsectores-noatp-full');
+      const noatpList = document.getElementById('list-subsectores-noatp');
+      const t = I18N[CURRENT_LANG] || I18N.es;
+      const mLabel = CURRENT_LANG === 'eu' ? 'em.' : 'm.';
+
+      if (atpTbodyFull) atpTbodyFull.innerHTML = '';
+      if (noatpTbodyFull) noatpTbodyFull.innerHTML = '';
+      if (noatpList) noatpList.innerHTML = '';
+
+      const atpSorted = [...DATA_EXCEL.ATP.subsectores].sort((a,b) => b.pct_m_de_190 - a.pct_m_de_190);
+      const noatpSorted = [...DATA_EXCEL.No_ATP.subsectores].sort((a,b) => (b.m / 232) - (a.m / 232));
+
+      // Llenar tabla paralela ATP completa (15 subsectores)
+      if (atpTbodyFull) {
+        atpSorted.forEach(s => {
+          const tot = s.h + s.m;
+          const paridad = tot > 0 ? ((s.m / tot) * 100).toFixed(1) : '0.0';
+          atpTbodyFull.innerHTML += `
+            <tr>
+              <td style="font-weight:600; color:var(--slate-800);">${translateName(s.nombre)}</td>
+              <td class="num">${s.h}</td>
+              <td class="num" style="color:#065F46; font-weight:700;">${s.m}</td>
+              <td class="num">${tot}</td>
+              <td class="num" style="color:#047857; font-weight:700;">${paridad}%</td>
+              <td class="num pct-cell" style="color:#047857;">${s.pct_m_de_190}%</td>
+            </tr>
+          `;
+        });
+      }
+
+      // Llenar tabla paralela NO ATP completa (18 subsectores)
+      if (noatpTbodyFull) {
+        noatpSorted.forEach(s => {
+          const tot = s.h + s.m;
+          const paridad = tot > 0 ? ((s.m / tot) * 100).toFixed(1) : '0.0';
+          const pct232 = ((s.m / 232) * 100).toFixed(1);
+          noatpTbodyFull.innerHTML += `
+            <tr>
+              <td style="font-weight:600; color:var(--slate-800);">${translateName(s.nombre)}</td>
+              <td class="num">${s.h}</td>
+              <td class="num" style="color:#92400E; font-weight:700;">${s.m}</td>
+              <td class="num">${tot}</td>
+              <td class="num" style="color:#D97706; font-weight:700;">${paridad}%</td>
+              <td class="num pct-cell" style="color:#D97706;">${pct232}%</td>
+            </tr>
+          `;
+        });
+      }
+
+      // Ranking Top 5 en tarjeta NO ATP
+      if (noatpList) {
+        noatpSorted.slice(0, 5).forEach(s => {
+          const pct232 = ((s.m / 232) * 100).toFixed(1);
+          noatpList.innerHTML += `
+            <div class="segment-item">
+              <div class="segment-item-top">
+                <span class="segment-item-name">${translateName(s.nombre)}</span>
+                <span class="segment-item-pct noatp-pct">${pct232}% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(${s.m} ${mLabel})</span></span>
+              </div>
+              <div class="segment-item-sub">${t.hombresPrefix}: ${s.h} | ${t.mujeresPrefix}: ${s.m}</div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill progress-noatp" style="width: ${pct232}%;"></div></div>
+            </div>
+          `;
+        });
+      }
+    }
+
+    // 2. RENDER SUPERFICIE
+    function renderSuperficie() {
+      const atpList = document.getElementById('list-superficie-atp');
+      const noatpList = document.getElementById('list-superficie-noatp');
+      const t = I18N[CURRENT_LANG] || I18N.es;
+      const mLabel = CURRENT_LANG === 'eu' ? 'em.' : 'm.';
+
+      atpList.innerHTML = '';
+      noatpList.innerHTML = '';
+
+      DATA_EXCEL.ATP.superficie.forEach(s => {
+        atpList.innerHTML += `
+          <div class="segment-item">
+            <div class="segment-item-top">
+              <span class="segment-item-name">${translateName(s.estrato)}</span>
+              <span class="segment-item-pct atp-pct">${s.pct_m_de_190}% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(${s.m} ${mLabel})</span></span>
+            </div>
+            <div class="segment-item-sub">${t.hombresPrefix}: ${s.h} | ${t.mujeresPrefix}: ${s.m}</div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill progress-atp" style="width: ${s.pct_m_de_190}%;"></div></div>
+          </div>
+        `;
+      });
+
+      DATA_EXCEL.No_ATP.superficie.forEach(s => {
+        noatpList.innerHTML += `
+          <div class="segment-item">
+            <div class="segment-item-top">
+              <span class="segment-item-name">${translateName(s.estrato)}</span>
+              <span class="segment-item-pct noatp-pct">${s.pct_m_de_1004}% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(${s.m} ${mLabel})</span></span>
+            </div>
+            <div class="segment-item-sub">${t.hombresPrefix}: ${s.h} | ${t.mujeresPrefix}: ${s.m}</div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill progress-noatp" style="width: ${s.pct_m_de_1004}%;"></div></div>
+          </div>
+        `;
+      });
+    }
+
+    // 3. RENDER ECOLOGICO
+    function renderEcologico() {
+      const atpList = document.getElementById('list-ecologico-atp');
+      const t = I18N[CURRENT_LANG] || I18N.es;
+      const mLabel = CURRENT_LANG === 'eu' ? 'em.' : 'm.';
+
+      if (atpList) {
+        atpList.innerHTML = `
+          <div class="segment-item">
+            <div class="segment-item-top">
+              <span class="segment-item-name">${CURRENT_LANG === 'eu' ? 'Ziurtagiri Ekologiko Ofiziala' : 'Certificado Ecológico Oficial'}</span>
+              <span class="segment-item-pct atp-pct">11,58% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(22 ${mLabel})</span></span>
+            </div>
+            <div class="segment-item-sub">${t.hombresPrefix} ATP: 32 (9,44%) | ${t.mujeresPrefix} ATP: 22 (11,58%)</div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill progress-atp" style="width: 11.58%;"></div></div>
+          </div>
+          <div class="segment-item" style="background: #F0FDF4; border: 1px solid #BBF7D0; margin-top: 10px;">
+            <div class="segment-item-top">
+              <span class="segment-item-name" style="font-weight:700; color: #166534;">${CURRENT_LANG === 'eu' ? 'Emakumeen Pisua Ekoizpen Ekologikoan Guztira' : 'Cuota Femenina en la Producción Ecológica Profesional'}</span>
+              <span class="segment-item-pct atp-pct" style="color: #047857;">40,74% <span style="font-size:11px;font-weight:600;color:#15803D;">(22 / 54)</span></span>
+            </div>
+            <div class="segment-item-sub" style="color: #15803D;">${CURRENT_LANG === 'eu' ? '54 ustiategi ekologiko guztira Bizkaian (32 gizon eta 22 emakume)' : '54 explotaciones ecológicas profesionales en Bizkaia (32 hombres y 22 mujeres)'}</div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill progress-atp" style="width: 40.74%;"></div></div>
+          </div>
+        `;
+      }
+    }
+
+    // 4. RENDER COMARCAS
+    function renderComarcas() {
+      const grid = document.getElementById('comarca-interactive-grid');
+      const mLabel = CURRENT_LANG === 'eu' ? 'em.' : 'm.';
+      grid.innerHTML = '';
+      
+      const comarcas = DATA_EXCEL.ATP.comarca.map(cAtp => {
+        const cNoatp = DATA_EXCEL.No_ATP.comarca.find(cn => cn.comarca.trim().toLowerCase() === cAtp.comarca.trim().toLowerCase()) || {};
+        return {
+          nombre: cAtp.comarca,
+          atp_m: cAtp.m,
+          atp_h: cAtp.h,
+          atp_pct: cAtp.pct_m_de_190,
+          noatp_m: cNoatp.m || 0,
+          noatp_h: cNoatp.h || 0,
+          noatp_pct: cNoatp.pct_m_de_1004 || 0
+        };
+      });
+
+      comarcas.forEach(c => {
+        grid.innerHTML += `
+          <div class="comarca-card" onclick="highlightComarca(this, '${c.nombre}')">
+            <div class="comarca-name">${c.nombre}</div>
+            <div class="comarca-badge-row">
+              <div class="comarca-mini-metric comarca-mini-atp">
+                <span>ATP (190 ${mLabel}):</span>
+                <span>${c.atp_pct}% (${c.atp_m})</span>
+              </div>
+              <div class="comarca-mini-metric comarca-mini-noatp">
+                <span>EZ-ATP (232 ${mLabel}):</span>
+                <span>${c.noatp_pct}% (${c.noatp_m})</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function highlightComarca(el, name) {
+      document.querySelectorAll('.comarca-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    // 5. RENDER FORMA JURIDICA
+    function renderFormaJuridica() {
+      const atpList = document.getElementById('list-juridica-atp');
+      const noatpList = document.getElementById('list-juridica-noatp');
+      if (!atpList || !noatpList) return;
+      const t = I18N[CURRENT_LANG] || I18N.es;
+      const mLabel = CURRENT_LANG === 'eu' ? 'em.' : 'm.';
+
+      atpList.innerHTML = '';
+      noatpList.innerHTML = '';
+
+      const atpSorted = [...DATA_EXCEL.ATP.forma_juridica].sort((a,b) => b.pct_m_de_190 - a.pct_m_de_190);
+      const noatpSorted = [...DATA_EXCEL.No_ATP.forma_juridica].sort((a,b) => b.pct_m_de_1004 - a.pct_m_de_1004);
+
+      atpSorted.forEach(j => {
+        if (j.m > 0 || j.pct_m_de_190 > 0) {
+          atpList.innerHTML += `
+            <div class="segment-item">
+              <div class="segment-item-top">
+                <span class="segment-item-name">${translateName(j.forma)}</span>
+                <span class="segment-item-pct atp-pct">${j.pct_m_de_190}% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(${j.m} ${mLabel})</span></span>
+              </div>
+              <div class="segment-item-sub">${t.hombresPrefix}: ${j.h} | ${t.mujeresPrefix}: ${j.m}</div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill progress-atp" style="width: ${j.pct_m_de_190}%;"></div></div>
+            </div>
+          `;
+        }
+      });
+
+      noatpSorted.forEach(j => {
+        if (j.m > 0 || j.pct_m_de_1004 > 0) {
+          noatpList.innerHTML += `
+            <div class="segment-item">
+              <div class="segment-item-top">
+                <span class="segment-item-name">${translateName(j.forma)}</span>
+                <span class="segment-item-pct noatp-pct">${j.pct_m_de_1004}% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(${j.m} ${mLabel})</span></span>
+              </div>
+              <div class="segment-item-sub">${t.hombresPrefix}: ${j.h} | ${t.mujeresPrefix}: ${j.m}</div>
+              <div class="progress-bar-bg"><div class="progress-bar-fill progress-noatp" style="width: ${j.pct_m_de_1004}%;"></div></div>
+            </div>
+          `;
+        }
+      });
+    }
+
+    // 6. RENDER EDAD
+    function renderEdad() {
+      const atpList = document.getElementById('list-edad-atp');
+      const noatpList = document.getElementById('list-edad-noatp');
+      const t = I18N[CURRENT_LANG] || I18N.es;
+      const mLabel = CURRENT_LANG === 'eu' ? 'em.' : 'm.';
+
+      atpList.innerHTML = `
+        <div class="segment-item">
+          <div class="segment-item-top">
+            <span class="segment-item-name">${t.ageYoung}</span>
+            <span class="segment-item-pct atp-pct">17,37% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(33 ${mLabel})</span></span>
+          </div>
+          <div class="segment-item-sub">${t.hombresPrefix} ATP: 80 (24,24%)</div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill progress-atp" style="width: 17.37%;"></div></div>
+        </div>
+        <div class="segment-item">
+          <div class="segment-item-top">
+            <span class="segment-item-name">${t.ageMid}</span>
+            <span class="segment-item-pct atp-pct">72,63% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(138 ${mLabel})</span></span>
+          </div>
+          <div class="segment-item-sub">${t.hombresPrefix} ATP: 227 (68,79%)</div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill progress-atp" style="width: 72.63%;"></div></div>
+        </div>
+        <div class="segment-item">
+          <div class="segment-item-top">
+            <span class="segment-item-name">${t.ageOld}</span>
+            <span class="segment-item-pct atp-pct">10,00% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(19 ${mLabel})</span></span>
+          </div>
+          <div class="segment-item-sub">${t.hombresPrefix} ATP: 23 (6,97%)</div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill progress-atp" style="width: 10.00%;"></div></div>
+        </div>
+      `;
+
+      const noAtpLabel = CURRENT_LANG === 'eu' ? 'EZ-ATP' : 'NO ATP';
+
+      noatpList.innerHTML = `
+        <div class="segment-item">
+          <div class="segment-item-top">
+            <span class="segment-item-name">${t.ageYoung}</span>
+            <span class="segment-item-pct noatp-pct">7,33% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(17 ${mLabel})</span></span>
+          </div>
+          <div class="segment-item-sub">${t.hombresPrefix} ${noAtpLabel}: 62 (13,51%)</div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill progress-noatp" style="width: 7.33%;"></div></div>
+        </div>
+        <div class="segment-item">
+          <div class="segment-item-top">
+            <span class="segment-item-name">${t.ageMid}</span>
+            <span class="segment-item-pct noatp-pct">41,38% <span style="font-size:11px;font-weight:500;color:var(--slate-500);">(96 ${mLabel})</span></span>
+          </div>
+          <div class="segment-item-sub">${t.hombresPrefix} ${noAtpLabel}: 273 (59,48%)</div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill progress-noatp" style="width: 41.38%;"></div></div>
+        </div>
+        <div class="segment-item" style="border-color: #FECACA; background: #FEF2F2;">
+          <div class="segment-item-top">
+            <span class="segment-item-name" style="color: #991B1B;">${t.ageOldAlert}</span>
+            <span class="segment-item-pct" style="color: #DC2626;">51,29% <span style="font-size:11px;font-weight:500;color:#991B1B;">(119 ${mLabel})</span></span>
+          </div>
+          <div class="segment-item-sub">${t.hombresPrefix} ${noAtpLabel}: 124 (27,02%)</div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 51.29%; background: #DC2626;"></div></div>
+        </div>
+      `;
+    }
+
+    // 7. CHART.JS INITIALIZATION & MULTILINGUAL UPDATE
+    const chartLabelsEs = {
+      subsectores: ['Bovinos Cría y Carne', 'Bovinos Leche', 'Hortalizas Invernadero', 'Aves Ponedoras', 'Ovinos', 'Hortalizas Aire Libre', 'Frutícolas', 'Viticultura'],
+      superficie: ['Muy pequeña (0,5 - 5 ha)', 'Pequeña (5 - 20 ha)', 'Mediana (20 - 50 ha)', 'Grande (> 50 ha)']
+    };
+
+    const chartLabelsEu = {
+      subsectores: ['Haragitarako Behiak', 'Esnetarako Behiak', 'Berotegiko Barazkiak', 'Hegazti Erruleak', 'Ardiak', 'Aire Zabaleko Barazkiak', 'Frutazaintza', 'Mahastizaintza'],
+      superficie: ['Oso txikia (0,5 - 5 ha)', 'Txikia (5 - 20 ha)', 'Ertaina (20 - 50 ha)', 'Handia (> 50 ha)']
+    };
+
+    const donutAtpLabelsEs = ['Bovino Carne', 'Bovino Leche', 'Huerta Invernadero', 'Aves Ponedoras', 'Ovinos', 'Huerta Aire Libre', 'Frutícolas', 'Viticultura', 'Otros'];
+    const donutAtpLabelsEu = ['Haragitarako Behiak', 'Esnetarako Behiak', 'Berotegiko Barazkiak', 'Hegazti Erruleak', 'Ardiak', 'Aire Zabaleko Barazkiak', 'Frutazaintza', 'Mahastizaintza', 'Beste batzuk'];
+
+    const donutNoAtpLabelsEs = ['Bovino Carne', 'Huerta Invernadero', 'Ovinos', 'Viticultura', 'Huerta Aire Libre', 'Frutícolas', 'Herbívoros', 'Otros'];
+    const donutNoAtpLabelsEu = ['Haragitarako Behiak', 'Berotegiko Barazkiak', 'Ardiak', 'Mahastizaintza', 'Aire Zabaleko Barazkiak', 'Frutazaintza', 'Belarjaleak', 'Beste batzuk'];
+
+    const subBarAtpLabelsEs = ['Bovino Carne', 'Bovino Leche', 'Huerta Invernadero', 'Aves Ponedoras', 'Ovinos', 'Huerta Aire Libre', 'Frutícolas', 'Viticultura'];
+    const subBarAtpLabelsEu = ['Haragitarako Behiak', 'Esnetarako Behiak', 'Berotegiko Barazkiak', 'Hegazti Erruleak', 'Ardiak', 'Aire Zabaleko Barazkiak', 'Frutazaintza', 'Mahastizaintza'];
+
+    const subBarNoAtpLabelsEs = ['Bovino Carne', 'Huerta Invernadero', 'Ovinos', 'Viticultura', 'Huerta Aire Libre', 'Frutícolas', 'Herbívoros', 'Apícolas'];
+    const subBarNoAtpLabelsEu = ['Haragitarako Behiak', 'Berotegiko Barazkiak', 'Ardiak', 'Mahastizaintza', 'Aire Zabaleko Barazkiak', 'Frutazaintza', 'Belarjaleak', 'Erlezaintza'];
+
+    function initCharts() {
+      Chart.defaults.font.family = "'Inter', sans-serif";
+      Chart.defaults.color = '#475569';
+
+      const t = I18N[CURRENT_LANG] || I18N.es;
+
+      // 1. Gráfico Barras Horizontales Top 8 ATP
+      const ctxBarATP = document.getElementById('chartSubsectoresBarATP');
+      if (ctxBarATP) {
+        chartSubsectoresBarATPInstance = new Chart(ctxBarATP, {
+          type: 'bar',
+          data: {
+            labels: CURRENT_LANG === 'eu' ? subBarAtpLabelsEu : subBarAtpLabelsEs,
+            datasets: [
+              {
+                label: t.hombresPrefix,
+                data: [33.33, 13.86, 18.88, 3.54, 7.08, 5.01, 2.65, 4.13],
+                backgroundColor: '#334155',
+                borderRadius: 4
+              },
+              {
+                label: t.mujeresPrefix,
+                data: [43.68, 13.16, 8.95, 5.79, 4.74, 4.74, 4.74, 3.68],
+                backgroundColor: '#059669',
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { font: { weight: 600, size: 11 } } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+            },
+            scales: {
+              x: { beginAtZero: true, ticks: { callback: val => val + '%' }, grid: { color: '#E2E8F0' } },
+              y: { grid: { display: false }, ticks: { font: { weight: 600, size: 10.5 } } }
+            }
+          }
+        });
+      }
+
+      // 2. Gráfico Barras Horizontales Top 8 NO ATP
+      const ctxBarNoATP = document.getElementById('chartSubsectoresBarNoATP');
+      if (ctxBarNoATP) {
+        chartSubsectoresBarNoATPInstance = new Chart(ctxBarNoATP, {
+          type: 'bar',
+          data: {
+            labels: CURRENT_LANG === 'eu' ? subBarNoAtpLabelsEu : subBarNoAtpLabelsEs,
+            datasets: [
+              {
+                label: t.hombresPrefix,
+                data: [63.40, 5.88, 6.97, 4.58, 4.36, 4.58, 1.96, 1.96],
+                backgroundColor: '#475569',
+                borderRadius: 4
+              },
+              {
+                label: t.mujeresPrefix,
+                data: [66.81, 8.19, 7.76, 5.17, 2.59, 2.16, 1.72, 1.29],
+                backgroundColor: '#D97706',
+                borderRadius: 4
+              }
+            ]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { font: { weight: 600, size: 11 } } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+            },
+            scales: {
+              x: { beginAtZero: true, ticks: { callback: val => val + '%' }, grid: { color: '#E2E8F0' } },
+              y: { grid: { display: false }, ticks: { font: { weight: 600, size: 10.5 } } }
+            }
+          }
+        });
+      }
+
+      // 3. Donut Chart: Subsectores ATP
+      const ctxDonutATP = document.getElementById('chartSubsectoresDonutATP');
+      if (ctxDonutATP) {
+        chartSubsectoresDonutATPInstance = new Chart(ctxDonutATP, {
+          type: 'doughnut',
+          data: {
+            labels: CURRENT_LANG === 'eu' ? donutAtpLabelsEu : donutAtpLabelsEs,
+            datasets: [{
+              data: [43.68, 13.16, 8.95, 5.79, 4.74, 4.74, 4.74, 3.68, 10.52],
+              backgroundColor: [
+                '#047857', '#059669', '#10B981', '#34D399', 
+                '#6EE7B7', '#A7F3D0', '#3B82F6', '#8B5CF6', '#94A3B8'
+              ],
+              borderWidth: 2,
+              borderColor: '#FFFFFF'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                labels: { boxWidth: 10, font: { size: 10, weight: 600 }, padding: 5 }
+              },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}%` } }
+            },
+            cutout: '58%'
+          }
+        });
+      }
+
+      // 4. Donut Chart: Subsectores NO ATP
+      const ctxDonutNoATP = document.getElementById('chartSubsectoresDonutNoATP');
+      if (ctxDonutNoATP) {
+        chartSubsectoresDonutNoATPInstance = new Chart(ctxDonutNoATP, {
+          type: 'doughnut',
+          data: {
+            labels: CURRENT_LANG === 'eu' ? donutNoAtpLabelsEu : donutNoAtpLabelsEs,
+            datasets: [{
+              data: [66.81, 8.19, 7.76, 5.17, 2.59, 2.16, 1.72, 5.60],
+              backgroundColor: [
+                '#D97706', '#F59E0B', '#FBBF24', '#FCD34D', 
+                '#FDE68A', '#EA580C', '#FB923C', '#94A3B8'
+              ],
+              borderWidth: 2,
+              borderColor: '#FFFFFF'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                labels: { boxWidth: 10, font: { size: 10, weight: 600 }, padding: 5 }
+              },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}%` } }
+            },
+            cutout: '58%'
+          }
+        });
+      }
+
+      // 2. Superficie ATP (Hombres vs Mujeres)
+      const ctxSupATP = document.getElementById('chartSuperficieATP');
+      if (ctxSupATP) {
+        chartSuperficieATPInstance = new Chart(ctxSupATP, {
+          type: 'bar',
+          data: {
+            labels: CURRENT_LANG === 'eu' ? chartLabelsEu.superficie : chartLabelsEs.superficie,
+            datasets: [
+              {
+                label: t.hombresPrefix,
+                data: [33.33, 17.40, 25.07, 24.19],
+                backgroundColor: '#334155',
+                borderRadius: 5
+              },
+              {
+                label: t.mujeresPrefix,
+                data: [32.11, 27.37, 26.32, 14.21],
+                backgroundColor: '#059669',
+                borderRadius: 5
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { font: { weight: 600, size: 11.5 } } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+            },
+            scales: {
+              y: { beginAtZero: true, ticks: { callback: val => val + '%' }, grid: { color: '#E2E8F0' } },
+              x: { grid: { display: false }, ticks: { font: { weight: 600, size: 11 } } }
+            }
+          }
+        });
+      }
+
+      // 3. Superficie NO ATP (Hombres vs Mujeres)
+      const ctxSupNoATP = document.getElementById('chartSuperficieNoATP');
+      if (ctxSupNoATP) {
+        chartSuperficieNoATPInstance = new Chart(ctxSupNoATP, {
+          type: 'bar',
+          data: {
+            labels: CURRENT_LANG === 'eu' ? chartLabelsEu.superficie : chartLabelsEs.superficie,
+            datasets: [
+              {
+                label: t.hombresPrefix,
+                data: [29.19, 41.61, 23.09, 6.10],
+                backgroundColor: '#475569',
+                borderRadius: 5
+              },
+              {
+                label: t.mujeresPrefix,
+                data: [41.38, 36.64, 19.40, 2.59],
+                backgroundColor: '#D97706',
+                borderRadius: 5
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { font: { weight: 600, size: 11.5 } } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+            },
+            scales: {
+              y: { beginAtZero: true, ticks: { callback: val => val + '%' }, grid: { color: '#E2E8F0' } },
+              x: { grid: { display: false }, ticks: { font: { weight: 600, size: 11 } } }
+            }
+          }
+        });
+      }
+
+      // 4. Comarcas ATP (Hombres vs Mujeres)
+      const comarcaLabels = ['Enkarterrialde', 'Jata Ondo', 'Gorbeialde', 'Urkiola', 'Urremendi', 'Lea-Artibai'];
+      const ctxComATP = document.getElementById('chartComarcasATP');
+      if (ctxComATP) {
+        chartComarcasATPInstance = new Chart(ctxComATP, {
+          type: 'bar',
+          data: {
+            labels: comarcaLabels,
+            datasets: [
+              {
+                label: t.hombresPrefix,
+                data: [31.65, 25.66, 13.27, 15.04, 7.08, 7.08],
+                backgroundColor: '#334155',
+                borderRadius: 5
+              },
+              {
+                label: t.mujeresPrefix,
+                data: [41.05, 16.32, 13.68, 11.58, 10.00, 6.84],
+                backgroundColor: '#059669',
+                borderRadius: 5
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { font: { weight: 600, size: 11.5 } } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+            },
+            scales: {
+              y: { beginAtZero: true, ticks: { callback: val => val + '%' }, grid: { color: '#E2E8F0' } },
+              x: { grid: { display: false }, ticks: { font: { weight: 600, size: 11 } } }
+            }
+          }
+        });
+      }
+
+      // 5. Comarcas NO ATP (Hombres vs Mujeres)
+      const ctxComNoATP = document.getElementById('chartComarcasNoATP');
+      if (ctxComNoATP) {
+        chartComarcasNoATPInstance = new Chart(ctxComNoATP, {
+          type: 'bar',
+          data: {
+            labels: ['Jata Ondo', 'Enkarterrialde', 'Urremendi', 'Gorbeialde', 'Urkiola', 'Lea-Artibai'],
+            datasets: [
+              {
+                label: t.hombresPrefix,
+                data: [20.93, 28.41, 14.54, 15.64, 12.11, 8.37],
+                backgroundColor: '#475569',
+                borderRadius: 5
+              },
+              {
+                label: t.mujeresPrefix,
+                data: [25.43, 18.97, 17.24, 14.66, 13.36, 9.48],
+                backgroundColor: '#D97706',
+                borderRadius: 5
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { font: { weight: 600, size: 11.5 } } },
+              tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+            },
+            scales: {
+              y: { beginAtZero: true, ticks: { callback: val => val + '%' }, grid: { color: '#E2E8F0' } },
+              x: { grid: { display: false }, ticks: { font: { weight: 600, size: 11 } } }
+            }
+          }
+        });
+      }
+    }
+
+    function updateChartsLanguage() {
+      const t = I18N[CURRENT_LANG] || I18N.es;
+      if (chartSubsectoresBarATPInstance) {
+        chartSubsectoresBarATPInstance.data.labels = CURRENT_LANG === 'eu' ? subBarAtpLabelsEu : subBarAtpLabelsEs;
+        chartSubsectoresBarATPInstance.data.datasets[0].label = t.hombresPrefix;
+        chartSubsectoresBarATPInstance.data.datasets[1].label = t.mujeresPrefix;
+        chartSubsectoresBarATPInstance.update();
+      }
+
+      if (chartSubsectoresBarNoATPInstance) {
+        chartSubsectoresBarNoATPInstance.data.labels = CURRENT_LANG === 'eu' ? subBarNoAtpLabelsEu : subBarNoAtpLabelsEs;
+        chartSubsectoresBarNoATPInstance.data.datasets[0].label = t.hombresPrefix;
+        chartSubsectoresBarNoATPInstance.data.datasets[1].label = t.mujeresPrefix;
+        chartSubsectoresBarNoATPInstance.update();
+      }
+
+      if (chartSubsectoresDonutATPInstance) {
+        chartSubsectoresDonutATPInstance.data.labels = CURRENT_LANG === 'eu' ? donutAtpLabelsEu : donutAtpLabelsEs;
+        chartSubsectoresDonutATPInstance.update();
+      }
+
+      if (chartSubsectoresDonutNoATPInstance) {
+        chartSubsectoresDonutNoATPInstance.data.labels = CURRENT_LANG === 'eu' ? donutNoAtpLabelsEu : donutNoAtpLabelsEs;
+        chartSubsectoresDonutNoATPInstance.update();
+      }
+
+      if (chartSuperficieATPInstance) {
+        chartSuperficieATPInstance.data.labels = CURRENT_LANG === 'eu' ? chartLabelsEu.superficie : chartLabelsEs.superficie;
+        chartSuperficieATPInstance.data.datasets[0].label = t.hombresPrefix;
+        chartSuperficieATPInstance.data.datasets[1].label = t.mujeresPrefix;
+        chartSuperficieATPInstance.update();
+      }
+
+      if (chartSuperficieNoATPInstance) {
+        chartSuperficieNoATPInstance.data.labels = CURRENT_LANG === 'eu' ? chartLabelsEu.superficie : chartLabelsEs.superficie;
+        chartSuperficieNoATPInstance.data.datasets[0].label = t.hombresPrefix;
+        chartSuperficieNoATPInstance.data.datasets[1].label = t.mujeresPrefix;
+        chartSuperficieNoATPInstance.update();
+      }
+
+      if (chartComarcasATPInstance) {
+        chartComarcasATPInstance.data.datasets[0].label = t.hombresPrefix;
+        chartComarcasATPInstance.data.datasets[1].label = t.mujeresPrefix;
+        chartComarcasATPInstance.update();
+      }
+
+      if (chartComarcasNoATPInstance) {
+        chartComarcasNoATPInstance.data.datasets[0].label = t.hombresPrefix;
+        chartComarcasNoATPInstance.data.datasets[1].label = t.mujeresPrefix;
+        chartComarcasNoATPInstance.update();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSubsectores();
+      renderSuperficie();
+      renderEcologico();
+      renderComarcas();
+      // renderFormaJuridica();
+      renderEdad();
+      initCharts();
+    });
+  </script>
+</body>
+</html>
